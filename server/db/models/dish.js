@@ -12,6 +12,7 @@ var dishSchema = new mongoose.Schema({
         max: 5
     },
     description: String,
+    //available dishes 
     price: Number,
     quantity: Number,
     tags: [{
