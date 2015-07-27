@@ -18,14 +18,26 @@ var dishSchema = new mongoose.Schema({
     },
     price: Number,
     quantity: Number,
-    category: {
+    tags: [{
         type: mongoose.Schema.ObjectId,
-        ref: 'Category'
-    },
+        ref: 'Tag'
+    }],
     picture: {
         type: String,
         default: 'http://mazwo.com/wp-content/uploads/2014/08/question-mark-made-of-food.jpg'
     }
 });
+
+//@params: tags: [String]
+dishSchema.statics.findByTags = function(tags){
+    return Dish.find({}).populate('tags', null, { name: { $in: tags } }).exec()
+        .then(function(dishes){
+            return dishes;
+        })
+        .then(null, function(err){
+            throw err.message;
+        });
+
+}
 
 mongoose.model('Dish', dishSchema);
