@@ -2,7 +2,8 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
+
+var userSchema = new mongoose.Schema({
     email: {
         type: String
     },
@@ -12,18 +13,27 @@ var schema = new mongoose.Schema({
     salt: {
         type: String
     },
-    twitter: {
-        id: String,
-        username: String,
-        token: String,
-        tokenSecret: String
-    },
     facebook: {
         id: String
     },
     google: {
         id: String
-    }
+    },
+    admin: Boolean,
+    shippingAddress: {type: mongoose.Schema.ObjectId, ref: 'Address'},
+
+    billing: {
+        billingAddress: {type: mongoose.Schema.ObjectId, ref: 'Address'},
+        number: Number,
+        ccv: Number,
+        exp: Date,
+        cardType: String
+    },
+    dishes: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
+    favorites: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
+    orders: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
+    reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}]
+
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
@@ -39,7 +49,7 @@ var encryptPassword = function (plainText, salt) {
     return hash.digest('hex');
 };
 
-schema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
 
     if (this.isModified('password')) {
         this.salt = this.constructor.generateSalt();
@@ -50,11 +60,11 @@ schema.pre('save', function (next) {
 
 });
 
-schema.statics.generateSalt = generateSalt;
-schema.statics.encryptPassword = encryptPassword;
+userSchema.statics.generateSalt = generateSalt;
+userSchema.statics.encryptPassword = encryptPassword;
 
-schema.method('correctPassword', function (candidatePassword) {
+userSchema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 
-mongoose.model('User', schema);
+mongoose.model('User', userSchema);
