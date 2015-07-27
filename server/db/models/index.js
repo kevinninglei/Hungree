@@ -4,3 +4,4 @@
 require('./address');
 require('./dish');
 require('./user');
+require('./review');
