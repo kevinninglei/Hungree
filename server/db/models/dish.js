@@ -12,10 +12,6 @@ var dishSchema = new mongoose.Schema({
         max: 5
     },
     description: String,
-    user: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
-    },
     price: Number,
     quantity: Number,
     tags: [{
