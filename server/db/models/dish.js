@@ -40,18 +40,26 @@ dishSchema.statics.findByTags = function(tags){
         .then(null, function(err){
             throw err.message;
         });
-
 }
 
-dishSchema.methods.getReviews = function(){
-    return this.constructor.findById(this._id).populate('reviews').exec()
-        .then(function(dish){
-            return dish.reviews;
+dishSchema.statics.findAllDishes = function(){
+    return this.find().populate('tags reviews').exec()
+        .then(function(dishes){
+            return dishes;
         })
         .then(null, function(err){
             throw err.message;
         });
+}
 
+dishSchema.statics.findDish = function(someDish){
+    return this.find(someDish).populate('tags reviews').exec()
+        .then(function(dish){
+            return dish;
+        })
+        .then(null, function(err){
+            throw err.message;
+        });
 }
 
 mongoose.model('Dish', dishSchema);
