@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 	res.json(req.user);
 })
 
-router.get('/dish', function (req, res, next) {
+router.get('/dishes', function (req, res, next) {
 	Dish.find({_id: {$in: req.user.dishes}}).exec()
 		.then(function (dishes) {
 			console.log('dishes!')
