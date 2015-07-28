@@ -22,7 +22,11 @@ var dishSchema = new mongoose.Schema({
     picture: {
         type: String,
         default: 'http://mazwo.com/wp-content/uploads/2014/08/question-mark-made-of-food.jpg'
-    }
+    },
+    reviews: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Review'
+    }]
 });
 
 //@params: tags: [String]
@@ -30,6 +34,17 @@ dishSchema.statics.findByTags = function(tags){
     return Dish.find({}).populate('tags', null, { name: { $in: tags } }).exec()
         .then(function(dishes){
             return dishes;
+        })
+        .then(null, function(err){
+            throw err.message;
+        });
+
+}
+
+dishSchema.statics.getReviews = function(dishName){
+    return Dish.find(dishName).populate('reviews').exec()
+        .then(function(dish){
+            return dish.reviews;
         })
         .then(null, function(err){
             throw err.message;
