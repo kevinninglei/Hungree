@@ -49,7 +49,10 @@ var tags = [
     new Tag({name: 'American'}),
     new Tag({name: 'Vegetarian'}),
     new Tag({name: 'Vegan'}),
-    new Tag({name: 'Gluten-free'})
+    new Tag({name: 'Gluten-free'}),
+    new Tag({name: 'Italian'}),
+    new Tag({name: 'Paleo'}),
+    new Tag({name: 'Organic'})
 ];
 
 var reviews = [

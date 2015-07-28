@@ -33,7 +33,9 @@ var dishSchema = new mongoose.Schema({
 dishSchema.statics.findByTags = function(tags){
     return this.find({}).populate('tags', null, { name: { $in: tags } }).exec()
         .then(function(dishes){
-            return dishes;
+            return dishes.filter(function(dish) {
+                return dish.tags.length === tags.length;
+            });
         })
         .then(null, function(err){
             throw err.message;
@@ -41,8 +43,8 @@ dishSchema.statics.findByTags = function(tags){
 
 }
 
-dishSchema.statics.getReviews = function(dishId){
-    return this.find(dishId).populate('reviews').exec()
+dishSchema.methods.getReviews = function(){
+    return this.constructor.findById(this._id).populate('reviews').exec()
         .then(function(dish){
             return dish.reviews;
         })
