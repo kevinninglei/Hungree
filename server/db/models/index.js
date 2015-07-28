@@ -6,3 +6,4 @@ require('./dish');
 require('./user');
 require('./review');
 require('./tag');
+require('./order');
