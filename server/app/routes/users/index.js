@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var router = require('express').Router();
 
+
+
 router.get('/', function(req, res, next){
 	User.find({}).exec()
 		.then(function(users) {
@@ -23,7 +25,7 @@ router.post('/', function (req, res, next) {
 })
 
 router.param('id', function (req, res, next) {
-	User.findById(req.param.id).exec()
+	User.findById(req.params.id).exec()
 		.then(function (user) {
 			if (user) {
 				req.user = user;
