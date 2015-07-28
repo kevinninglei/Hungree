@@ -1,6 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
-//var User = mongoose.model('User');
+var User = mongoose.model('User');
 var Dish = mongoose.model('Dish');
 var Review = mongoose.model('Review');
 var Order = mongoose.model('Order');
@@ -41,6 +41,32 @@ router.get('/favorites', function (req, res, next) {
 			res.json(favorites);
 		})
 		.then(null, next);
+})
+
+router.put('/', function (req, res, next){
+	User.findByIdAndUpdate(req.user._id, req.body, { new: true }).exec()
+	.then(function (user) {
+		res.status(200).json(user);
+	})
+	.then(null, next);
+})
+
+
+
+router.delete('/', function (req, res, next) {
+//NEed to loop through 
+//	- Reviews
+//	- Dishes
+//  - Orders
+// and delete if user._id is found
+// /!\ We are keeping the reviews and orders associated with the deleted Dish
+// So that customers can refer back to them 
+// We'll add a "dish was deleted by Chef" message
+	User.findByIdAndRemove(req.user._id).exec()
+	.then(function (user) {
+		res.status(200).json({message: 'Successfully deleted!'})
+	})
+	.then(null, next)
 })
 
 module.exports = router;
