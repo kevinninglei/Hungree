@@ -11,15 +11,13 @@ router.get('/', function(req, res, next){
 			console.log('success!')
 			res.json(users);
 		})
-		.then(null, function(err){
-			console.log(err)
-		});
+		.then(null,next)
 })
 
 router.post('/', function (req, res, next) {
 	User.create(req.body)
 		.then(function(user){
-			res.json(user);
+			res.status(201).json(user);
 		})
 		.then(null, next);
 })
