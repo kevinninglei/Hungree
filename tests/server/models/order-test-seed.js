@@ -123,7 +123,7 @@ var seed = function(done) {
             if (err) console.error(err);
         }),
         models[1].create(addresses, function(err) {
-            if (err) console.error(err);
+            if (err) console.error(err); 
         }),
         models[2].create(dishes, function(err) {
             if (err) console.error(err);
@@ -144,6 +144,7 @@ var seed = function(done) {
     })
     .then(null, function(err) {
         console.error(err);
+        done()
     })
 };
 

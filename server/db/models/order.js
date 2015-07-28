@@ -20,7 +20,8 @@ orderSchema.pre('save', function (next, done) {
 
 	Dish.find({}).exec()
 	.then(function(dishes){
-		console.log('dishes is: ', dishes)
+		console.log('presave hook in dish')
+		//console.log('dishes is: ', dishes)
 		done();
 	})
 	// //mary need to try ['price']

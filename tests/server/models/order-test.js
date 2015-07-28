@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 require('../../../server/db/models');
 
 var Order = mongoose.model('Order');
+var Dish = mongoose.model('Dish');
 
 describe('Order Model', function() {
 
@@ -22,20 +23,24 @@ describe('Order Model', function() {
         });
     });
 
-    afterEach('Clear test database', function (done) {
-        clearDB(done);
-    });
 
     it('should exist', function () {
         expect(Order).to.be.a('function');
     });
 
-    it('create a new Order', function (done){
-    	var order = new Order();
-    	order.save(function(err, order){
-    		console.log("ORDER IS", order);
-    		done()
-    	})
+    it('finds all of the Order', function (done){
+    	// var order = new Order();
+    	// order.save(function(err, order){
+    	// 	console.log("ORDER IS", order);
+    	// 	done()
+    	// })
+    Dish.find({}).exec()
+    .then(function(dishes){
+        console.log('dishes is: ', dishes)
+        done();
+    })
+
+
     })
 
 
