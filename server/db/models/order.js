@@ -1,6 +1,7 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var Dish = mongoose.model('Dish');
 
 var orderSchema = new mongoose.Schema({
 	//make a static to fill if the user is a guest. add cookies to keep track of guest sessions
@@ -9,7 +10,7 @@ var orderSchema = new mongoose.Schema({
 	dishes: [{
 		dishId: {type: mongoose.Schema.ObjectId, ref: 'Dish'},
 		quantity: Number
-	}]
+	}],
 	//make static to calculate total for checkout
 	total: { type: Number, default: 0}
 
