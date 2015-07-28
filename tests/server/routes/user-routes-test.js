@@ -53,6 +53,7 @@ describe('User Route', function () {
 			});
 		});
 
+
 		it('gets one user by the id', function (done){
 			loggedInAgent.get('/api/users/' + newUser._id).expect(200).end(function (err, res) {
 				if (err) return done(err)
