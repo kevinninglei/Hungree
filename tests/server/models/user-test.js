@@ -143,5 +143,44 @@ describe('User model', function () {
         });
 
     });
+    describe('adding a user', function() {
+        it('create only one user', function (done) {
+
+            var createUser = function (user) {
+                return User.create({email:'yves@me.com',
+                    password:'123'});
+            };
+            createUser().then(function (user) {
+                expect(user.email).to.be.equal('yves@me.com');
+                done();
+            });
+        });
+
+        it('should return an error with no passwords', function (done) {
+
+            var createUser = function (user) {
+                return User.create({email:'yves@me.com'});
+            };
+            createUser()
+                .then(null,function(err){
+                    expect(err.errors).to.contain.all.keys(['password']);
+                    done();
+                });
+        });
+        it('should return an error with no email', function (done) {
+
+            var createUser = function (user) {
+                return User.create({password: '123'});
+            };
+            createUser()
+                .then(null,function(err){
+                    expect(err.errors).to.contain.all.keys(['email']);
+                    done();
+                });
+        });
+    })
+
+
+
 
 });
