@@ -1,6 +1,7 @@
 var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
 
+
 var sinon = require('sinon');
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
@@ -13,8 +14,12 @@ var Order = mongoose.model('Order');
 describe('Order Model', function() {
 
     beforeEach('Establish DB connection', function (done) {
+
         if (mongoose.connection.db) return done();
-        mongoose.connect(dbURI, done);
+        mongoose.connect(dbURI, function(){
+            var orderSeed = require('./order-test-seed');
+            console.log(orderSeed(done));
+        });
     });
 
     afterEach('Clear test database', function (done) {
@@ -32,6 +37,7 @@ describe('Order Model', function() {
     		done()
     	})
     })
+
 
 
 
