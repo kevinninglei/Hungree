@@ -20,8 +20,8 @@ Refer to the q documentation for why and how q.invoke is used.
 */
 
 // var bluebird = require('bluebird');
+require('../../../server/db/models');
 var mongoose = require('mongoose');
-var connectToDb = require('./server/db');
 var User = mongoose.model('User');
 var Address = mongoose.model('Address');
 var Dish = mongoose.model('Dish');
@@ -49,10 +49,7 @@ var tags = [
     new Tag({name: 'American'}),
     new Tag({name: 'Vegetarian'}),
     new Tag({name: 'Vegan'}),
-    new Tag({name: 'Gluten-free'}),
-    new Tag({name: 'Italian'}),
-    new Tag({name: 'Paleo'}),
-    new Tag({name: 'Organic'})
+    new Tag({name: 'Gluten-free'})
 ];
 
 var reviews = [
@@ -62,10 +59,10 @@ var reviews = [
 ];
 
 var dishes = [
-    new Dish({name: 'Thai Curry', ingredients: ['Coconut milk', 'chicken', 'bell peppers', 'fish sauce', 'thai curry paste', 'sugar'], spiciness: 4, description: 'This is good shit.', price: 10, quantity: 5, tags: [tags[0], tags[1], tags[2]], reviews: [reviews[0], reviews[2]]}),
-    new Dish({name: 'Lasagna', ingredients: ['Pasta', 'chicken', 'bell peppers', 'tomato sauce', 'cheese', 'salt'], spiciness: 1, description: 'This is ok shit.', price: 8, quantity: 3, tags: [tags[1], tags[4], tags[5]], reviews: [reviews[1], reviews[2]]}),
-    new Dish({name: 'Pizza', ingredients: ['Dough', 'chicken', 'bell peppers', 'tomato sauce', 'cheese', 'jalapenos'], spiciness: 3, description: 'This shit is bomb.', price: 15, quantity: 25, tags: [tags[8], tags[9], tags[10]], reviews: [reviews[0], reviews[1]]}),
-    new Dish({name: 'Bulgogi', ingredients: ['Pear', 'beef', 'carrots', 'soy sauce', 'sesame oil', 'brown sugar', 'onion'], spiciness: 1, description: 'OMG.', price: 20, quantity: 2, tags: [tags[5], tags[9], tags[4]], reviews: [reviews[1]]})
+    new Dish({name: 'Thai Curry', ingredients: ['Coconut milk', 'chicken', 'bell peppers', 'fish sauce', 'thai curry paste', 'sugar'], spiciness: 4, description: 'This is good shit.', price: 10, quantity: 5, tags: [tags[0], tags[1], tags[2]]}),
+    new Dish({name: 'Lasagna', ingredients: ['Pasta', 'chicken', 'bell peppers', 'tomato sauce', 'cheese', 'salt'], spiciness: 1, description: 'This is ok shit.', price: 8, quantity: 3, tags: [tags[1], tags[4], tags[5]]}),
+    new Dish({name: 'Pizza', ingredients: ['Dough', 'chicken', 'bell peppers', 'tomato sauce', 'cheese', 'jalapenos'], spiciness: 3, description: 'This shit is bomb.', price: 15, quantity: 25, tags: [tags[8], tags[9], tags[10]]}),
+    new Dish({name: 'Bulgogi', ingredients: ['Pear', 'beef', 'carrots', 'soy sauce', 'sesame oil', 'brown sugar', 'onion'], spiciness: 1, description: 'OMG.', price: 20, quantity: 2, tags: [tags[5], tags[9], tags[4]]})
 ];
 
 var orders = [ //add userIds
@@ -120,13 +117,13 @@ var wipeDB = function() {
     return q.resolve();
 };
 
-var seed = function() {
+var seed = function(done) {
     q.all(
         models[0].create(users, function(err) {
             if (err) console.error(err);
         }),
         models[1].create(addresses, function(err) {
-            if (err) console.error(err);
+            if (err) console.error(err); 
         }),
         models[2].create(dishes, function(err) {
             if (err) console.error(err);
@@ -143,16 +140,13 @@ var seed = function() {
     )
     .then(function() {
         console.log('Database seeded!');
-        process.kill(0);
+        done()
     })
     .then(null, function(err) {
         console.error(err);
+        done()
     })
 };
 
-connectToDb.then(function() {
-    wipeDB().then(seed);
-})
-.then(null, function(err) {
-    console.error(err);
-});
+
+module.exports = seed
