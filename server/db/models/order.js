@@ -16,15 +16,15 @@ var orderSchema = new mongoose.Schema({
 
 })
 
-orderSchema.pre('save', function (next) {
-	//mary need to try ['price']
-	Dish.find({}).populate('dishes.dishId', 'price').exec()
-	.then(function (price) {
-		this.total += price * this.dishes.quantity;
-	})
-	.then(null, function (err){
-		throw err.message
-	})
-})
+// orderSchema.pre('save', function (next) {
+// 	//mary need to try ['price']
+// 	Dish.find({}).populate('dishes.dishId', 'price').exec()
+// 	.then(function (price) {
+// 		this.total += price * this.dishes.quantity;
+// 	})
+// 	.then(null, function (err){
+// 		throw err.message
+// 	})
+// })
 
 mongoose.model('Order', orderSchema);

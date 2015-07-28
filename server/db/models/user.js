@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 
 var userSchema = new mongoose.Schema({
+    name: {first: String, last: String},
     email: {
         type: String,
         unique: true
@@ -27,7 +28,7 @@ var userSchema = new mongoose.Schema({
         billingAddress: {type: mongoose.Schema.ObjectId, ref: 'Address'},
         number: Number,
         ccv: Number,
-        exp: Date,
+        exp: {month: Number, year: Number},
         cardType: String
     },
     dishes: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
