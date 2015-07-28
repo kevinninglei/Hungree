@@ -14,4 +14,21 @@ router.get('/', function(req, res, next){
 		});
 })
 
+router.param('id', function (req, res, next) {
+	User.findById(req.param.id).exec()
+		.then(function (user) {
+			if (user) {
+				req.user = user;
+				next();
+			} else {
+				throw new Error();
+			}
+		})
+		.then(null, next);
+})
+
+router.use('/:id', require('./user-id'));
+
+
+
 module.exports = router;
