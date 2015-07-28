@@ -4,15 +4,10 @@ var mongoose = require('mongoose');
 
 
 var userSchema = new mongoose.Schema({
-    email: {
-        type: String
-    },
-    password: {
-        type: String
-    },
-    salt: {
-        type: String
-    },
+    name: {first: String, last: String},
+    email: String,
+    password: String,
+    salt: String,
     facebook: {
         id: String
     },
@@ -26,7 +21,7 @@ var userSchema = new mongoose.Schema({
         billingAddress: {type: mongoose.Schema.ObjectId, ref: 'Address'},
         number: Number,
         ccv: Number,
-        exp: Date,
+        exp: {month: Number, year: Number},
         cardType: String
     },
     dishes: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
