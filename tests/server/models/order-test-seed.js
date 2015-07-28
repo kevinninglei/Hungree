@@ -149,13 +149,4 @@ var seed = function(done) {
 };
 
 
-
-// connectToDb.then(function() {
-//     wipeDB().then(seed);
-// })
-// .then(null, function(err) {
-//     console.error(err);
-// });
-
-
 module.exports = seed
