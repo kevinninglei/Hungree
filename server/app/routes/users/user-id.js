@@ -43,4 +43,30 @@ router.get('/favorites', function (req, res, next) {
 		.then(null, next);
 })
 
+router.put('/', function (req, res, next){
+	for(var prop in req.body) {
+		req.user[prop] = req.body[prop];
+	}
+	req.user.save()
+	.then(function (user) {
+		res.json(user);
+	})
+	.then(null, next)
+})
+
+router.delete('/', function (req, res, next) {
+	req.user.remove()
+		.then(function () {
+			res.json({message: 'Sucessfully deleted!'})
+		})
+		.then(null, next)
+
+
+	// User.remove({_id: req.user._id})
+	// 	.then(function () {
+	// 		res.json({message: 'Sucessfully deleted!'})
+	// 	})
+	// 	.then(null, next)
+})
+
 module.exports = router;
