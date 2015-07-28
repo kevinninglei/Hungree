@@ -32,8 +32,12 @@ describe('User Route', function () {
 			password: 'shoopdawoop'
 		};
 
-		beforeEach('Create a user', function (done) {
-			User.create(userInfo, done);
+		var newUser;
+		beforeEach('Create a user', function () {
+			return User.create(userInfo)
+								.then(function (user) {
+									newUser = user;
+								})
 		});
 
 		beforeEach('Create loggedIn user agent and authenticate', function (done) {
@@ -41,13 +45,46 @@ describe('User Route', function () {
 			loggedInAgent.post('/login').send(userInfo).end(done);
 		});
 
-		it('should get with 200 response and with an array as the body', function (done) {
+		it('/api/users should get with 200 response and with an array as the body', function (done) {
 			loggedInAgent.get('/api/users').expect(200).end(function (err, response) {
 				if (err) return done(err);
 				expect(response.body).to.an.array;
 				done();
 			});
 		});
+
+
+		it('gets one user by the id', function (done){
+			loggedInAgent.get('/api/users/' + newUser._id).expect(200).end(function (err, res) {
+				if (err) return done(err)
+				expect(res.body.email).to.equal('joe@gmail.com');
+				done();
+			})
+		});
+
+		it('/api/users/:id/dishes should get with 200 response and with an array as the body', function (done) {
+			loggedInAgent.get('/api/users/' + newUser._id +'/dishes').expect(200).end(function (err, response) {
+				if (err) return done(err);
+				expect(response.body).to.an.array;
+				done();
+			});
+		});
+
+		it('/api/users/:id/orders should get with 200 response and with an array as the body', function (done) {
+			loggedInAgent.get('/api/users/' + newUser._id +'/orders').expect(200).end(function (err, response) {
+				if (err) return done(err);
+				expect(response.body).to.an.array;
+				done();
+			});
+		});
+
+		it('/api/users/:id/reviews should get with 200 response and with an array as the body', function (done) {
+			loggedInAgent.get('/api/users/' + newUser._id +'/reviews').expect(200).end(function (err, response) {
+				if (err) return done(err);
+				expect(response.body).to.an.array;
+				done();
+			});
+		}); 
 
 	});
 
