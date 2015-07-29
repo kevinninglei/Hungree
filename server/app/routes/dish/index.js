@@ -5,7 +5,22 @@ var mongoose = require('mongoose');
 var Dish = mongoose.model('Dish');
 
 
-//  /api/dish/
+//  /api/dishes/
+router.param('id', function(req, res, next, id) {
+	Dish.findDish(id)
+		.then(function(dish){
+			if (!dish) {
+				throw new Error();
+			}
+			else {
+				req.dish = dish;
+				req.id = id;
+				next();
+			}
+		})
+		.then(null, next);
+});
+
 router.get('/', function(req, res, next){
 	Dish.findAllDishes()
 		.then(function(dishes){
@@ -15,21 +30,15 @@ router.get('/', function(req, res, next){
 
 });
 
-//  /api/dish/:id/
-router.get('/:id', function(req, res, next){
-	Dish.findById(req.params).exec()
-		.then(function(dish){
-			res.json(dish);
-		})
-		.then(null, next);
-});
+router.post('/', function(req, res, next) {
+	Dish.create(req.body)
+	.then(function(dish) {
+		res.status(201).json(dish);
+	})
+	.then(null, next);
+})
 
-//  /api/dish/:id/reviews
-router.get('/:id/reviews', function(req, res, next){
-	Dish.getReviews(req.params)
-		.then(function(reviews){
-			res.json(reviews)
-		})
-		.then(null, next);
-});
+// /api/dishes/:id/
+router.use('/:id', require('./dish-id.js'));
+
 
