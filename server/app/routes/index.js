@@ -4,7 +4,7 @@ module.exports = router;
 
 router.use('/tutorial', require('./tutorial'));
 router.use('/members', require('./members'));
-router.use('/dish', require('./dish'));
+router.use('/dishes', require('./dish'));
 router.use('/users', require('./users'));
 router.use('/tags', require('./tags'));
 

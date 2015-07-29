@@ -6,7 +6,7 @@ var Review = mongoose.model('Review');
 var Order = mongoose.model('Order');
 var router = require('express').Router();
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
 	res.json(req.user);
 })
 
@@ -63,7 +63,7 @@ router.delete('/', function (req, res, next) {
 // So that customers can refer back to them 
 // We'll add a "dish was deleted by Chef" message
 	User.findByIdAndRemove(req.user._id).exec()
-	.then(function (user) {
+	.then(function () {
 		res.status(200).json({message: 'Successfully deleted!'})
 	})
 	.then(null, next)
