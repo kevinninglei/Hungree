@@ -53,7 +53,7 @@ describe('Dish route', function () {
 		it('/api/dishes should get with 200 response and an array as the body', function (done) {
 			loggedInAgent.get('/api/dishes').expect(200).end(function (err, res) {
 				if (err) return done(err);
-				expect(res.body).to.an.array;
+				expect(res.body).to.have.length(4);
 				done();
 			});
 		})
@@ -69,7 +69,7 @@ describe('Dish route', function () {
 		it('/api/dishes/:id/reviews should get with 200 response and with an array as the body', function (done) {
 			loggedInAgent.get('/api/dishes/' + newDish._id +'/reviews').expect(200).end(function (err, res) {
 				if (err) return done(err);
-				expect(res.body).to.an.array;
+				expect(res.body).to.have.length(2);
 				done();
 			});
 		}); 
