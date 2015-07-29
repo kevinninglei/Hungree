@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <base href="/" />
@@ -16,4 +16,45 @@
     <navbar></navbar>
     <div ui-view></div>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/" />
+    <meta charset="UTF-8">
+    <title>Hungree</title>
+    <!--external CSS dependencies-->
+    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css">
+    <script src="/lodash/index.js"></script>
+    <style type="text/css"></style>
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="/socket.io-client/socket.io.js"></script>
+    <script src="/main.js"></script>
+    <style type="text/css">
+    footer {
+        position: fixed;
+        bottom: 0;
+        text-align: center;
+    }
+
+    </style>
+</head>
+
+<body ng-app="HungreeApp">
+      <navbar></navbar>
+
+    <div class="container">
+        <ui-view></ui-view>
+    </div>
+    <footer class="footer">
+        <div>Built by JKAY for Full Stack Academy of Code </div>
+    </footer>
+</body>
+
 </html>
