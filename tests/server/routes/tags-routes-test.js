@@ -10,7 +10,6 @@ var clearDB = require('mocha-mongoose')(dbURI);
 
 var supertest = require('supertest');
 var app = require('../../../server/app');
-console.log(app);
 
 describe('Tags model', function () {
 
