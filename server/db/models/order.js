@@ -3,6 +3,7 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Dish = mongoose.model('Dish');
 var q = require('q');
+var _ = require('lodash');
 
 
 
@@ -19,8 +20,9 @@ var orderSchema = new mongoose.Schema({
 
 })
 
+
 orderSchema.pre('save', function (next, done) {
-	var self = this;
+	var order = this;
 	//creates an array of promises for q to process
 	var promiseArr = this.dishes.map(function(dishInOrder){
 		return Dish.findById(dishInOrder.dishId).exec();
@@ -28,13 +30,17 @@ orderSchema.pre('save', function (next, done) {
 
 	//once array of promises are resolved, the results is an
 	//array of dishes which must be computed.
-	q.all(promiseArr).then(function(results){
+	q.all(promiseArr).then(function(dishes){
 		var currTotal = 0;
-		results.forEach(function(dish){
-			currTotal += dish.price;
+		dishes.forEach(function(dish){
+			order.dishes.forEach(function (dishInOrder) {
+				if (String(dishInOrder.dishId) === String(dish._id)) {
+					currTotal += dishInOrder.quantity * dish.price;
+				}
+			})
 		})
-		self.total = currTotal;
-		done();
+		order.total = currTotal;
+		next();
 	})
 	
 })

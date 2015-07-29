@@ -56,7 +56,7 @@ describe('Tags model', function () {
 						done();
 					})
 					.then(null, function (err) {
-						done();
+						done(err);
 					})
 
 			})

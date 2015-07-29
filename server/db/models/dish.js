@@ -14,7 +14,7 @@ var dishSchema = new mongoose.Schema({
     description: String,
     //available dishes 
     price: Number,
-    quantity: Number,
+    inventory: Number,
     tags: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Tag'
