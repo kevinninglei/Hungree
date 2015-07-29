@@ -59,10 +59,16 @@ describe('Dish model', function () {
                 expect(Dish.findDish).to.be.a('function');
             });
 
-            it('should return one dish', function() {
-                Dish.findDish({name: 'Thai Curry'}).then(function(dish) {
-                    console.log('thai curry', dish)
+            it('should find one dish by id', function() {
+                Dish.find({name:'Thai Curry'}).exec()
+                .then(function(dish) {
+                    return Dish.findDish(dish[0]._id)
+                })
+                .then(function(dish) {
                     expect(dish).to.have.length(1);
+                })
+                .then(function(err) {
+                    console.error(err);
                 });
             });
 
@@ -75,7 +81,7 @@ describe('Dish model', function () {
             });
 
             it('should return an array of dishes', function() {
-                Dish.findByTags().then(function(dishes) {
+                Dish.findByTags([]).then(function(dishes) {
                     expect(dishes).to.have.length.above(0);
                 });
             });

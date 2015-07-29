@@ -7,7 +7,7 @@ var Dish = mongoose.model('Dish');
 
 //  /api/dish/
 router.get('/', function(req, res, next){
-	Dish.find({}).exec()
+	Dish.findAllDishes()
 		.then(function(dishes){
 			res.json(dishes);
 		})
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next){
 
 //  /api/dish/:id/
 router.get('/:id', function(req, res, next){
-	Dish.find(req.params).exec()
+	Dish.findById(req.params).exec()
 		.then(function(dish){
 			res.json(dish);
 		})
