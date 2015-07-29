@@ -35,9 +35,9 @@ describe('User Route', function () {
 		var newUser;
 		beforeEach('Create a user', function () {
 			return User.create(userInfo)
-								.then(function (user) {
-									newUser = user;
-								})
+				.then(function (user) {
+					newUser = user;
+				})
 		});
 
 		beforeEach('Create loggedIn user agent and authenticate', function (done) {

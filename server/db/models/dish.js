@@ -52,8 +52,8 @@ dishSchema.statics.findAllDishes = function(){
         });
 }
 
-dishSchema.statics.findDish = function(someDish){
-    return this.find(someDish).populate('tags reviews').exec()
+dishSchema.statics.findDish = function(id){
+    return this.findById(id).populate('tags reviews').exec()
         .then(function(dish){
             return dish;
         })
