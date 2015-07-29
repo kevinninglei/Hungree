@@ -8,7 +8,6 @@ var router = require('express').Router();
 router.get('/', function(req, res, next){
 	User.find({}).exec()
 		.then(function(users) {
-			console.log('success!')
 			res.json(users);
 		})
 		.then(null,next)

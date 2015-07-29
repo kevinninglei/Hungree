@@ -50,7 +50,7 @@ describe('User Route', function () {
 			it('/api/users should get with 200 response and with an array as the body', function (done) {
 				loggedInAgent.get('/api/users').expect(200).end(function (err, response) {
 					if (err) return done(err);
-					expect(response.body).to.an.array;
+					expect(response.body).to.have.length(1);
 					done();
 				});
 			}); 
@@ -67,7 +67,7 @@ describe('User Route', function () {
 			it('/api/users/:id/dishes should get with 200 response and with an array as the body', function (done) {
 				loggedInAgent.get('/api/users/' + newUser._id +'/dishes').expect(200).end(function (err, response) {
 					if (err) return done(err);
-					expect(response.body).to.an.array;
+					expect(response.body).to.be.instanceof(Array);
 					done();
 				});
 			});
@@ -75,7 +75,7 @@ describe('User Route', function () {
 			it('/api/users/:id/orders should get with 200 response and with an array as the body', function (done) {
 				loggedInAgent.get('/api/users/' + newUser._id +'/orders').expect(200).end(function (err, response) {
 					if (err) return done(err);
-					expect(response.body).to.an.array;
+					expect(response.body).to.be.instanceof(Array);
 					done();
 				});
 			});
@@ -83,7 +83,7 @@ describe('User Route', function () {
 			it('/api/users/:id/reviews should get with 200 response and with an array as the body', function (done) {
 				loggedInAgent.get('/api/users/' + newUser._id +'/reviews').expect(200).end(function (err, response) {
 					if (err) return done(err);
-					expect(response.body).to.an.array;
+					expect(response.body).to.be.instanceof(Array);
 					done();
 				});
 			}); 
