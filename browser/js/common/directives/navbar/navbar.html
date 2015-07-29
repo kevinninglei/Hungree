@@ -1,4 +1,4 @@
-<nav class="navbar navbar-static-top">
+<!-- <nav class="navbar navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <fullstack-logo></fullstack-logo>
@@ -14,4 +14,18 @@
             <a ng-click="logout()">Logout</a>
         </div>
     </div>
-</nav>
+</nav> -->
+
+    <nav class="navbar navbar-default">
+        <ul class="nav nav-pills nav-right">
+            <li><a ui-sref-active="active" ui-sref="home"> Home </a></li>
+            <li><a ui-sref-active="active" ui-sref="listDishes"> Find Dishes </a></li>
+            <li><a ui-sref-active="active" ui-sref="listChefs"> Find Chefs </a></li>
+            <li>
+                <a ui-sref-active="active" ui-sref="cart"> <i class="fa fa-shopping-cart"></i> Cart </a>
+            </li>
+            <li><a ui-sref-active="active" ui-sref="logIn"> login</a></li>
+            <li><a ui-sref-active="active" ui-sref="signUp"> signup</a></li>
+            <li><a ui-sref-active="active" ui-sref="logOut"> Logout</a></li>
+        </ul>
+    </nav>
