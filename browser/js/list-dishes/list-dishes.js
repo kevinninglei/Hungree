@@ -11,6 +11,12 @@ app.config(function ($stateProvider) {
 app.controller('DishesCtrl', function($scope, Chefs) {
 	$scope.nearbyChefs = Chefs.nearbyChefs;
 	$scope.filters = {};
+
+	$scope.categories = [
+		{category: 'price'},
+		{category: 'highest rating'},
+		{category: 'spiciness'}
+	];
 });
 
 app.filter('tags', function(Tags) {
