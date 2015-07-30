@@ -89,6 +89,7 @@ var users = [
     },
     {
         name: {first: 'Barack', last: 'Obama'},
+        picture: 'http://a5.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE4MDAzNDEwNzg5ODI4MTEw.jpg',
         email: 'obama@gmail.com',
         password: 'potus',
         facebook: null,
