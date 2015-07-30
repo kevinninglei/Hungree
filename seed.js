@@ -73,7 +73,7 @@ var orders = [ //add userIds
 ];
 
 var users = [
-    {
+    new User({
         name: {first: 'KevinJustin', last: 'AnnieYves'},
         email: 'testing@fsa.com',
         password: 'password',
@@ -86,8 +86,8 @@ var users = [
         favorites: [dishes[3], dishes[1]],
         orders: [orders[0]],
         reviews: [reviews[0], reviews[1]]
-    },
-    {
+    }),
+    new User({
         name: {first: 'Barack', last: 'Obama'},
         email: 'obama@gmail.com',
         password: 'potus',
@@ -100,15 +100,16 @@ var users = [
         favorites: [dishes[0], dishes[1]],
         orders: [orders[1], orders[2]],
         reviews: [reviews[2]]
-    }
+    })
 ];
 
 orders[0].userId = users[0];
 orders[1].userId = users[1];
 orders[2].userId = users[1];
 
-
 var models = [User, Address, Dish, Order, Review, Tag];
+var data = [users, addresses, dishes, orders, reviews, tags];
+
 
 var wipeDB = function() {
     models.forEach(function(model) {
@@ -119,33 +120,18 @@ var wipeDB = function() {
 };
 
 var seed = function() {
-    q.all(
-        models[0].create(users, function(err) {
-            if (err) console.error(err);
-        }),
-        models[1].create(addresses, function(err) {
-            if (err) console.error(err);
-        }),
-        models[2].create(dishes, function(err) {
-            if (err) console.error(err);
-        }),
-        models[3].create(orders, function(err) {
-            if (err) console.error(err);
-        }),
-        models[4].create(reviews, function(err) {
-            if (err) console.error(err);
-        }),
-        models[5].create(tags, function(err) {
-            if (err) console.error(err);
+    var promiseArr = models.map(function(currModel, index){
+        return currModel.create(data[index]);
+    })
+    q.all(promiseArr)
+        .then(function(data){
+            console.log("database seeded!");
+            process.kill(0)
         })
-    )
-    .then(function() {
-        console.log('Database seeded!');
-        process.kill(0);
-    })
-    .then(null, function(err) {
-        console.error(err);
-    })
+        .then(function(err){
+            console.log("error! is: ", err.message);
+            process.kill(0)
+        })
 };
 
 connectToDb.then(function() {
