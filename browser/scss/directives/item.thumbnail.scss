@@ -1,0 +1,30 @@
+#profile-pic{
+  height: 100px;
+  width: 100px;
+  overflow:hidden;
+  border-radius: 50%;
+}
+
+#thumbnail {
+  h4 {
+    display: inline
+  }
+}
+
+
+#status {
+  float:right
+  // color:green;
+}
+
+i#status.online{
+  color:green;
+}
+
+i#status.offline{
+  color:red;
+}
+
+i#status.busy{
+  color:orange;
+}

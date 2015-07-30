@@ -21,13 +21,6 @@ footer {
   color: primary;
 }
 
-#profile-pic{
-  height: 200px;
-  width: 200px;
-  overflow:hidden;
-  border-radius: 50%;
-}
-
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
