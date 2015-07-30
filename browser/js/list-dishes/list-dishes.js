@@ -9,7 +9,8 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('DishesCtrl', function($scope, Chefs) {
-	$scope.nearbyChefs = Chefs.nearbyChefs 
+	$scope.nearbyChefs = Chefs.nearbyChefs;
+	$scope.filters = {};
 });
 
 app.filter('tags', function(Tags) {
