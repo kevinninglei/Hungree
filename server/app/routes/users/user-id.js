@@ -7,11 +7,11 @@ var Order = mongoose.model('Order');
 var router = require('express').Router();
 
 router.get('/', function (req, res) {
-	res.json(req.user);
+	res.json(req.CurrentUser);
 })
 
 router.get('/dishes', function (req, res, next) {
-	Dish.find({_id: {$in: req.user.dishes}}).exec()
+	Dish.find({_id: {$in: req.CurrentUser.dishes}}).exec()
 		.then(function (dishes) {
 			console.log('dishes!')
 			res.json(dishes);
@@ -20,7 +20,7 @@ router.get('/dishes', function (req, res, next) {
 })
 
 router.get('/reviews', function (req, res, next) {
-	Review.find({_id: {$in: req.user.reviews}}).exec()
+	Review.find({_id: {$in: req.CurrentUser.reviews}}).exec()
 		.then(function (reviews) {
 			res.json(reviews);
 		})
@@ -28,7 +28,7 @@ router.get('/reviews', function (req, res, next) {
 })
 
 router.get('/orders', function (req, res, next) {
-	Order.find({_id: {$in: req.user.orders}}).exec()
+	Order.find({_id: {$in: req.CurrentUser.orders}}).exec()
 		.then(function (orders) {
 			res.json(orders);
 		})
@@ -36,7 +36,7 @@ router.get('/orders', function (req, res, next) {
 })
 
 router.get('/favorites', function (req, res, next) {
-	Dish.find({_id: {$in: req.user.favorites}}).exec()
+	Dish.find({_id: {$in: req.CurrentUser.favorites}}).exec()
 		.then(function (favorites) {
 			res.json(favorites);
 		})
@@ -44,7 +44,7 @@ router.get('/favorites', function (req, res, next) {
 })
 
 router.put('/', function (req, res, next){
-	User.findByIdAndUpdate(req.user._id, req.body, { new: true }).exec()
+	User.findByIdAndUpdate(req.CurrentUser._id, req.body, { new: true }).exec()
 	.then(function (user) {
 		res.status(200).json(user);
 	})
@@ -54,15 +54,15 @@ router.put('/', function (req, res, next){
 
 
 router.delete('/', function (req, res, next) {
-//NEed to loop through 
+//NEed to loop through
 //	- Reviews
 //	- Dishes
 //  - Orders
 // and delete if user._id is found
 // /!\ We are keeping the reviews and orders associated with the deleted Dish
-// So that customers can refer back to them 
+// So that customers can refer back to them
 // We'll add a "dish was deleted by Chef" message
-	User.findByIdAndRemove(req.user._id).exec()
+	User.findByIdAndRemove(req.CurrentUser._id).exec()
 	.then(function () {
 		res.status(200).json({message: 'Successfully deleted!'})
 	})
