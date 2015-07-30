@@ -4,30 +4,30 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/home/home.html',
         controller: 'HomeCtrl',
         resolve: {
-        	chefs: function(Dishes) { //array of chefs obj (with dishes)
-        		return Dishes.getDishes();
+        	chefs: function(Chefs) { //array of chefs obj (with dishes)
+        		return Chefs.getChefs();
         	}
         }
     });
 });
 
-app.controller('HomeCtrl', function($scope, chefs, $http, Dishes) {
+app.controller('HomeCtrl', function($scope, chefs, $http, Chefs) {
 
 	$scope.getLocation = function() {
-	    if (navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition($scope.getDishesCloseBy);
-	    } else {
-	        alert("Geolocation is not supported by this browser.");
-	    }
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition($scope.getChefsCloseBy);
+		} else {
+			alert("Geolocation is not supported by this browser.");
+		}
 	}
 
 	Number.prototype.toRadians = function() {
 		return this*Math.PI/180;
 	}
 
-	$scope.getDishesCloseBy = function(position) {
-		Dishes.position = position;
-		Dishes.nearbyChefs = chefs.filter(function(chef) {
+	$scope.getChefsCloseBy = function(position) {
+		Chefs.position = position;
+		Chefs.nearbyChefs = chefs.filter(function(chef) {
 			var φ1 = chef.address.lat.toRadians(), 
 				φ2 = position.coords.latitude.toRadians(), 
 				Δλ = (position.coords.longitude-chef.address.lng).toRadians(), 
@@ -38,5 +38,5 @@ app.controller('HomeCtrl', function($scope, chefs, $http, Dishes) {
 		})
 	};
 
-	if (!Dishes.position) $scope.getLocation();
+	if (!Chefs.position) $scope.getLocation();
 });

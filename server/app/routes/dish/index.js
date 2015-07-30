@@ -3,9 +3,6 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var Dish = mongoose.model('Dish');
-var User = mongoose.model('User');
-var https = require('https');
-var async = require('async');
 
 //  /api/dishes/
 router.param('id', function(req, res, next, id) {
