@@ -2,9 +2,15 @@ app.factory('Chefs',function($http){
   return{
     getAll: function(){
       return $http.get('/api/users/')
-        .then(function(res) {
+        .then(function (res) {
                 return res.data;
             });
+    },
+    getOne: function(id) {
+    	return $http.get('/api/users/' + id)
+    		.then(function (res) {
+    			return res.data;
+    		})
     }
   };
 });

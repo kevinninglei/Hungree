@@ -1,7 +1,7 @@
-app.factory('Dishes', function ($http) {
+app.factory('Chefs', function ($http) {
     return {
-        getDishes: function() {
-            return $http.get('/api/dishes/locations')
+        getChefs: function() { //returns array of chef objects with dishes array
+            return $http.get('/api/users/chefs')
             .then(function(res) {
                 return res.data;
             });
