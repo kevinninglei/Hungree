@@ -64,16 +64,12 @@ router.param('id', function (req, res, next) {
 				req.CurrentUser = user;
 				next();
 			} else {
-				throw new Error();
+				throw new Error("User doesn't exist!");
 			}
 		})
 		.then(null, next);
 });
 
 router.use('/:id', require('./user-id'));
-
-
-
-
 
 module.exports = router;

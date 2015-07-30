@@ -17,7 +17,7 @@ router.put('/', function(req, res, next) {
 	//why doesn't this work? and i also have the dish already attached to
 	//req.dish from my router.param. Why doesn't it have a save/remove method?
 
-	// Dish.findDish(req.id)
+	// Dish.findDish(req.dish._id)
 	// .then(function(dish) {
 	// 	for (var key in req.body) {
 	// 		dish[key] = req.body[key];
@@ -31,7 +31,7 @@ router.put('/', function(req, res, next) {
 	// })
 	// .then(null, next)
 
-	Dish.findByIdAndUpdate(req.id, req.body, { new: true }).exec()
+	Dish.findByIdAndUpdate(req.dish._id, req.body, { new: true }).exec()
 	.then(function (dish) {
 		res.status(200).json(dish);
 	})
@@ -39,7 +39,7 @@ router.put('/', function(req, res, next) {
 })
 
 router.delete('/', function(req, res, next) {
-	Dish.findByIdAndRemove(req.id).exec()
+	Dish.findByIdAndRemove(req.dish._id).exec()
 	.then(function () {
 		res.status(200).json({message: 'Successfully deleted!'})
 	})
