@@ -42,7 +42,6 @@ orderSchema.pre('save', function (next, done) {
 		order.total = currTotal;
 		next();
 	})
-	
 })
 
 mongoose.model('Order', orderSchema);
