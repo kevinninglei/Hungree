@@ -6,7 +6,10 @@ app.config(function ($stateProvider) {
 		controller: 'ViewChefCtrl',
 		resolve: {
 			chef: function (Chefs, $stateParams) {
-				return Chefs.getOne($stateParams.id);
+				console.log('resolve')
+				var x = Chefs.getOne($stateParams.id);
+				console.log('after resolve', x);
+				return x;
 			}
 		}
 	})
