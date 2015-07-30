@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var Order = mongoose.model('Order');
 var router = require('express').Router();
-var _ = require('lodash');
 
 router.get('/', function (req, res, next) {
 	Order.find({}).exec()

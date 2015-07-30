@@ -1,9 +1,7 @@
 'use strict';
-var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Dish = mongoose.model('Dish');
 var q = require('q');
-var _ = require('lodash');
 
 
 
@@ -21,7 +19,7 @@ var orderSchema = new mongoose.Schema({
 })
 
 
-orderSchema.pre('save', function (next, done) {
+orderSchema.pre('save', function (next) {
 	var order = this;
 	//creates an array of promises for q to process
 	var promiseArr = this.dishes.map(function(dishInOrder){
