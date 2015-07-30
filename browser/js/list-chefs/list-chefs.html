@@ -7,7 +7,7 @@
             <img src="{{chef.picture}}" id="profile-pic">
 
         </div>
-        <div class="panel-heading"><a ui-sref="itemDetails({id: chef._id})"> <h4>{{chef.name.first}} {{chef.name.last}} </h4></a></div>
+        <div class="panel-heading"><a ui-sref="oneChef({id: chef._id})"> <h4>{{chef.name.first}} {{chef.name.last}} </h4></a></div>
         <div class="panel-body"> <strong> Currently Connected: </strong>(true/false) </div>
         <div class="panel-body"> <strong> Number of Dishes: </strong>{{chef.dishes.length}}   </div>
         <div class="panel-body"> <strong> Rating: </strong>
