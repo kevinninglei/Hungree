@@ -1,17 +1,20 @@
 <h3> Chefs </h3>
 <div class="row">
-    <div class="col-md-4" ng-repeat="chef in chefs">
-        <div class="container">
-            <div class="row">
-                <div>
-                    <img src="{{chef.picture}}" class="img-circle" >
-                    <div>
-                        <div>
-                            <a ui-sref="itemDetails({id: chef._id})">{{chef.name.first}} {{chef.name.last}}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+    <div class="col-md-4" ng-repeat="chef in chefs" id="profile">
+    <div class="panel panel-default">
+        <div class="panel-body row text-center">
+            <img src="{{chef.picture}}" id="profile-pic">
+
         </div>
-    </div>
+        <div class="panel-heading"><a ui-sref="itemDetails({id: chef._id})"> <h4>{{chef.name.first}} {{chef.name.last}} </h4></a></div>
+        <div class="panel-body"> <strong> Currently Connected: </strong>(true/false) </div>
+        <div class="panel-body"> <strong> Number of Dishes: </strong>{{chef.dishes.length}}   </div>
+        <div class="panel-body"> <strong> Rating: </strong>
+          <i class="fa fa-star"> </i>
+          <i class="fa fa-star"> </i>
+          <i class="fa fa-star"> </i>
+          <i class="fa fa-star-half-o"> </i>
+          <i class="fa fa-star-o"> </i>
+           </div>
 </div>
