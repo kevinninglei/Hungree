@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
 		res.status(201).json(dish);
 	})
 	.then(null, next);
-})
+});
 
 // /api/dishes/:id/
 router.use('/:id', require('./dish-id.js'));
