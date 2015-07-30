@@ -32,9 +32,9 @@ router.get('/', function(req, res, next){
 });
 
 function convertAddress(user) {
-	var street = user.shippingAddress.street;
-	var city = user.shippingAddress.city;
-	var state = user.shippingAddress.state
+	var street = user.address.shipping.street;
+	var city = user.address.shipping.city;
+	var state = user.address.shipping.state
 	var address = street+', '+city+', '+state;
 	return address.replace(/ /g, '+');
 }
