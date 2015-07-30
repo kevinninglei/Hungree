@@ -1,0 +1,28 @@
+.form-step {
+  background-color: #fff;
+  border: solid 2px #DDDDDD;
+  color: #DDDDDD;
+  height: 30px;
+  line-height: 26px;
+  position: relative;
+  text-align: center;
+  width: 30px;
+  display: inline-block;
+  border-radius: 100px;
+}
+
+
+.signupform{
+  border-right: 1px solid #dddddd
+}
+
+.signup-container {
+  border-right: 1px solid #dddddd;
+}
+
+@media (max-width: 990px) {
+  .signup-container {
+    border-right: none;
+    border-bottom: 1px solid #dddddd;
+  }
+}

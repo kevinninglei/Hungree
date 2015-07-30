@@ -1,15 +1,60 @@
-<div class="signin-container">
-    <div class="buffer local">
-        <form ng-submit="sendLogin(credentials)">
-            <div class="form-group">
-                <label>email</label>
-                <input type="text" class="form-control" ng-model="credentials.email"/>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default" style="width:50%;  display:table; margin: 0 auto;">
+
+            <!-- Panel Heading -->
+            <div class="panel-heading">
+              <h1 class="panel-title">Signup in 2 steps!</h1>
             </div>
-            <div class="form-group">
-                <label>password</label>
-                <input type="password" class="form-control" ng-model="credentials.password" />
-            </div>
-            <button type="submit" class="btn btn-block btn-primary">login</button>
-        </form>
-    </div>
-</div>
+
+            <!-- Panel Body -->
+            <div class="panel-body">
+              <!-- Basic Information Row-->
+              <div class="row" > 
+                <div class='col-lg-12'>
+                    <form class="form">
+                      <h3 style="color:#DDDDDD"> <span class="form-step">1</span> Basic Information </h3>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Firstname">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Lastname">
+                      </div>
+                      <div class="form-group">
+                        <label>Upload Profile Picture</label>
+                        <input type="file" >
+                      </div>
+                    </form>
+                </div>
+              </div>
+              <!-- Sign In Row-->
+              <div class="row">
+                <div class='col-lg-12'>
+                    <form class="form">
+                      <h3 style="color:#DDDDDD"> <span class="form-step">2</span> Join Now! </h3>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Password">
+                      </div>
+                      <button type="button" class="btn btn-default" style="float:right">Sign in with email</button>
+                    </form>
+                </div>
+              </div>
+
+            </div> <!-- end panel footer -->
+
+            <!-- Panel Footer -->
+            <div class="panel-footer" style="background-color:white">
+              <div style="display:table; margin: 0 auto;">
+                  <oauth-button provider-name="Google" style="margin: 0 10px 0 0"></oauth-button>
+                  <oauth-button provider-name="Facebook" style="margin: 0 0 0 10px"></oauth-button>
+              </div>
+            </div> 
+
+            </div> <!-- panel -->
+        </div> <!-- main col for panel -->
+    </div> <!-- end row for container !-->
+</div> <!-- end container -->
