@@ -1,12 +1,12 @@
 app.factory('Chefs',function($http){
 	console.log('here')
   return{
-    getAll: function(){
-      return $http.get('/api/users/')
-        .then(function (res) {
+    getChefs: function() { //returns array of chef objects with dishes array
+            return $http.get('/api/users/chefs')
+            .then(function(res) {
                 return res.data;
             });
-    },
+        },
     getOne: function(id) {
     	console.log('getOne')
     	return $http.get('/api/users/' + id)
