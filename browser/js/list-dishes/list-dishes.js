@@ -2,12 +2,7 @@ app.config(function ($stateProvider) {
 
     $stateProvider.state('listDishes', {
         url: '/dishes',
-        template: `<div ng-repeat="chef in nearbyChefs">
-	        		<h3>{{chef.name.first}} {{chef.name.last}}</h3>
-	        		<ul>
-	        			<li ng-repeat="dish in chef.dishes">{{dish.name}}</li>
-	        		</ul>
-        		</div>`,
+        templateUrl: 'js/list-dishes/list-dishes.html',
         controller: 'DishesCtrl'
     });
 
@@ -16,3 +11,18 @@ app.config(function ($stateProvider) {
 app.controller('DishesCtrl', function($scope, Chefs) {
 	$scope.nearbyChefs = Chefs.nearbyChefs 
 });
+
+app.filter('tags', function(Tags) {
+	return function(dishes) {
+		if (!Tags.selectedTags.length) return dishes;
+		return dishes.filter(function(dish) {
+			var filtered = dish.tags.filter(function(tag) {
+				return Tags.selectedTags.indexOf(tag.name) !== -1;
+			})
+			return !!filtered.length;
+		})
+	}
+})
+
+
+//dish.tag = ids, Tags.selectedTags = full tags

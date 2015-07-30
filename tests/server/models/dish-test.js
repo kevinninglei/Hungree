@@ -45,9 +45,10 @@ describe('Dish model', function () {
                 expect(Dish.findAllDishes).to.be.a('function');
             });
 
-            it('should return an array of dishes', function() {
+            it('should return an array of dishes', function(done) {
                 Dish.findAllDishes().then(function(dishes) {
                     expect(dishes).to.have.length.above(0);
+                    done()
                 });
             });
 
@@ -59,17 +60,16 @@ describe('Dish model', function () {
                 expect(Dish.findDish).to.be.a('function');
             });
 
-            it('should find one dish by id', function() {
+            it('should find one dish by id', function(done) {
                 Dish.find({name:'Thai Curry'}).exec()
                 .then(function(dish) {
                     return Dish.findDish(dish[0]._id)
                 })
                 .then(function(dish) {
-                    expect(dish).to.have.length(1);
+                    expect(dish.name).to.equal('Thai Curry');
+                    done()
                 })
-                .then(function(err) {
-                    console.error(err);
-                });
+                .then(null, done);
             });
 
         });
@@ -80,15 +80,17 @@ describe('Dish model', function () {
                 expect(Dish.findByTags).to.be.a('function');
             });
 
-            it('should return an array of dishes', function() {
+            it('should return an array of dishes', function(done) {
                 Dish.findByTags([]).then(function(dishes) {
                     expect(dishes).to.have.length.above(0);
+                    done();
                 });
             });
 
-            it('should return dishes that match a single tag or array of tags', function() {
+            it('should return dishes that match a single tag or array of tags', function(done) {
                 Dish.findByTags(['Paleo', 'Organic']).then(function(dishes) {
                     expect(dishes).to.have.length(1);
+                    done()
                 });
             });
         });

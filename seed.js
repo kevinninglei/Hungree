@@ -85,7 +85,8 @@ var users = [
         dishes: [dishes[0], dishes[1]],
         favorites: [dishes[3], dishes[1]],
         orders: [orders[0]],
-        reviews: [reviews[0], reviews[1]]
+        reviews: [reviews[0], reviews[1]],
+        status: 'online'
     }),
     new User({
         name: {first: 'Barack', last: 'Obama'},
@@ -100,7 +101,8 @@ var users = [
         dishes: [dishes[2]],
         favorites: [dishes[0], dishes[1]],
         orders: [orders[1], orders[2]],
-        reviews: [reviews[2]]
+        reviews: [reviews[2]],
+        status: 'offline'
     }),
         new User({
         name: {first: 'Crazy', last: 'Eyes'},
@@ -112,6 +114,7 @@ var users = [
         google: null,
         admin: false,
         address: {shipping: addresses[4], lat: 41.3091229, lng: -74.2024038},
+        status: 'busy'
     }),
 ];
 
