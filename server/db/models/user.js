@@ -28,8 +28,11 @@ var userSchema = new mongoose.Schema({
         id: String
     },
     admin: Boolean,
-    shippingAddress: {type: mongoose.Schema.ObjectId, ref: 'Address'},
-
+    address: {
+        shipping: {type: mongoose.Schema.ObjectId, ref: 'Address'},
+        lat: Number,
+        lng: Number
+    },
     billing: {
         billingAddress: {type: mongoose.Schema.ObjectId, ref: 'Address'},
         number: Number,
@@ -72,7 +75,7 @@ userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
 
 userSchema.statics.findChefs = function() {
-    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).populate('shippingAddress billing.billingAddress dishes').exec()
+    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).populate('address.shipping billing.billingAddress dishes').exec()
         .then(function(chefs) {
             return chefs;
         });
