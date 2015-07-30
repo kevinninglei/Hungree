@@ -3,8 +3,8 @@ app.factory('Dishes', function ($http) {
         getDishes: function() {
             return $http.get('/api/dishes/locations')
             .then(function(res) {
-                return res.data
-            })
+                return res.data;
+            });
         }
-    }
+    };
 });
