@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
         controller: 'ListChefsCtrl',
         resolve: {
           chefs: function(Chefs){
-            return Chefs.getAll();
+            return Chefs.getChefs();
           }
         }
     });
