@@ -1,10 +1,17 @@
 <h3> Chefs </h3>
-<div class="container" ng-repeat="chef in chefs">
-  <div class="col-lg-4">
-    <img src="{{chef.picture}}">
-    <p>{{chef.name.first}} {{chef.name.last}}</p>
-  </div>
-  <div class="col-lg-8">
-    Blablabla
-  </div>
-<div>
+<div class="row">
+    <div class="col-md-4" ng-repeat="chef in chefs">
+        <div class="container">
+            <div class="row">
+                <div>
+                    <img src="{{chef.picture}}" class="img-circle" >
+                    <div>
+                        <div>
+                            <a ui-sref="profile">{{chef.name.first}} {{chef.name.last}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
