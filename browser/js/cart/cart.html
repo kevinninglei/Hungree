@@ -10,52 +10,32 @@
             <th>quantity</th>
           </thead>
           <tbody>
-            <tr>
-              <td><input type="checkbox" 
-                     ng-model="transaction.isSelected"></td>
-              <td>Order 1</td>
-              <td><span>$</span><span>10</span></td>
+            <tr ng-repeat="cartItem in cart">
+              <td><input type="checkbox" ng-change="updateSelectedCartItem()" ng-model="cartItem.isSelected"></td>
               <td>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                </select>
+                <div>
+                  <strong>{{ cartItem.dishName }}</strong><br>
+                  <em>{{ cartItem.dishDescription }}</em>
+                </div>
               </td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" 
-                     ng-model="transaction.isSelected"></td>
-              <td>Order 1</td>
-              <td><span>$</span><span>10</span></td>
+              <td><span>$</span><span>{{ cartItem.dishPrice }}</span></td>
               <td>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                </select>
+                <input type="text" 
+                       size="2" 
+                       style="border:none" 
+                       value="{{ cartItem.quantity }}"
+                       ng-model="cartItem.quantity"
+                       >
               </td>
-
-            </tr>
-            <tr>
-              <td><input type="checkbox" 
-                     ng-model="transaction.isSelected"></td>
-              <td>Order 1</td>
-              <td><span>$</span><span>10</span></td>
-              <td>
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                </select>              
-              </td>
-
             </tr>
             <tr class="totalrow">
               <td></td>
               <td><span style="font-weight:bold">TOTAL</span></td>
-              <td><span>$</span>20</th>
+              <td><span>$</span>{{ totalPrice }}</th>
             </tr>
           </tbody>
         </table>
-        <button type="button" class="btn btn-default" style="float:right">Delete Order</button>
+        <button type="button" class="btn btn-default" style="float:right" ng-click="deleteItems()" ng-show="showDeleteItemsButton">Delete Item(s)</button>
 
       </form>     
     </div>
@@ -67,7 +47,7 @@
           <h3 class="panel-title">Cart</h3>
         </div>
         <div class="panel-body">
-            <p>Total <span>(4)</span> orders: $<span>{{total}}</span> </p>          
+            <p>Total <span>({{ cart.length }})</span> orders: $<span>{{totalPrice}}</span> </p>          
             <button type="button" class="btn btn-default">Checkout</button>
 
 
