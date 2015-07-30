@@ -97,11 +97,22 @@ var users = [
         admin: true,
         address: {shipping: addresses[2], lat: 42.404326, lng: -71.12380499999999},
         billing: {billingAddress: addresses[3], number: 6453965834530596, ccv: 997, exp: {month: 09, year: 2015}, cardType: 'MasterCard'},
-        dishes: [dishes[2], dishes[3]],
+        dishes: [dishes[2]],
         favorites: [dishes[0], dishes[1]],
         orders: [orders[1], orders[2]],
         reviews: [reviews[2]]
-    })
+    }),
+        new User({
+        name: {first: 'Crazy', last: 'Eyes'},
+        picture: 'http://nerdylittlesecret.com/main/wp-content/uploads/2013/08/warren_susanna_2227.jpg',
+        email: 'testin2g@fsa.com',
+        password: 'password',
+        facebook: null,
+        dishes:[dishes[3]],
+        google: null,
+        admin: false,
+        address: {shipping: addresses[4], lat: 41.3091229, lng: -74.2024038},
+    }),
 ];
 
 orders[0].userId = users[0];
