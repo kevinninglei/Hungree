@@ -3,8 +3,6 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var Dish = mongoose.model('Dish');
-var User = mongoose.model('User');
-var https = require('https');
 
 //  /api/dishes/
 router.param('id', function(req, res, next, id) {
@@ -26,42 +24,6 @@ router.get('/', function(req, res, next){
 	Dish.findAllDishes()
 		.then(function(dishes){
 			res.json(dishes);
-		})
-		.then(null, next);
-
-});
-
-function convertAddress(user) {
-	var street = user.address.shipping.street;
-	var city = user.address.shipping.city;
-	var state = user.address.shipping.state
-	var address = street+', '+city+', '+state;
-	return address.replace(/ /g, '+');
-}
-
-router.get('/locations', function(req, res, next){
-	User.findChefs()
-		.then(function(chefs){
-			var chefsArr = [];
-			chefs.forEach(function(chef) {
-				var chefObj = {chef: chef};
-				var address = convertAddress(chef);
-				var key = '&key=AIzaSyCSyc5QWQp2jw0q91SLI6hlDaWzAUIzy1o';
-				https.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address+key, function(response) {
-					var body = ""; //parse to json object 
-					response.on('data', function(data){
-						body += data;
-					});
-					response.on('end', function(){
-						chefObj.lat = JSON.parse(body).results[0].geometry.location.lat;
-						chefObj.lng = JSON.parse(body).results[0].geometry.location.lng;
-						chefsArr.push(chefObj);
-						if (chefsArr.length === chefs.length) {
-							res.json(chefsArr)
-						}
-					});
-				})
-			})
 		})
 		.then(null, next);
 
