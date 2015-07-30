@@ -1,11 +1,13 @@
-app.config(function ($stateProvider,Chefs) {
+app.config(function ($stateProvider) {
 
     $stateProvider.state('listChefs', {
         url: '/chefs',
         templateUrl: 'js/list-chefs/list-chefs.html',
-        controller: 'SignupCtrl',
+        controller: 'ListChefsCtrl',
         resolve: {
-          user: Chefs.getAll()
+          chefs: function(Chefs){
+            return Chefs.getAll();
+          }
         }
     });
 });

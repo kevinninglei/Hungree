@@ -5,6 +5,10 @@ var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
     name: {first: String, last: String},
+    picture: {
+        type: String,
+        default: 'http://www.corporatetraveller.ca/assets/images/profile-placeholder.gif'
+    },
     email: {
         type: String,
         unique: true,

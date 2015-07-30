@@ -6,12 +6,12 @@ var router = require('express').Router();
 
 
 router.get('/', function(req, res, next){
-	User.find({}).exec()
+	User.find({}).populate('dishes').exec()
 		.then(function(users) {
 			res.json(users);
 		})
-		.then(null,next)
-})
+		.then(null,next);
+});
 
 router.post('/', function (req, res, next) {
 	User.create(req.body)
@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
 			res.status(201).json(user);
 		})
 		.then(null, next);
-})
+});
 
 router.param('id', function (req, res, next) {
 	User.findById(req.params.id).exec()
@@ -32,7 +32,7 @@ router.param('id', function (req, res, next) {
 			}
 		})
 		.then(null, next);
-})
+});
 
 router.use('/:id', require('./user-id'));
 
