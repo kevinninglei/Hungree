@@ -2,7 +2,7 @@
 <div ng-repeat="chef in nearbyChefs">
 	<h3>{{chef.name.first}} {{chef.name.last}}</h3>
 	<div 
-		ng-repeat="dish in chef.dishes">
+		ng-repeat="dish in chef.dishes | tags">
 		<div 
 			class="dish-img col-lg-3" 
 			ng-style="{'background-image': 'url({{dish.picture}})'}">
