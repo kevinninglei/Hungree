@@ -1,9 +1,15 @@
-app.controller('CartCtrl', function ($scope, $http){
+app.controller('CartCtrl', function ($scope, $http, OrderFactory){
 	$scope.total = 49;
-	$http.get('/api/orders')
+
+
+
+	OrderFactory.getAllOrders()
 		.then(function(orders){
-			console.log('orders is:', orders)
+			console.log(orders);
+
+
 		})
+
 
 
 
