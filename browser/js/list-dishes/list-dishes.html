@@ -1,0 +1,15 @@
+<tag-search></tag-search>
+<div ng-repeat="chef in nearbyChefs">
+	<h3>{{chef.name.first}} {{chef.name.last}}</h3>
+	<div 
+		ng-repeat="dish in chef.dishes">
+		<div 
+			class="dish-img col-lg-3" 
+			ng-style="{'background-image': 'url({{dish.picture}})'}">
+			<div class="dish-label">
+				<h2>{{dish.name}}</h2>
+				<p>{{dish.description}}</p>
+			</div>
+		</div>
+	</div>
+</div>
