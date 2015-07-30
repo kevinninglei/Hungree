@@ -1,5 +1,5 @@
 app.controller('ViewChefCtrl', function ($scope, chef) {
-	//console.log("!!!!", chef);
 	$scope.item = chef;
+	$scope.item.extra = { name: 'Location', body: chef.location };
 })
 
