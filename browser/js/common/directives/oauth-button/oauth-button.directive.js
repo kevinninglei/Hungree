@@ -6,6 +6,5 @@ app.directive('oauthButton', function () {
 			providerName: '@'
 		},
 		restrict: 'E',
-		templateUrl: '/browser/components/oauth-button/oauth-button.html'
-	}
+		templateUrl: 'js/common/directives/oauth-button/oauth-button.html'	}
 });
