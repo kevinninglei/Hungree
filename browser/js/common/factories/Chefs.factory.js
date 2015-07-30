@@ -1,5 +1,4 @@
 app.factory('Chefs',function($http){
-	console.log('here')
   return{
     getChefs: function() { //returns array of chef objects with dishes array
             return $http.get('/api/users/chefs')

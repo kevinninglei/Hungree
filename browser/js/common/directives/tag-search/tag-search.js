@@ -9,10 +9,13 @@ app.directive('tagSearch', function (Tags, AuthService, AUTH_EVENTS, $state) {
                 scope.tags = tags;
             })
 
-            scope.tagsToAdd = [];
+            scope.tagsToAdd = Tags.selectedTags;
 
             scope.addTag = function() {
-                scope.tagsToAdd.push(scope.selectedTag);
+                Tags.selectedTags.push(scope.selectedTag);
+            }
+            scope.removeTag = function(index) {
+                Tags.selectedTags.splice(index, 1);
             }
         },
         templateUrl: 'js/common/directives/tag-search/tag-search.html'
