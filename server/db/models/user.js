@@ -2,6 +2,7 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var deepPopulate = require('mongoose-deep-populate');
+var status ="busy online offline".split(' ');
 
 var userSchema = new mongoose.Schema({
     name: {first: String, last: String},
@@ -43,7 +44,12 @@ var userSchema = new mongoose.Schema({
     dishes: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
     favorites: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
     orders: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
-    reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}]
+    reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}],
+    status:{
+        type: String,
+        enum: status,
+        default: 'offline'
+    }
 
 });
 
