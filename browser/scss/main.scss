@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import 'bootstrap.custom.scss';
+
 * {
   box-sizing: border-box;
 }
@@ -9,6 +12,15 @@
     clear: both;
   }
 }
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+footer {
+  color: primary;
+}
+
 
 @import 'directives/main';
 @import 'home/main';
