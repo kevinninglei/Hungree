@@ -1,12 +1,46 @@
-app.controller('CartCtrl', function ($scope, $http){
+app.controller('CartCtrl', function ($scope, $http, CartFactory){
 	$scope.total = 49;
-	$http.get('/api/orders')
-		.then(function(orders){
-			console.log('orders is:', orders)
+	//1. given an existing 'order', populate the cart
+	//2. ability to easy add dishes to the current order
+	//3. keep the current order as a factory
+
+
+	var selectedItems = {};
+	$scope.updateSelectedCartItem = function(){
+		console.log('deleting button showing...');
+		$scope.showDeleteItemsButton = true;
+
+	}
+
+	var populateCart = function(order){
+		var currCart = [];
+		var calculatedTotal = 0;
+		order.dishes.forEach(function(dish){
+			currCart.push({
+				dishName: dish.dishId.name,
+				dishDescription: dish.dishId.description,
+				//price of a single dish
+				dishPrice: dish.dishId.price,
+				//used to configure the current <select> 
+				quantity: dish.quantity,
+				isSelected: false
+			});
+		});
+		$scope.cart = currCart;
+		$scope.totalPrice = order.total;
+		console.log(currCart);
+	}
+
+	$scope.showDeleteItemsButton = false;
+
+	$scope.deleteItems = function(){
+		console.log($scope.cart);
+	}
+
+	CartFactory.getCurrentCart()
+		.then(function(order){
+			populateCart(order);
 		})
-
-
-
 
 	
 })

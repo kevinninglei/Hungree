@@ -4,7 +4,7 @@ var Order = mongoose.model('Order');
 var router = require('express').Router();
 
 router.get('/', function (req, res, next) {
-	Order.find({}).exec()
+	Order.find({}).populate('dishes.dishId').exec()
 		.then(function(orders) {
 			res.json(orders)
 		})
