@@ -32,14 +32,12 @@ var q = require('q');
 
 
 var addresses = [
-    new Address({street: '123 Sesame Street', city: 'Boston', state: 'MA', zip: 02144}),
-    new Address({street: '20 Boop Ave', city: 'Monroe', state: 'NY', zip: 10950}),
-    new Address({street: '13 Atlantic Ave', city: 'New York', state: 'NY', zip: 10001}),
-    new Address({street: '65 Sunview Drive', city: 'San Francisco', state: 'CA', zip: 43513}),
-    new Address({street: '50 Cowboy Road', city: 'Dallas', state: 'TX', zip: 99657}),
-    new Address({street: '1300 Plastic Surgey Boulevard', city: 'Seoul', state: 'Korea', zip: 10242}),
-    new Address({street: '4604 Ski Road', city: 'Somewhere', state: 'Montana', zip: 00234}),
-    new Address({street: '324 Fredrick Drive', city: 'Tampa', state: 'FL', zip: 43564})
+    new Address({street: '87 Fredrick Drive', city: 'Monroe', state: 'NY', zip: 10950}),
+    new Address({street: '5 Cameron Avenue', city: 'Somerville', state: 'MA', zip: 02144}),
+    new Address({street: '126 Powder House Boulevard', city: 'Somerville', state: 'MA', zip: 02144}),
+    new Address({street: '886 6th Avenue', city: 'New York', state: 'NY', zip: 10001}),
+    new Address({street: '5 Hanover Square', city: 'New York', state: 'NY', zip: 10004}),
+    new Address({street: 'Walt Disney World Resort', city: 'Orlando', state: 'FL', zip: 32830})
 ];
 
 var tags = [

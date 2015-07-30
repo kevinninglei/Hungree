@@ -67,8 +67,20 @@ userSchema.pre('save', function (next) {
 userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
 
+userSchema.statics.findChefs = function() {
+    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).populate('shippingAddress billing.billingAddress dishes').exec()
+        .then(function(chefs) {
+            return chefs;
+        });
+}
+
 userSchema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 
 mongoose.model('User', userSchema);
+
+
+
+
+
