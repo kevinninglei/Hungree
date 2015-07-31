@@ -10,7 +10,9 @@ app.config(function ($stateProvider) {
 
 app.controller('DishesCtrl', function($scope, Chefs, $state, $rootScope) {
 	if (!Chefs.nearbyDishes) {
+		$scope.loading = true;
 		$rootScope.$on('got-dishes', function(event, data) {
+			$scope.loading = false;
 			$scope.nearbyDishes = Chefs.nearbyDishes;
 		})
 	}
