@@ -30,7 +30,7 @@ router.get('/chefs', function(req, res, next){
 			// 	var address = convertAddress(chef);
 			// 	var key = '&key=AIzaSyCSyc5QWQp2jw0q91SLI6hlDaWzAUIzy1o';
 			// 	https.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address+key, function(response) {
-			// 		var body = ""; //parse to json object 
+			// 		var body = ""; //parse to json object
 			// 	    response.on('data', function(data){
 			// 	      body += data;
 			// 	    });
@@ -61,19 +61,15 @@ router.param('id', function (req, res, next) {
 	User.findById(req.params.id).exec()
 		.then(function (user) {
 			if (user) {
-				req.user = user;
+				req.CurrentUser = user;
 				next();
 			} else {
-				throw new Error();
+				throw new Error("User doesn't exist!");
 			}
 		})
 		.then(null, next);
 });
 
 router.use('/:id', require('./user-id'));
-
-
-
-
 
 module.exports = router;
