@@ -14,7 +14,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 				return Dish.getDishes();
 			},
 			reviews: function(Reviews, $stateParams) {
-				return Reviews.getReviews($stateParams.id);
+				return Reviews.getReviews($stateParams.id)
 			}
 		}
 	})
@@ -32,17 +32,9 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	.state('oneChef.reviews', {
 		url: '/reviews',
 		templateUrl: '/js/one-chef/chef-tab-reviews.html',
+		link: function(scope, element, attrs){
+			console.log("atttributes: ",attrs);
+			console.log("element: ",element);
+		}
 	})
-	// .state('chefDishes', {
-	// 	url: '/:id',
-	// 	//templateUrl: '/js/one-chef/chef-dishes/chef-dishes.html',
-	// 	template: '<p>omgggg</p>',
-	// 	controller: 'ChefDishesCtrl',
-	// 	resolve: {
-	// 		dishes: function (Dish, $stateParams) {
-	// 			console.log("IAMMMMM")
-	// 			return Dish.getDishes();
-	// 		}
-	// 	}
-	// })
 })

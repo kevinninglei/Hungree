@@ -118,16 +118,15 @@ var users = [
     }),
 ];
 
-orders[0].userId = users[0];
-orders[1].userId = users[1];
-orders[2].userId = users[1];
+orders[0].user = users[0];
+orders[1].user = users[1];
+orders[2].user = users[1];
 
-users.forEach(function (user) {
-    user.reviews.forEach(function (rev) {
-        rev.user = user;
-    })
-    
-})
+//make reviews and user bidirectional so that we dont have to loop
+//through all users to get info for each review
+reviews[0].user = users[0];
+reviews[1].user = users[0];
+reviews[2].user = users[1];
 
 var models = [User, Address, Dish, Order, Review, Tag];
 var data = [users, addresses, dishes, orders, reviews, tags];

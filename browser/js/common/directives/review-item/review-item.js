@@ -5,7 +5,8 @@ app.directive('reviewItem', function() {
       review: "=review",
     },
     templateUrl: 'js/common/directives/review-item/review-item.html',
-    link: function(scope, element, attribute) {
-    }
+    link: function(scope, element, attrs){
+			console.log("atttributes: ",attrs.review)
+		}
   };
 });
