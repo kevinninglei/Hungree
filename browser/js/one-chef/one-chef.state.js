@@ -3,7 +3,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/:id/dishes')
 	$stateProvider
 	.state('oneChef', {
-		url: '/:id',
+		url: '/chefs/:id',
 		templateUrl: '/js/one-chef/one-chef.html',
 		controller: 'OneChefCtrl',
 		resolve: {
