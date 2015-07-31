@@ -1,0 +1,13 @@
+<h3> Reviews </h3>
+<div class="row">
+
+    <div class="col-md-4" ng-repeat="review in reviews" id="profile">
+    <div class="panel panel-default">
+
+        <div class="panel-heading"><a ui-sref=""> <h4>{{review.rating}} </h4></a></div>
+        <div class="panel-body row text-center">
+        	{{review.description}}
+        </div>
+      </div>
+    </div>
+</div>
