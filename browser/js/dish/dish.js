@@ -8,11 +8,12 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs) {
+app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $state) {
 	$scope.dish = Chefs.viewDish;
 	console.log($scope.dish)
 	$scope.addToOrder = function() {
 		CartFactory.cartOrders.push($scope.dish);
-		console.log(CartFactory.cartOrders);
+		CartFactory.addToCart($scope.dish, 1)
+		$state.go('listDishes');
 	}
 });

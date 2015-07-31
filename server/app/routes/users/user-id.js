@@ -69,6 +69,44 @@ router.get('/cart', function(req, res, next) {
 		.then(null, next);
 });
 
+router.put('/cart', function (req, res, next){
+	console.log('PUTTING NOW')
+	var newDishObj = {
+			dishId: req.body.dish,
+			quantity: req.body.quantity
+		}
+	//--> if user has an existing cart(order), then push the dish + quantity and save
+	// the user///and res.respond with dish
+	//--> if the user doesn't have an existing cart(order), create a cart with the single dish
+	// then save the user...and res.respond with dish 
+	if (!req.CurrentUser.cart){
+		Order.create({
+						user: req.CurrentUser._id, 
+						dishes:[newDishObj]
+					})
+			.then(function(order){
+				//now that you have the order, you must save it to the current user
+				req.CurrentUser.cart = order;
+				return req.CurrentUser.save();
+			})
+			.then(function(user){
+				res.json(user.cart);
+			})
+			.then(null, next);
+	}else{
+		Order.findById(req.CurrentUser.cart._id).exec()
+			.then(function(order){
+
+				order.dishes.push(newDishObj);
+				return order.save();
+			})
+			.then(function(order){
+				res.json(order);
+			})
+			.then(null, next);
+	}
+});
+
 router.put('/', function(req, res, next) {
 	_.extend(req.CurrentUser, req.body);
 	req.CurrentUser.save()
