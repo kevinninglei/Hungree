@@ -7,7 +7,7 @@ var q = require('q');
 
 var orderSchema = new mongoose.Schema({
 	//make a static to fill if the user is a guest. add cookies to keep track of guest sessions
-	users: {
+	user: {
 		type: mongoose.Schema.ObjectId,
 		ref: 'User'
 	},
