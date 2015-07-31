@@ -10,6 +10,9 @@
 	</select>
 </div>
 <div class="container" style="clear:both">
+	<div style="text-align:center" ng-show="loading">
+		<img src="../assets/images/loader.gif"/>
+	</div>
 	<div 
 		class="dish-img clickable col-lg-3" 
 		ng-repeat="dish in nearbyDishes | tags | orderBy: selectedFilter"
