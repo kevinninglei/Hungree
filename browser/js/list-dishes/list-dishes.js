@@ -8,15 +8,17 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DishesCtrl', function($scope, Chefs) {
-	$scope.nearbyChefs = Chefs.nearbyChefs;
-	$scope.filters = {};
-
+app.controller('DishesCtrl', function($scope, Chefs, $state) {
+	$scope.nearbyDishes = Chefs.nearbyDishes;
 	$scope.categories = [
-		{category: 'price'},
-		{category: 'highest rating'},
-		{category: 'spiciness'}
+		{name: 'price'},
+		{name: 'rating'},
+		{name: 'spiciness'}
 	];
+
+	$scope.goToDish = function(dish) {
+		$state.go('dish', {id: dish._id});
+	}
 });
 
 app.filter('tags', function(Tags) {

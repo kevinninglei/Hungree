@@ -27,15 +27,22 @@ app.controller('HomeCtrl', function($scope, chefs, $http, Chefs) {
 
 	$scope.getChefsCloseBy = function(position) {
 		Chefs.position = position;
-		Chefs.nearbyChefs = chefs.filter(function(chef) {
+		Chefs.nearbyDishes = chefs.filter(function(chef) {
 			var φ1 = chef.address.lat.toRadians(), 
 				φ2 = position.coords.latitude.toRadians(), 
 				Δλ = (position.coords.longitude-chef.address.lng).toRadians(), 
 				R = 6371000; // gives d in metres
 			var d = Math.acos( Math.sin(φ1)*Math.sin(φ2) + Math.cos(φ1)*Math.cos(φ2) * Math.cos(Δλ) ) * R;
 			// console.log(chef);
-			return d <= 160934; //0.5 mile = 804.672m
+			return d <= 1609340; //0.5 mile = 804.672m
 		})
+		.reduce(function(returningArray, chef) {
+			// push an new array of the recipe with reference to the chef
+			chef.dishes.forEach(function(dish) { //attach reference to chef on each dish
+				dish.chef = chef;
+			})
+			return returningArray.concat(chef.dishes) //concat all dishes
+		}, [])
 	};
 
 	if (!Chefs.position) $scope.getLocation();

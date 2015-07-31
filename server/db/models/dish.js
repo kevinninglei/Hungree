@@ -61,4 +61,10 @@ dishSchema.statics.findDish = function(id){
         });
 }
 
+dishSchema.virtual('rating').get(function() { //average rating
+    return this.reviews.reduce(function(a,b) {
+        return a.rating+b.rating;
+    }) / this.reviews.length
+})
+
 mongoose.model('Dish', dishSchema);
