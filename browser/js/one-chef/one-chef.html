@@ -16,10 +16,13 @@
 		</div>
 	</div>
 </div>
-<ul class="nav nav-tabs">
-    <li ng-repeat="tab in tabs" 
-        ng-class="{active:isActiveTab(tab)}"><a class="chef" ui-sref="{{tab.state}}">{{tab.title}}</a></li>
-</ul>
+<div ng-controller="ChefTabCtrl">
+	<tabset>
+    <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+      {{tab.content}}
+    </tab>
+  </tabset>
+</div>
 
 
 
