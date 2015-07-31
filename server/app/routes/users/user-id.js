@@ -24,12 +24,13 @@ router.get('/dishes', function(req, res, next) {
 		.then(null, next);
 });
 
+//gets the reviews that the user has written
 router.get('/reviews', function(req, res, next) {
 	Review.find({
 			_id: {
 				$in: req.CurrentUser.reviews
 			}
-		}).exec()
+		}).populate('user').exec()
 		.then(function(reviews) {
 			res.json(reviews);
 		})
