@@ -10,9 +10,19 @@ app.config(function ($stateProvider) {
 
 app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $state) {
 	$scope.dish = Chefs.viewDish;
-	console.log($scope.dish)
+	$scope.ingredients = $scope.dish.ingredients.join(', ');
+	$scope.tags = $scope.dish.tags.map(function(tag) {
+		return tag.name;
+	}).join(', ');
+
+	$scope.getNumber = function(num) {
+	    return new Array(num);   
+	}
 	$scope.addToOrder = function() {
 		CartFactory.cartOrders.push($scope.dish);
+	}
+	$scope.postReview = function() {
+		$state.go('review', {id: $scope.dish._id})
 		CartFactory.addToCart($scope.dish, 1)
 		$state.go('listDishes');
 	}
