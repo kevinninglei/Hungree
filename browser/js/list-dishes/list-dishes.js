@@ -8,8 +8,14 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DishesCtrl', function($scope, Chefs, $state) {
-	$scope.nearbyDishes = Chefs.nearbyDishes;
+app.controller('DishesCtrl', function($scope, Chefs, $state, $rootScope) {
+	if (!Chefs.nearbyDishes) {
+		$rootScope.$on('got-dishes', function(event, data) {
+			$scope.nearbyDishes = Chefs.nearbyDishes;
+		})
+	}
+	else $scope.nearbyDishes = Chefs.nearbyDishes
+		
 	$scope.categories = [
 		{name: 'price'},
 		{name: 'rating'},
