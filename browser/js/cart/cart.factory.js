@@ -1,6 +1,6 @@
 app.factory('CartFactory', function($http, OrderFactory){
 	return {
-		
+
 
 		//cart factory will be a representation
 		//of a single order, for now, we will arbitrarily have a single
@@ -11,7 +11,8 @@ app.factory('CartFactory', function($http, OrderFactory){
 			return OrderFactory.getAllOrders().then(function(data){
 				return data[0];
 			})
-		}
+		},
+		cartOrders: []
 	}
 
 })

@@ -12,5 +12,5 @@ app.factory('Chefs',function($http){
     			return res.data;
     		})
     }
-  };
+  }; // nearbyDishes attached here from home.state.js, viewDish from list.dishes.js
 });
