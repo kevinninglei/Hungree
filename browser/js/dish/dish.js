@@ -23,5 +23,7 @@ app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $s
 	}
 	$scope.postReview = function() {
 		$state.go('review', {id: $scope.dish._id})
+		CartFactory.addToCart($scope.dish, 1)
+		$state.go('listDishes');
 	}
 });

@@ -1,4 +1,4 @@
-app.controller('CartCtrl', function ($scope, $http, CartFactory,$modal, $log){
+app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 	$scope.total = 49;
 	//1. given an existing 'order', populate the cart
 	//2. ability to easy add dishes to the current order
@@ -6,15 +6,20 @@ app.controller('CartCtrl', function ($scope, $http, CartFactory,$modal, $log){
 
 
 	var selectedItems = {};
-	$scope.updateSelectedCartItem = function(){
+	$scope.updateSelectedCartItem = function() {
 		console.log('deleting button showing...');
 		$scope.showDeleteItemsButton = true;
 	};
 
 	var populateCart = function(order){
+		if (!order){
+			$scope.cart = [];
+			$scope.totalPrice = 0;
+			return;
+		}
 		var currCart = [];
 		var calculatedTotal = 0;
-		order.dishes.forEach(function(dish){
+		order.dishes.forEach(function(dish) {
 			currCart.push({
 				dishName: dish.dishId.name,
 				dishDescription: dish.dishId.description,
@@ -32,37 +37,40 @@ app.controller('CartCtrl', function ($scope, $http, CartFactory,$modal, $log){
 
 	$scope.showDeleteItemsButton = false;
 
-	$scope.deleteItems = function(){
+	$scope.deleteItems = function() {
 		console.log($scope.cart);
 	};
 
 	CartFactory.getCurrentCart()
-		.then(function(order){
+		.then(function(order) {
 			populateCart(order);
 		});
 
-  $scope.open = function () {
-    var modalInstance = $modal.open({
-      animation: true,
-      templateUrl: 'js/cart/payment/payment.html',
-      controller: 'paymentCtrl',
-      resolve: {
-        price: function () {
-          return $scope.totalPrice;
-        }
-      }
-    });
+	$scope.open = function(price) {
+		var modalInstance = $modal.open({
+			animation: true,
+			scope: $scope,
+			templateUrl: 'js/cart/payment/payment.html',
+			controller: 'paymentCtrl',
+			resolve: {
+				price: function() {
+					return price;
+				}
+			}
+		});
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
 
-  $scope.toggleAnimation = function () {
-    $scope.animationsEnabled = !$scope.animationsEnabled;
-  };
+
+		modalInstance.result.then(function(selectedItem) {
+			$scope.selected = selectedItem;
+		}, function() {
+			$log.info('Modal dismissed at: ' + new Date());
+		});
+	};
+
+	$scope.toggleAnimation = function() {
+		$scope.animationsEnabled = !$scope.animationsEnabled;
+	};
 
 
 

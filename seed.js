@@ -110,8 +110,7 @@ var users = [
         favorites: [dishes[0], dishes[1]],
         orders: [orders[1], orders[2]],
         reviews: [reviews[2]],
-        status: 'offline',
-        cart: carts[0]
+        status: 'offline'
     }),
         new User({
         name: {first: 'Crazy', last: 'Eyes'},
@@ -124,7 +123,7 @@ var users = [
         admin: false,
         address: {shipping: addresses[4], lat: 41.3091229, lng: -74.2024038},
         status: 'busy',
-        cart: carts[0]
+        cart: carts[2]
     }),
 ];
 
