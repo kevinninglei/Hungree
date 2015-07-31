@@ -1,13 +1,7 @@
-<div class="col-md-12" id="thumbnail">
-    <div class="col-md-3 row">
-        <img class="text-center" src="{{review.user.picture}}" id="profile-pic">
-        <p class="text-center">{{review.user.name.first}}</p>
-    </div>
-    <div class="col-md-9"></div>
-    <div class="panel panel-default">
-        <a ui-sref="viewReview({id: dish._id})">
-        <div class="panel-heading">
-            <!-- !!!!!!build view review and view dish!!!!! -->
+<div class="panel panel-default container">
+    <div class="panel-heading row">
+        <div class="col-md-2">{{review.user.name.first}}</div>
+        <div class="col-md-10">
             <div>
                 <i class="fa fa-star"> </i>
                 <i class="fa fa-star"> </i>
@@ -16,8 +10,13 @@
                 <i class="fa fa-star-o"> </i>
             </div>
         </div>
-        <div class="panel-body">
-            <p>{{review.description}}</p>
-        </div>
     </div>
+    <div class="panel-body row">
+        <div class="col-md-2">
+            <img class="text-center" src="{{review.user.picture}}" id="profile-pic">
+        </div>
+        <div class="col-md-10">{{review.description}}</div>
+
+    </div>
+
 </div>
