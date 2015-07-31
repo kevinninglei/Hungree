@@ -6,12 +6,9 @@
         <div class="panel-heading">
             <div>
 
-                <i ng-class="chef.status" class="fa fa-square" id="status"></i>
-                <a ui-sref="viewChef({id: chef._id})">
-                    <h4>{{chef.name.first}} {{chef.name.last}} </h4></a>
+                <a ui-sref="viewDish({id: dish._id})">
+                    <h4> {{dish.name}} </h4></a>
                 <div>
-                <div>{{chef.address.shipping.city}} , {{chef.address.shipping.state}} </div>
-
                     <i class="fa fa-star"> </i>
                     <i class="fa fa-star"> </i>
                     <i class="fa fa-star"> </i>
