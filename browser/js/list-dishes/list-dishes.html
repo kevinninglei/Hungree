@@ -1,8 +1,18 @@
 <tag-search></tag-search>
+<div class="col-lg-3 pull-right">
+	Filter by:
+	<select
+		class="form-control"
+		style="display: inline-block"
+		ng-model="selectedFilter">
+		<option 
+			ng-click="filters.category = filter.category"
+			ng-repeat="filter in categories">{{filter.category}}</option>
+	</select>
+</div>
 <div ng-repeat="chef in nearbyChefs">
 	<h3>{{chef.name.first}} {{chef.name.last}}</h3>
-	<div 
-		ng-repeat="dish in chef.dishes">
+	<div ng-repeat="dish in chef.dishes | tags | filter: filters">
 		<div 
 			class="dish-img col-lg-3" 
 			ng-style="{'background-image': 'url({{dish.picture}})'}">

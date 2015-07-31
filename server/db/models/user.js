@@ -2,6 +2,8 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 
+var deepPopulate = require('mongoose-deep-populate');
+var status ="busy online offline".split(' ');
 
 var userSchema = new mongoose.Schema({
     name: {first: String, last: String},
@@ -43,10 +45,16 @@ var userSchema = new mongoose.Schema({
     dishes: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
     favorites: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
     orders: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
-    reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}]
+    reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}],
+    status:{
+        type: String,
+        enum: status,
+        default: 'offline'
+    }
 
 });
 
+userSchema.plugin(deepPopulate, {});
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
 var generateSalt = function () {
@@ -75,7 +83,7 @@ userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
 
 userSchema.statics.findChefs = function() {
-    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).populate('address.shipping billing.billingAddress dishes').exec()
+    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).deepPopulate('address.shipping billing.billingAddress dishes.tags').exec()
         .then(function(chefs) {
             return chefs;
         });

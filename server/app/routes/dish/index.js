@@ -9,11 +9,10 @@ router.param('id', function(req, res, next, id) {
 	Dish.findDish(id)
 		.then(function(dish){
 			if (!dish) {
-				throw new Error();
+				throw new Error("Dish doesn't exist!");
 			}
 			else {
 				req.dish = dish;
-				req.id = id;
 				next();
 			}
 		})
@@ -35,7 +34,7 @@ router.post('/', function(req, res, next) {
 		res.status(201).json(dish);
 	})
 	.then(null, next);
-})
+});
 
 // /api/dishes/:id/
 router.use('/:id', require('./dish-id.js'));
