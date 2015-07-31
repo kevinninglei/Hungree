@@ -5,11 +5,6 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory)
     };
 
 
-
-
-
-
-
     /*
 
 	Sign In Button Actions
