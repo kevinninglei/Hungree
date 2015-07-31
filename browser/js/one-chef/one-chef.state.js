@@ -1,6 +1,6 @@
 'use strict'
-app.config(function ($stateProvider) {
-	console.log('here')
+app.config(function ($stateProvider, $urlRouterProvider) {
+	$urlRouterProvider.otherwise('/:id/dishes')
 	$stateProvider
 	.state('oneChef', {
 		url: '/:id',
@@ -12,4 +12,24 @@ app.config(function ($stateProvider) {
 			}
 		}
 	})
+	.state('oneChef.dishes', {
+		url: '/dishes',
+		templateUrl: 'js/one-chef/chef-dishes/chef-dishes.html',
+	})
+	.state('oneChef.reviews', {
+		url: '/reviews',
+		templateUrl: 'js/one-chef/chef-dishes/chef-dishes.html',
+	})
+	// .state('chefDishes', {
+	// 	url: '/:id',
+	// 	//templateUrl: '/js/one-chef/chef-dishes/chef-dishes.html',
+	// 	template: '<p>omgggg</p>',
+	// 	controller: 'ChefDishesCtrl',
+	// 	resolve: {
+	// 		dishes: function (Dish, $stateParams) {
+	// 			console.log("IAMMMMM")
+	// 			return Dish.getDishes();
+	// 		}
+	// 	}
+	// })
 })
