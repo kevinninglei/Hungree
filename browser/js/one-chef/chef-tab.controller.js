@@ -1,5 +1,7 @@
 app.controller('ChefTabCtrl', function ($scope, $state) {
 	$scope.currentTab = 'Dishes';
+
+	//why cant i do this!?
 	//$scope.dishes = dishes
   $scope.tabs = [{title: 'Dishes', route: 'oneChef.dishes'}, {title: 'Reviews', route: 'oneChef.reviews'}, {title: 'Favorites', route: 'oneChef.favorites'}];
   $scope.go = function(route){
@@ -13,7 +15,4 @@ app.controller('ChefTabCtrl', function ($scope, $state) {
             tab.active = $scope.active(tab.route);
         });
     });
-	// $scope.isActiveTab = function(tab) {
-	// 	return tab.title === $scope.currentTab;
-	// }
 })

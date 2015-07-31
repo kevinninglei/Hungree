@@ -9,16 +9,29 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		resolve: {
 			chef: function (Chefs, $stateParams) {
 				return Chefs.getOne($stateParams.id);
+			},
+			dishes: function (Dish) {
+				return Dish.getDishes();
+			},
+			reviews: function(Reviews, $stateParams) {
+				return Reviews.getReviews($stateParams.id);
 			}
 		}
 	})
 	.state('oneChef.dishes', {
+		controller: 'ChefTabCtrl',
 		url: '/dishes',
-		templateUrl: 'js/one-chef/chef-dishes/chef-dishes.html',
+		templateUrl: '/js/one-chef/chef-tab-dishes.html'
+		// resolve: {
+		// 	dishes: function (Dish) {
+		// 		return Dish.getDishes();
+		// 	}
+		// }
+	
 	})
 	.state('oneChef.reviews', {
 		url: '/reviews',
-		templateUrl: 'js/one-chef/chef-dishes/chef-dishes.html',
+		templateUrl: '/js/one-chef/chef-tab-reviews.html',
 	})
 	// .state('chefDishes', {
 	// 	url: '/:id',
