@@ -10,8 +10,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			chef: function (Chefs, $stateParams) {
 				return Chefs.getOne($stateParams.id);
 			},
-			dishes: function (Dish) {
-				return Dish.getDishes();
+			dishes: function (Dish, $stateParams) {
+				return Dish.getDishesForChef($stateParams.id);
 			},
 			reviews: function(Reviews, $stateParams) {
 				return Reviews.getReviews($stateParams.id)
