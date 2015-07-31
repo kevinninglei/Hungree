@@ -10,11 +10,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			chef: function (Chefs, $stateParams) {
 				return Chefs.getOne($stateParams.id);
 			},
-			dishes: function (Dish) {
-				return Dish.getDishes();
+			dishes: function (Dish, $stateParams) {
+				return Dish.getDishesForChef($stateParams.id);
 			},
 			reviews: function(Reviews, $stateParams) {
-				return Reviews.getReviews($stateParams.id);
+				return Reviews.getReviews($stateParams.id)
+			},
+			favorites: function(Favorites, $stateParams) {
+				return Favorites.getFavsForUser($stateParams.id)
 			}
 		}
 	})
@@ -22,27 +25,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		controller: 'ChefTabCtrl',
 		url: '/dishes',
 		templateUrl: '/js/one-chef/chef-tab-dishes.html'
-		// resolve: {
-		// 	dishes: function (Dish) {
-		// 		return Dish.getDishes();
-		// 	}
-		// }
-	
 	})
 	.state('oneChef.reviews', {
+		controller: 'ChefTabCtrl',
 		url: '/reviews',
-		templateUrl: '/js/one-chef/chef-tab-reviews.html',
+		templateUrl: '/js/one-chef/chef-tab-reviews.html'
 	})
-	// .state('chefDishes', {
-	// 	url: '/:id',
-	// 	//templateUrl: '/js/one-chef/chef-dishes/chef-dishes.html',
-	// 	template: '<p>omgggg</p>',
-	// 	controller: 'ChefDishesCtrl',
-	// 	resolve: {
-	// 		dishes: function (Dish, $stateParams) {
-	// 			console.log("IAMMMMM")
-	// 			return Dish.getDishes();
-	// 		}
-	// 	}
-	// })
+	.state('oneChef.favorites', {
+		controller: 'ChefTabCtrl',
+		url: '/favorites',
+		templateUrl: '/js/one-chef/chef-tab-favorites.html'
+	})
 })

@@ -8,8 +8,16 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DishesCtrl', function($scope, Chefs, $state) {
-	$scope.nearbyDishes = Chefs.nearbyDishes;
+app.controller('DishesCtrl', function($scope, Chefs, $state, $rootScope) {
+	if (!Chefs.nearbyDishes) {
+		$scope.loading = true;
+		$rootScope.$on('got-dishes', function(event, data) {
+			$scope.loading = false;
+			$scope.nearbyDishes = Chefs.nearbyDishes;
+		})
+	}
+	else $scope.nearbyDishes = Chefs.nearbyDishes
+		
 	$scope.categories = [
 		{name: 'price'},
 		{name: 'rating'},
@@ -17,6 +25,7 @@ app.controller('DishesCtrl', function($scope, Chefs, $state) {
 	];
 
 	$scope.goToDish = function(dish) {
+		Chefs.viewDish = dish;
 		$state.go('dish', {id: dish._id});
 	}
 });

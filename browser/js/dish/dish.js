@@ -8,9 +8,11 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DishCtrl', function($scope, CartFactory, $stateParams) {
+app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs) {
+	$scope.dish = Chefs.viewDish;
+	console.log($scope.dish)
 	$scope.addToOrder = function() {
-		CartFactory.cartOrders.push($stateParams.id);
+		CartFactory.cartOrders.push($scope.dish);
 		console.log(CartFactory.cartOrders);
 	}
 });

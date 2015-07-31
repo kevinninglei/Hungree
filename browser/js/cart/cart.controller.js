@@ -27,7 +27,7 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		});
 		$scope.cart = currCart;
 		$scope.totalPrice = order.total;
-		console.log(currCart);
+		//console.log(currCart);
 	};
 
 	$scope.showDeleteItemsButton = false;
