@@ -11,7 +11,8 @@ app.factory('CartFactory', function($http, OrderFactory){
 			return OrderFactory.getAllOrders().then(function(data){
 				return data[0];
 			})
-		}
+		},
+		cartOrders: []
 	}
 
 })
