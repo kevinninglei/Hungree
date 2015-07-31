@@ -8,11 +8,20 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs) {
+app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $state) {
 	$scope.dish = Chefs.viewDish;
-	console.log($scope.dish)
+	$scope.ingredients = $scope.dish.ingredients.join(', ');
+	$scope.tags = $scope.dish.tags.map(function(tag) {
+		return tag.name;
+	}).join(', ');
+
+	$scope.getNumber = function(num) {
+	    return new Array(num);   
+	}
 	$scope.addToOrder = function() {
 		CartFactory.cartOrders.push($scope.dish);
-		console.log(CartFactory.cartOrders);
+	}
+	$scope.postReview = function() {
+		$state.go('review', {id: $scope.dish._id})
 	}
 });
