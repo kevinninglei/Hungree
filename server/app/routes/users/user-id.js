@@ -61,6 +61,14 @@ router.get('/favorites', function(req, res, next) {
 		.then(null, next);
 });
 
+router.get('/cart', function(req, res, next) {
+	Order.findById(req.CurrentUser.cart).populate('dishes.dishId').exec()
+		.then(function (order){
+			res.json(order);
+		})
+		.then(null, next);
+});
+
 router.put('/', function(req, res, next) {
 	_.extend(req.CurrentUser, req.body);
 	req.CurrentUser.save()

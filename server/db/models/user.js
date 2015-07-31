@@ -50,7 +50,8 @@ var userSchema = new mongoose.Schema({
         type: String,
         enum: status,
         default: 'offline'
-    }
+    },
+    cart: {type: mongoose.Schema.ObjectId, ref: 'Order'}
 
 });
 
