@@ -1,6 +1,7 @@
 app.controller('paymentCtrl', function ($scope, $modalInstance) {
 
-  // $scope.total = price;
+  $scope.price = price;
+  console.log($scope.price);
   // $scope.selected = {
   //   item: $scope.items[0]
   // };
