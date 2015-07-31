@@ -122,6 +122,13 @@ orders[0].userId = users[0];
 orders[1].userId = users[1];
 orders[2].userId = users[1];
 
+users.forEach(function (user) {
+    user.reviews.forEach(function (rev) {
+        rev.user = user;
+    })
+    
+})
+
 var models = [User, Address, Dish, Order, Review, Tag];
 var data = [users, addresses, dishes, orders, reviews, tags];
 
