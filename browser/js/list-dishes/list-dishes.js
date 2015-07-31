@@ -17,6 +17,7 @@ app.controller('DishesCtrl', function($scope, Chefs, $state) {
 	];
 
 	$scope.goToDish = function(dish) {
+		Chefs.viewDish = dish;
 		$state.go('dish', {id: dish._id});
 	}
 });

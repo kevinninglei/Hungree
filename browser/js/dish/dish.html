@@ -1,6 +1,22 @@
 <p>this is where you see the dish</p>
-<button 
-	type="button" 
-	class="btn btn-primary"
-	ng-click="addToOrder()"
-	>Add Dish</button>
+<div class="row">
+	<div class="col-sm-4">
+		<img class="fit" src="{{dish.picture}}">
+	</div>
+	<div class="col-sm-8">
+		<h1>{{dish.name}}</h1>
+		<div>
+			<h3>Description</h3>
+			<p>{{dish.description}}</p>
+		</div>
+		<div>
+			<h3>Rating</h3>
+			<p>{{dish.rating}}</p>
+		</div>
+		<button 
+			type="button" 
+			class="btn btn-primary"
+			ng-click="addToOrder()"
+			>Add Dish</button>
+	</div>
+</div>
