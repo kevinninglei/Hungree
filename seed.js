@@ -72,6 +72,13 @@ var orders = [ //add userIds
     new Order({dishes: [{dishId: dishes[1], quantity: 3}, {dishId: dishes[2], quantity: 5}]})
 ];
 
+
+var carts = [ //add userIds
+    new Order({dishes: [{dishId: dishes[0], quantity: 10}, {dishId: dishes[1], quantity: 5}]}),
+    new Order({dishes: [{dishId: dishes[2], quantity: 10}, {dishId: dishes[3], quantity: 5}]}),
+    new Order({dishes: [{dishId: dishes[1], quantity: 10}, {dishId: dishes[2], quantity: 5}]})
+];
+
 var users = [
     new User({
         name: {first: 'KevinJustin', last: 'AnnieYves'},
@@ -86,7 +93,8 @@ var users = [
         favorites: [dishes[3], dishes[1]],
         orders: [orders[0]],
         reviews: [reviews[0], reviews[1]],
-        status: 'online'
+        status: 'online',
+        cart: carts[0]
     }),
     new User({
         name: {first: 'Barack', last: 'Obama'},
@@ -102,7 +110,8 @@ var users = [
         favorites: [dishes[0], dishes[1]],
         orders: [orders[1], orders[2]],
         reviews: [reviews[2]],
-        status: 'offline'
+        status: 'offline',
+        cart: carts[0]
     }),
         new User({
         name: {first: 'Crazy', last: 'Eyes'},
@@ -114,16 +123,25 @@ var users = [
         google: null,
         admin: false,
         address: {shipping: addresses[4], lat: 41.3091229, lng: -74.2024038},
-        status: 'busy'
+        status: 'busy',
+        cart: carts[0]
     }),
 ];
 
-orders[0].userId = users[0];
-orders[1].userId = users[1];
-orders[2].userId = users[1];
+orders[0].user = users[0];
+orders[1].user = users[1];
+orders[2].user = users[1];
 
-var models = [User, Address, Dish, Order, Review, Tag];
-var data = [users, addresses, dishes, orders, reviews, tags];
+//make reviews and user bidirectional so that we dont have to loop
+//through all users to get info for each review
+reviews[0].user = users[0];
+reviews[1].user = users[0];
+reviews[2].user = users[1];
+
+
+
+var models = [User, Address, Dish, Order, Order ,Review, Tag];
+var data = [users, addresses, dishes, orders, carts ,reviews, tags];
 
 
 var wipeDB = function() {

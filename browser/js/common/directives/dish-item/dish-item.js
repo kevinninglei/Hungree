@@ -5,7 +5,5 @@ app.directive('dishItem', function() {
       dish: "=dish",
     },
     templateUrl: 'js/common/directives/dish-item/dish-item.html',
-    link: function(scope, element, attribute) {
-    }
   };
 });

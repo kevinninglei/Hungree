@@ -24,12 +24,13 @@ router.get('/dishes', function(req, res, next) {
 		.then(null, next);
 });
 
+//gets the reviews that the user has written
 router.get('/reviews', function(req, res, next) {
 	Review.find({
 			_id: {
 				$in: req.CurrentUser.reviews
 			}
-		}).exec()
+		}).populate('user').exec()
 		.then(function(reviews) {
 			res.json(reviews);
 		})
@@ -56,6 +57,14 @@ router.get('/favorites', function(req, res, next) {
 		}).exec()
 		.then(function(favorites) {
 			res.json(favorites);
+		})
+		.then(null, next);
+});
+
+router.get('/cart', function(req, res, next) {
+	Order.findById(req.CurrentUser.cart).populate('dishes.dishId').exec()
+		.then(function (order){
+			res.json(order);
 		})
 		.then(null, next);
 });
