@@ -58,7 +58,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.param('id', function (req, res, next) {
-	User.findById(req.params.id).exec()
+	User.findById(req.params.id).populate('cart').exec()
 		.then(function (user) {
 			if (user) {
 				req.CurrentUser = user;

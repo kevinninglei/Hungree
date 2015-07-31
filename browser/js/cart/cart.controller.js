@@ -12,6 +12,12 @@ app.controller('CartCtrl', function ($scope, $http, CartFactory,$modal, $log){
 	};
 
 	var populateCart = function(order){
+		if (!order){
+			$scope.cart = [];
+			$scope.totalPrice = 0;
+			return;
+		}
+
 		var currCart = [];
 		var calculatedTotal = 0;
 		order.dishes.forEach(function(dish){
