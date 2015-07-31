@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var dishSchema = new mongoose.Schema({
     name: {
         type: String,
-        unique: true
     },
     ingredients: [String],
     spiciness: {
@@ -12,7 +11,7 @@ var dishSchema = new mongoose.Schema({
         max: 5
     },
     description: String,
-    //available dishes 
+    //available dishes
     price: Number,
     inventory: Number,
     tags: [{
