@@ -7,4 +7,10 @@ var reviewSchema = new mongoose.Schema({
   //Add userID?
 });
 
+//i am a review, go to list of users, does my id exist in their array of reviews
+reviewSchema.method.getUserForReview = function (cb) {
+	console.log(this.model('User'));
+	return this.model('User').findOne({'reviews' : {$in: this._id}});
+}
+
 mongoose.model('Review', reviewSchema);
