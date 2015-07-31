@@ -27,10 +27,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		templateUrl: '/js/one-chef/chef-tab-dishes.html'
 	})
 	.state('oneChef.reviews', {
+		controller: 'ChefTabCtrl',
 		url: '/reviews',
 		templateUrl: '/js/one-chef/chef-tab-reviews.html'
 	})
 	.state('oneChef.favorites', {
+		controller: 'ChefTabCtrl',
 		url: '/favorites',
 		templateUrl: '/js/one-chef/chef-tab-favorites.html'
 	})
