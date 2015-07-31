@@ -30,4 +30,13 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory)
 
     }
 
+    $scope.getCurrentUser = function () {
+        AuthService.getLoggedInUser().then(function(user){
+            console.log(user);
+
+        })
+
+        
+    }
+
 });
