@@ -7,9 +7,9 @@ app.factory('Reviews',function($http){
 		  return res.data;
 		});
 	},
-    postReview: function(dishId, dish) { //put request because updating the dish
-    	console.log(dishId, dish)
-    	return $http.put(`/api/dishes/${dishId}`, dish)
+    postReview: function(review, dishId, dish) { //put request because updating the dish
+    	return $http.post()
+    	$http.put(`/api/dishes/${dishId}`, dish)
     	.then(function(res) {
     		console.log(res.data);
     		return res.data;
