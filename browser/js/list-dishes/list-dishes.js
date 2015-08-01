@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DishesCtrl', function($scope, Chefs, $state, $rootScope) {
+app.controller('DishesCtrl', function($scope, Chefs, $state, $rootScope, Stars) {
 	if (!Chefs.nearbyDishes) {
 		$scope.loading = true;
 		$rootScope.$on('got-dishes', function(event, data) {
@@ -23,10 +23,11 @@ app.controller('DishesCtrl', function($scope, Chefs, $state, $rootScope) {
 		{name: 'rating'},
 		{name: 'spiciness'}
 	];
-
+	$scope.getNumber = Stars.getNumber;
+	$scope.getNumberInverse = Stars.getNumberInverse;
 	$scope.goToDish = function(dish) {
 		Chefs.viewDish = dish;
-		$state.go('dish', {id: dish._id});
+		$state.go('oneDish', {id: dish._id});
 	}
 });
 

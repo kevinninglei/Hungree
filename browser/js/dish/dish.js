@@ -1,6 +1,6 @@
 app.config(function ($stateProvider) {
 
-    $stateProvider.state('dish', {
+    $stateProvider.state('oneDish', {
         url: '/dishes/:id',
         templateUrl: 'js/dish/dish.html',
         controller: 'DishCtrl'
@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $state) {
+app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $state, Stars) {
 	$scope.isCollapsed = true; //info collapse
 	$scope.dish = Chefs.viewDish;
 	$scope.ingredients = $scope.dish.ingredients.join(', ');
@@ -16,12 +16,8 @@ app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $s
 		return tag.name;
 	}).join(', ');
 
-	$scope.getNumber = function(num) {
-	    return new Array(Math.round(num));   
-	}
-	$scope.getNumberInverse = function(num) {
-	    return new Array(5-Math.round(num));   
-	}
+	$scope.getNumber = Stars.getNumber;
+	$scope.getNumberInverse = Stars.getNumberInverse;
 	$scope.addToOrder = function() {
 		CartFactory.cartOrders.push($scope.dish);
 		CartFactory.addToCart($scope.dish, 1);
