@@ -86,7 +86,7 @@ userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
 
 userSchema.statics.findChefs = function() {
-    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).deepPopulate('address.shipping billing.billingAddress dishes.tags dishes.reviews').exec()
+    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).deepPopulate('address.shipping billing.billingAddress dishes.tags dishes.reviews.user').exec()
         .then(function(chefs) {
             return chefs;
         });
