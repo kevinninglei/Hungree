@@ -51,7 +51,9 @@ var userSchema = new mongoose.Schema({
         enum: status,
         default: 'offline'
     },
-    cart: {type: mongoose.Schema.ObjectId, ref: 'Order'}
+    cart: {
+        type: mongoose.Schema.ObjectId, 
+        ref: 'Order'    }
 
 });
 
@@ -84,7 +86,7 @@ userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
 
 userSchema.statics.findChefs = function() {
-    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).deepPopulate('address.shipping billing.billingAddress dishes.tags').exec()
+    return this.find({ dishes: {$exists: true, $not: {$size: 0}} }).deepPopulate('address.shipping billing.billingAddress dishes.tags dishes.reviews').exec()
         .then(function(chefs) {
             return chefs;
         });
