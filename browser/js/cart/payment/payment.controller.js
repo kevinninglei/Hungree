@@ -6,6 +6,12 @@ app.controller('paymentCtrl', function($scope, $modalInstance, price,$state) {
     this.$form = $("#form-payment");
   };
 
+  $scope.closeAlert(){
+    console.log("called");
+    delete $scope.error ;
+    $scope.$digest();
+  }
+
   $scope.stripeResponseHandler = function(status, response) {
     console.log(status, response);
     if (response.error) {

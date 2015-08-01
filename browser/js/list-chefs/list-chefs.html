@@ -12,4 +12,5 @@
         </div>
     </div>
     <pre> searched For: {{query}}</pre>
-<chef-profile chef="chef" ng-repeat="chef in chefs | filter:{name: query}" ui-sref="oneChef({id: chef._id})"></chef-profile>
+
+<chef-profile id="chef-profile" chef="chef" ng-repeat="chef in chefs | filter: search" ui-sref="oneChef({id: chef._id})"></chef-profile>
