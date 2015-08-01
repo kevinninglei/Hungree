@@ -9,6 +9,7 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $state) {
+	$scope.isCollapsed = true; //info collapse
 	$scope.dish = Chefs.viewDish;
 	$scope.ingredients = $scope.dish.ingredients.join(', ');
 	$scope.tags = $scope.dish.tags.map(function(tag) {
@@ -16,7 +17,10 @@ app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $s
 	}).join(', ');
 
 	$scope.getNumber = function(num) {
-	    return new Array(num);   
+	    return new Array(Math.round(num));   
+	}
+	$scope.getNumberInverse = function(num) {
+	    return new Array(5-Math.round(num));   
 	}
 	$scope.addToOrder = function() {
 		CartFactory.cartOrders.push($scope.dish);
@@ -26,10 +30,6 @@ app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $s
 	$scope.postReview = function() {
 		$state.go('review', {id: $scope.dish._id})
 	}
-});
-
-app.controller('CollapseDemoCtrl', function ($scope) {
-  $scope.isCollapsed = true;
 });
 
 app.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
@@ -83,8 +83,10 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, Rev
     AuthService.getLoggedInUser()
     .then(function(user) {
     	var newReview = {description: $scope.description, rating: $scope.rate, user: user};
-    	Chefs.viewDish.reviews.push(newReview);
-    	Reviews.postReview(newReview, $stateParams.id, _.omit(Chefs.viewDish, 'chef')); //posting review by updating dish
+    	var updatedDish = _.omit(Chefs.viewDish, 'chef');
+    	updatedDish.rating = (updatedDish.rating*updatedDish.reviews.length + $scope.rate) / (updatedDish.reviews.length + 1);
+    	Chefs.viewDish.rating = updatedDish.rating;
+    	Reviews.postReview(newReview, $stateParams.id, updatedDish); //posting review by updating dish
     })
   };
 

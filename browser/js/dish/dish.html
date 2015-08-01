@@ -7,7 +7,7 @@
 		<div class="col-lg-8" style="padding-left:0px">
 			<div>
 				<h3 style="margin-top:0px">Rating</h3>
-				<span ng-repeat="star in getNumber(dish.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumber(5-dish.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+				<span popover="Average: {{dish.rating}}" popover-trigger="mouseenter"><span ng-repeat="star in getNumber(dish.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumberInverse(dish.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></span>
 			</div>
 			<div>
 				<h3>Description</h3>
@@ -48,11 +48,14 @@
 				>Post Review</button> -->
 		</div>
 		<div class="col-lg-4">
-			<div ng-controller="CollapseDemoCtrl">
+			<div>
 				<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Info</button>
 				<br><br>
 				<div collapse="isCollapsed">
 					<div class="well well-lg">
+						<div>
+							<p>Rating: {{dish.rating}}</p>
+						</div>
 						<div>
 							<p>Spiciness: {{dish.spiciness}}</p>
 						</div>

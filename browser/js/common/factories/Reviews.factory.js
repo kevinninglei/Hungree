@@ -8,12 +8,14 @@ app.factory('Reviews',function($http){
 		});
 	},
     postReview: function(review, dishId, dish) { //put request because updating the dish
-    	return $http.post()
-    	$http.put(`/api/dishes/${dishId}`, dish)
+    	return $http.post('/api/reviews', review)
+		.then(function(res) {
+			dish.reviews.push(res.data);
+			return $http.put(`/api/dishes/${dishId}`, dish)
+		})
     	.then(function(res) {
-    		console.log(res.data);
     		return res.data;
-    	})
+		})
     }
   }
 })
