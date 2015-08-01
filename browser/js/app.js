@@ -51,7 +51,6 @@ app.run(function ($rootScope, AuthService, $state) {
 });
 
 app.run(function(Chefs, $rootScope) {
-    console.log('running')
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(getChefsCloseBy);

@@ -8,6 +8,7 @@ router.use('/dishes', require('./dish'));
 router.use('/users', require('./users'));
 router.use('/tags', require('./tags'));
 router.use('/orders', require('./order'));
+router.use('/reviews', require('./reviews'));
 
 // Make sure this is after all of
 // the registered routes!
