@@ -1924,7 +1924,6 @@ function randUser() {
     var pickDishes = dishesStack.pop();
     var favoriteDish = dishes[Math.floor(Math.random()*(dishes.length-1))];
     var badDish = dishes[Math.floor(Math.random()*(dishes.length-1))];
-    var newReviews = randReview(favoriteDish,badDish);
     var addressIndex = Math.floor(Math.random()*(address.length-1));
     var newAddress = new Address(address[addressIndex][0]);
     addresses.push(newAddress);
@@ -1946,7 +1945,6 @@ function randUser() {
             max: 3
         })],
         isAdmin: false,
-        reviews: newReviews,
         dishes: [pickDishes] || null,
         favorites: [favoriteDish]
     });
@@ -1957,9 +1955,11 @@ function randUser() {
 
     var newBadOrder = new Order({user: newUser, dishes: [{dishId: badDish, quantity: quantity, total: quantity*badDish.price}]});
 
+    var newReviews = randReview(favoriteDish,badDish,newUser);
 
     newUser.orders = [newGoodOrder,newBadOrder];
     orders.concat([newGoodOrder,newBadOrder]);
+    newUser.reviews = newReviews;
 
     return newUser;
 }
@@ -1977,27 +1977,43 @@ function randPhoto(gender) {
     return 'http://api.randomuser.me/portraits/thumb/' + g + '/' + n + '.jpg';
 }
 
-function randReview(favoriteDish,badDish) {
+function randReview(favoriteDish,badDish,user) {
     var newGoodReview = new Review({
-        description: chance.sentence(),
+        description: favoriteDish.name + chance.sentence(),
+        user: user,
         rating: chance.natural({
             min: 4,
             max: 5
         })
     });
 
+
     var newBadReview = new Review({
-            description: chance.sentence(),
+        description: badDish.name + chance.sentence(),
+        user: user,
         rating: 2
     });
 
-    favoriteDish.reviews.concat(newGoodReview);
-    badDish.reviews.concat(newBadReview);
+
+    if(favoriteDish.rating){
+      favoriteDish.rating = ((favoriteDish.rating * favoriteDish.reviews.length ) + newGoodReview.rating) / (favoriteDish.reviews.length +1);
+    } else {
+      favoriteDish.rating = newGoodReview.rating;
+    }
+    if(badDish.rating){
+      badDish.rating = ((badDish.rating * badDish.reviews.length) + newBadReview.rating) / (badDish.reviews.length+1);
+    } else {
+      badDish.rating = newBadReview.rating;
+    }
+
+    favoriteDish.reviews.push(newGoodReview);
+    badDish.reviews.push(newBadReview);
 
     reviews = reviews.concat(newGoodReview).concat(newBadReview);
     return [newGoodReview,newBadReview];
 }
 
+//update dishes rating
 
 
 var models =[User, Address, Dish, Order ,Review, Tag];
