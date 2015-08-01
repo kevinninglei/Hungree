@@ -125,6 +125,11 @@ var users = [
         status: 'busy',
         cart: carts[2]
     }),
+        new User({
+            email: 'admin',
+            password:'jkay',
+            admin: true
+        })
 ];
 
 orders[0].user = users[0];
