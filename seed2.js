@@ -32,9 +32,6 @@ var q = require('q');
 var _ = require('lodash');
 var chance = require('chance')(123);
 
-var addresses = [
-];
-
 var tags= [
   {name: "American"},
   {name:"Cajun and Creole"},
@@ -1890,9 +1887,12 @@ var dishes = [{
   ]
 }];
 
-dishes = dishes.map(function(dish){
+dishes=_.map(dishes,function(dish){
     return new Dish(dish);
 });
+// dishes = dishes.map(function(dish){
+//     return new Dish(dish);
+// });
 
 var orders = [
 ];
@@ -1905,21 +1905,35 @@ var carts = [
 //<-----USERS---->//
 var numUsers = 100;
 var status = "busy online offline".split(' ');
-var dishesStack = dishes.slice();
+var dishesStack = _.slice(dishes);
+var addresses = [];
+
+var address =[
+{street: '5 Hanover Square', city: 'New York', state: 'NY', zip: 10004},
+{street: '754 Metropolitan Ave', city: 'Brooklyn', state: 'NY', zip: 11211},
+{street: '1299 McCarter Hwy', city: 'Newark', state: 'NJ', zip: 07104},
+{street: '44 W 17th St', city: 'New York', state: 'NY', zip: 10011},
+{street: '148 W 4th St', city: 'New York', state: 'NY', zip: 10012}
+];
+
 var users = _.times(numUsers, randUser);
 
 function randUser() {
     var gender = chance.gender();
-    var review = [randReview(1)];
-    var dishes = dishesStack.pop()
-    reviews = reviews.concat(review);
-    return new User({
+    var pickDishes = dishesStack.pop();
+    var favoriteDish = dishes[Math.floor(Math.random()*(dishes.length-1))];
+    var newReviews = randReview(favoriteDish);
+
+    var newAddress = new Address(address[Math.floor(Math.random()*(address.length-1))]);
+    addresses.push(newAddress);
+    var newUser = new User({
         name: {
             first: chance.first({
                 gender: gender.toLowerCase()
             }),
             last: chance.last()
         },
+        address: {shipping: newAddress},
         picture: randPhoto(gender),
         email: chance.email({
             domain: 'example.com'
@@ -1930,10 +1944,17 @@ function randUser() {
             max: 3
         })],
         isAdmin: false,
-        reviews: review,
-        dishes: [dishes],
-        favorites: dishesStack[0]
+        reviews: newReviews,
+        dishes: [pickDishes] || null,
+        favorites: [favoriteDish]
     });
+
+
+    var newOrder = new Order({user: newUser, dishes: [{dishId: favoriteDish, quantity: 2, total: 100}]});
+    newUser.orders = newOrder;
+    orders.push(newOrder);
+
+    return newUser;
 }
 
 function randPhoto(gender) {
@@ -1949,20 +1970,29 @@ function randPhoto(gender) {
     return 'http://api.randomuser.me/portraits/thumb/' + g + '/' + n + '.jpg';
 }
 
-function randReview(min) {
-    return new Review({
+function randReview(favoriteDish) {
+    var newGoodReview = new Review({
         description: chance.sentence(),
         rating: chance.natural({
-            min: min,
+            min: 4,
             max: 5
         })
     });
+
+    var newBadReview = new Review({
+            description: chance.sentence(),
+        rating: 2
+    });
+
+
+    reviews = reviews.concat(newGoodReview).concat(newBadReview);
+    return [newGoodReview,newBadReview];
 }
 
 
 
-var models = [User, Address, Dish, Order, Order ,Review, Tag];
-var data = [users, addresses, dishes, orders, carts ,reviews, tags];
+var models =[User, Address, Dish, Order ,Review, Tag];
+var data =[users, addresses, dishes, orders ,reviews, tags];
 
 
 var wipeDB = function() {
@@ -1988,8 +2018,11 @@ var seed = function() {
         });
 };
 
-connectToDb.then(function() {
-    wipeDB().then(seed);
+connectToDb
+// .then(function() {
+//     wipeDB())
+.then(function(){
+    seed();
 })
 .then(null, function(err) {
     console.error(err);
