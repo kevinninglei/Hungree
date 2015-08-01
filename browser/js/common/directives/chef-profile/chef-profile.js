@@ -5,6 +5,9 @@ app.directive('chefProfile', function() {
     scope: {
       chef: "=chef",
     },
-    templateUrl: 'js/common/directives/chef-profile/chef-profile.html'
+    templateUrl: 'js/common/directives/chef-profile/chef-profile.html',
+    link: function(scope, element, attribute) {
+    }
   };
 });
+

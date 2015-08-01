@@ -5,7 +5,10 @@
 <div class="modal-body">
     <form class="form-horizontal" role="form" action="" method="POST" id="payment-form" ng-init="setFormScope(this)">
         <fieldset>
-            <span class="payment-errors text-danger"><h5>{{error}}</h5></span>
+
+  <alert  type="danger" ng-show=!!error close="closeAlert()">{{error}}</alert>
+
+            <!-- <span class="payment-errors text-danger"><h5>{{error}}</h5></span> -->
 <!--             <pre>{{card | json}}</pre> -->
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
