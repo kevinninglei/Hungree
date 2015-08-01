@@ -5,26 +5,27 @@
 <div class="modal-body">
     <form class="form-horizontal" role="form" action="" method="POST" id="payment-form" ng-init="setFormScope(this)">
         <fieldset>
-            <span class="payment-errors">{{error}}</span>
+            <span class="payment-errors text-danger"><h5>{{error}}</h5></span>
+<!--             <pre>{{card | json}}</pre> -->
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="card-holder-name" placeholder="Card Holder's Name">
+                    <input type="text" class="form-control" id="card-holder-name" placeholder="Card Holder's Name" ng-model="card.name">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label" data-stripe="number" for="card-number">Card Number</label>
                 <div class="col-sm-9">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="card-number" placeholder="Debit/Credit Card Number" value="4444444444444444"> <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                        <input type="text" class="form-control" id="card-number" placeholder="Debit/Credit Card Number" ng-model="card.number" ng-init="card.number=4242424242424242" > <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label" data-stripe="cvc" for="cvc">cvc</label>
+                <label class="col-sm-3 control-label" data-stripe="cvc" for="cvc" ng-model="card.cvc">cvc</label>
                 <div class="col-sm-9">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="cvc" placeholder="cvc">
+                        <input type="text" class="form-control" id="cvc" placeholder="cvc" ng-model="cvc">
                     </div>
                 </div>
             </div>
@@ -33,7 +34,7 @@
                 <div class="col-sm-9">
                     <div class="row">
                         <div class="col-xs-3">
-                            <select class="form-control col-sm-2" data-stripe="exp-month" id="expiry-month">
+                            <select class="form-control col-sm-2" data-stripe="exp-month" ng-model="card.month" id="expiry-month">
                                 <option>Month</option>
                                 <option value="01">Jan (01)</option>
                                 <option value="02">Feb (02)</option>
@@ -50,7 +51,7 @@
                             </select>
                         </div>
                         <div class="col-xs-3">
-                            <select class="form-control" data-stripe="exp-year">
+                            <select class="form-control" data-stripe="exp-year" ng-model="card.year">
                                 <option value="15">2015</option>
                                 <option value="16">2016</option>
                                 <option value="17">2017</option>
@@ -70,8 +71,8 @@
 <div class="modal-footer">
     <div class="form-group">
         <div class="col-sm-12">
-            <button type="submit" class="btn btn-primary pull-right" ng-click="ok()">Pay {{price | currency}}</button>
-            <img class="img-responsive pull-left" src="http://i76.imgup.net/accepted_c22e0.png">
+            <button type="submit" class="btn btn-primary pull-right" ng-click="ok(card)">Pay {{price | currency}}</button>
+            <img class="img-responsive pull-left" src="../../../../assets/images/accepted_cc.png">
         </div>
     </div>
     </form>

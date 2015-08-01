@@ -1,41 +1,42 @@
-app.controller('paymentCtrl', function($scope, $modalInstance, price) {
+app.controller('paymentCtrl', function($scope, $modalInstance, price,$state) {
   $scope.price = price;
+  console.log($scope);
 
   $scope.setFormScope = function(scope) {
     this.$form = $("#form-payment");
-
-    console.log(this.$form);
   };
 
   $scope.stripeResponseHandler = function(status, response) {
     console.log(status, response);
     if (response.error) {
       $scope.error = response.error.message;
+      $scope.$digest();
       // Show the errors on the form
-      // $form.find('.payment-errors').text(response.error.message);
-      // $form.find('button').prop('disabled', false);
     } else {
       // response contains id and card, which contains additional card details
       var token = response.id;
-      // Insert the token into the form so it gets submitted to the server
-      $scope.form.append($('<input type="hidden" name="stripeToken" />').val(token));
+      console.log("inside of func", $scope.$form)
+        // Insert the token into the form so it gets submitted to the server
+      $scope.$form.append($('<input type="hidden" name="stripeToken" />').val(token));
       // and submit
-      $scope.form.get(0).submit();
+      $scope.$form.submit();
+      $modalInstance.close();
+      $state.go('home');
     }
 
   };
 
-  $scope.ok = function() {
+  $scope.ok = function(card) {
+    console.log("card", card);
+    if(!card) return false;
     Stripe.setPublishableKey('pk_test_ZJ2EdpJbGoQokkcIwkci5gOY');
     Stripe.card.createToken(
-      // $scope.$form
-    {
-        number: '4242424242424242',
-        cvc: '123',
-        exp_month: '08',
-        exp_year: '2016'
-      }
-      , $scope.stripeResponseHandler);
+      {
+        number: card.number,
+        cvc: card.cvc,
+        exp_month: card.month,
+        exp_year: card.year
+      }, $scope.stripeResponseHandler);
     return false;
   };
 
