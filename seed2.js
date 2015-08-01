@@ -1888,6 +1888,7 @@ var dishes = [{
 }];
 
 dishes=_.map(dishes,function(dish){
+    _.assign(dish,{price: Math.floor((Math.random()*100)+10)})
     return new Dish(dish);
 });
 // dishes = dishes.map(function(dish){
@@ -1922,7 +1923,8 @@ function randUser() {
     var gender = chance.gender();
     var pickDishes = dishesStack.pop();
     var favoriteDish = dishes[Math.floor(Math.random()*(dishes.length-1))];
-    var newReviews = randReview(favoriteDish);
+    var badDish = dishes[Math.floor(Math.random()*(dishes.length-1))];
+    var newReviews = randReview(favoriteDish,badDish);
     var addressIndex = Math.floor(Math.random()*(address.length-1));
     var newAddress = new Address(address[addressIndex][0]);
     addresses.push(newAddress);
@@ -1949,10 +1951,15 @@ function randUser() {
         favorites: [favoriteDish]
     });
 
+    var quantity = Math.floor(Math.random()*5)+1;
 
-    var newOrder = new Order({user: newUser, dishes: [{dishId: favoriteDish, quantity: 2, total: 100}]});
-    newUser.orders = newOrder;
-    orders.push(newOrder);
+    var newGoodOrder = new Order({user: newUser, dishes: [{dishId: favoriteDish, quantity: quantity, total: quantity*favoriteDish.price}]});
+
+    var newBadOrder = new Order({user: newUser, dishes: [{dishId: badDish, quantity: quantity, total: quantity*badDish.price}]});
+
+
+    newUser.orders = [newGoodOrder,newBadOrder];
+    orders.concat([newGoodOrder,newBadOrder]);
 
     return newUser;
 }
@@ -1970,7 +1977,7 @@ function randPhoto(gender) {
     return 'http://api.randomuser.me/portraits/thumb/' + g + '/' + n + '.jpg';
 }
 
-function randReview(favoriteDish) {
+function randReview(favoriteDish,badDish) {
     var newGoodReview = new Review({
         description: chance.sentence(),
         rating: chance.natural({
@@ -1984,6 +1991,8 @@ function randReview(favoriteDish) {
         rating: 2
     });
 
+    favoriteDish.reviews.concat(newGoodReview);
+    badDish.reviews.concat(newBadReview);
 
     reviews = reviews.concat(newGoodReview).concat(newBadReview);
     return [newGoodReview,newBadReview];
