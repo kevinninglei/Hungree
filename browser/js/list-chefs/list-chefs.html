@@ -1,3 +1,23 @@
-<h3> Chefs </h3>
-<chef-profile chef="chef" ng-repeat="chef in chefs" ui-sref="oneChef({id: chef._id})"></chef-profile>
-
+<div class="container well" id="chef-nav">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 id="chef-title"> Chefs </h2>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="query" placeholder="Search for...">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+            <div class="row"></div>
+        </div>
+    </div>
+    <!--     <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">Filter</div>
+    </div> -->
+</div>
+<div class="container">
+    <chef-profile id="chef-profile" chef="chef" ng-repeat="chef in chefs | filter: search" ui-sref="oneChef({id: chef._id})"></chef-profile>
+</div>

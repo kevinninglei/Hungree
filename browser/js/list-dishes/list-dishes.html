@@ -9,19 +9,29 @@
 			ng-repeat="category in categories">{{category.name}}</option>
 	</select>
 </div>
-<div class="container" style="clear:both">
+<div style="clear:both">
 	<div style="text-align:center" ng-show="loading">
 		<img src="../assets/images/loader.gif"/>
 	</div>
-	<div 
-		class="dish-img clickable col-lg-3" 
-		ng-repeat="dish in nearbyDishes | tags | orderBy: selectedFilter"
-		ng-click="goToDish(dish)"
-		ng-style="{'background-image': 'url({{dish.picture}})'}">
-		<div class="dish-label">
-			<h2>{{dish.name}}</h2>
-			<p>{{dish.description}}</p>
-		</div>
+
+	<div class="col-md-3" id="thumbnail"
+		ng-repeat="dish in nearbyDishes | tags | orderBy: selectedFilter">
+	    <div class="panel panel-default dish-img"
+			ng-click="goToDish(dish)"
+			ng-style="{'background-image': 'url({{dish.picture}})'}">
+	        <div class="panel-body row">
+	            <div style="height:100px"></div>
+	        </div>
+	        <div class="panel-heading dish-label clickable">
+	            <div style="height:61px">
+	                    <h4>{{dish.name}}</h4>
+	                <div>
+	                	<div>{{dish.description}}</div>
+	                    <span ng-repeat="star in getNumber(dish.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumberInverse(dish.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
 	</div>
 </div>
 

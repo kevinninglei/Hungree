@@ -60,10 +60,10 @@ var reviews = [
 ];
 
 var dishes = [
-    new Dish({name: 'Thai Curry', ingredients: ['Coconut milk', 'chicken', 'bell peppers', 'fish sauce', 'thai curry paste', 'sugar'], spiciness: 4, description: 'This is good shit.', price: 10, quantity: 5, tags: [tags[0], tags[1], tags[2]], reviews: [reviews[0], reviews[2]]}),
-    new Dish({name: 'Lasagna', ingredients: ['Pasta', 'chicken', 'bell peppers', 'tomato sauce', 'cheese', 'salt'], spiciness: 1, description: 'This is ok shit.', price: 8, quantity: 3, tags: [tags[1], tags[4], tags[5]], reviews: [reviews[1], reviews[2]]}),
-    new Dish({name: 'Pizza', ingredients: ['Dough', 'chicken', 'bell peppers', 'tomato sauce', 'cheese', 'jalapenos'], spiciness: 3, description: 'This shit is bomb.', price: 15, quantity: 25, tags: [tags[8], tags[9], tags[10]], reviews: [reviews[0], reviews[1]]}),
-    new Dish({name: 'Bulgogi', ingredients: ['Pear', 'beef', 'carrots', 'soy sauce', 'sesame oil', 'brown sugar', 'onion'], spiciness: 1, description: 'OMG.', price: 20, quantity: 2, tags: [tags[5], tags[9], tags[4]], reviews: [reviews[1]]})
+    new Dish({name: 'Thai Curry', ingredients: ['Coconut milk', 'chicken', 'bell peppers', 'fish sauce', 'thai curry paste', 'sugar'], spiciness: 4, description: 'This is good shit.', price: 10, quantity: 5, tags: [tags[0], tags[1], tags[2]], reviews: [reviews[0], reviews[2]], rating: 4}),
+    new Dish({name: 'Lasagna', ingredients: ['Pasta', 'chicken', 'bell peppers', 'tomato sauce', 'cheese', 'salt'], spiciness: 1, description: 'This is ok shit.', price: 8, quantity: 3, tags: [tags[1], tags[4], tags[5]], reviews: [reviews[1], reviews[2]], rating: 2}),
+    new Dish({name: 'Pizza', ingredients: ['Dough', 'chicken', 'bell peppers', 'tomato sauce', 'cheese', 'jalapenos'], spiciness: 3, description: 'This shit is bomb.', price: 15, quantity: 25, tags: [tags[8], tags[9], tags[10]], reviews: [reviews[0], reviews[1]], rating: 3}),
+    new Dish({name: 'Bulgogi', ingredients: ['Pear', 'beef', 'carrots', 'soy sauce', 'sesame oil', 'brown sugar', 'onion'], spiciness: 1, description: 'OMG.', price: 20, quantity: 2, tags: [tags[5], tags[9], tags[4]], reviews: [reviews[1]], rating: 1})
 ];
 
 var orders = [ //add userIds
@@ -86,7 +86,7 @@ var users = [
         password: 'password',
         facebook: null,
         google: null,
-        admin: false,
+        isAdmin: false,
         address: {shipping: addresses[0], lat: 41.3091229, lng: -74.2024038},
         billing: {billingAddress: addresses[1], number: 3245558323493406, ccv: 445, exp: {month: 10, year: 2015}, cardType: 'Visa'},
         dishes: [dishes[0], dishes[1]],
@@ -103,15 +103,14 @@ var users = [
         password: 'potus',
         facebook: null,
         google: null,
-        admin: true,
+        isAdmin: true,
         address: {shipping: addresses[2], lat: 42.404326, lng: -71.12380499999999},
         billing: {billingAddress: addresses[3], number: 6453965834530596, ccv: 997, exp: {month: 09, year: 2015}, cardType: 'MasterCard'},
         dishes: [dishes[2]],
         favorites: [dishes[0], dishes[1]],
         orders: [orders[1], orders[2]],
         reviews: [reviews[2]],
-        status: 'offline',
-        cart: carts[0]
+        status: 'offline'
     }),
         new User({
         name: {first: 'Crazy', last: 'Eyes'},
@@ -121,11 +120,16 @@ var users = [
         facebook: null,
         dishes:[dishes[3]],
         google: null,
-        admin: false,
+        isAdmin: false,
         address: {shipping: addresses[4], lat: 41.3091229, lng: -74.2024038},
         status: 'busy',
-        cart: carts[0]
+        cart: carts[2]
     }),
+        new User({
+            email: 'admin',
+            password:'jkay',
+            admin: true
+        })
 ];
 
 orders[0].user = users[0];
@@ -155,7 +159,7 @@ var wipeDB = function() {
 var seed = function() {
     var promiseArr = models.map(function(currModel, index){
         return currModel.create(data[index]);
-    })
+    });
     q.all(promiseArr)
         .then(function(data){
             console.log("database seeded!");
@@ -163,8 +167,8 @@ var seed = function() {
         })
         .then(function(err){
             console.log("error! is: ", err.message);
-            process.kill(0)
-        })
+            process.kill(0);
+        });
 };
 
 connectToDb.then(function() {
