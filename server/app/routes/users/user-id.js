@@ -26,6 +26,10 @@ router.get('/dishes', function(req, res, next) {
 
 //gets the reviews that the user has written
 router.get('/reviews', function(req, res, next) {
+
+	User.populate(req.CurrentUser,{path:'reviews'},function(err,data){
+		res.json(data);
+	});
 	Review.find({
 			_id: {
 				$in: req.CurrentUser.reviews
@@ -78,10 +82,10 @@ router.put('/cart', function (req, res, next){
 	//--> if user has an existing cart(order), then push the dish + quantity and save
 	// the user///and res.respond with dish
 	//--> if the user doesn't have an existing cart(order), create a cart with the single dish
-	// then save the user...and res.respond with dish 
+	// then save the user...and res.respond with dish
 	if (!req.CurrentUser.cart){
 		Order.create({
-						user: req.CurrentUser._id, 
+						user: req.CurrentUser._id,
 						dishes:[newDishObj]
 					})
 			.then(function(order){
