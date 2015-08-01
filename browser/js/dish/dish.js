@@ -10,6 +10,7 @@ app.config(function ($stateProvider) {
 
 app.controller('DishCtrl', function($scope, CartFactory, $stateParams, Chefs, $state) {
 	$scope.dish = Chefs.viewDish;
+	console.log($scope.dish.reviews);
 	$scope.ingredients = $scope.dish.ingredients.join(', ');
 	$scope.tags = $scope.dish.tags.map(function(tag) {
 		return tag.name;

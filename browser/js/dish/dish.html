@@ -4,27 +4,37 @@
 	</div>
 	<div class="col-sm-8">
 		<h1>{{dish.name}}</h1>
-		<div>
-			<h3>Description</h3>
-			<p>{{dish.description}}</p>
-		</div>
-		<div>
-			<div class="col-lg-4" style="padding-left:0px">
-				<h3>Rating</h3>
-				<p>{{dish.rating}}</p>
+		<div class="col-lg-8">
+			<div>
+				<h3>Description</h3>
+				<p>{{dish.description}}</p>
 			</div>
-			<div class="col-lg-8">
-				<h3>Spiciness</h3>
-				<p>{{dish.spiciness}}</p>
+			<div>
+				<h3>Tags</h3>
+				<p>{{tags}}</p>
 			</div>
 		</div>
-		<div>
-			<h3>Ingredients</h3>
-			<p>{{ingredients}}</p>
-		</div>
-		<div>
-			<h3>Tags</h3>
-			<p>{{tags}}</p>
+		<div class="col-lg-4">
+			<div ng-controller="CollapseDemoCtrl">
+				<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Info</button>
+				<hr>
+				<div collapse="isCollapsed">
+					<div class="well well-lg">
+						<div>
+							<h3>Rating</h3>
+							<p>{{dish.rating}}</p>
+						</div>
+						<div>
+							<h3>Spiciness</h3>
+							<p>{{dish.spiciness}}</p>
+						</div>
+						<div>
+							<h3>Ingredients</h3>
+							<p>{{ingredients}}</p>
+						</div>
+					</div> 
+				</div>
+			</div>
 		</div>
 		<button 
 			type="button" 
@@ -40,8 +50,16 @@
 	<div class="col-lg-12">
 		<h3>Reviews</h3>
 		<div ng-repeat="review in dish.reviews">
-			<span ng-repeat="star in getNumber(review.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span>
-			<p>{{review.description}}</p>
+			<div class="row">
+				<div class="col-lg-1">
+					<img class="fit" src="{{review.user.picture}}">
+					<b>{{review.user.name.first}} {{review.user.name.last}}</b>
+				</div>
+				<div class="col-lg-11">
+					<span ng-repeat="star in getNumber(review.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumber(5-review.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+					<p>{{review.description}}</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
