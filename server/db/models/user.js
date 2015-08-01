@@ -29,7 +29,7 @@ var userSchema = new mongoose.Schema({
     google: {
         id: String
     },
-    admin: Boolean,
+    isAdmin: Boolean,
     address: {
         shipping: {type: mongoose.Schema.ObjectId, ref: 'Address'},
         lat: Number,
@@ -52,7 +52,7 @@ var userSchema = new mongoose.Schema({
         default: 'offline'
     },
     cart: {
-        type: mongoose.Schema.ObjectId, 
+        type: mongoose.Schema.ObjectId,
         ref: 'Order'    }
 
 });
