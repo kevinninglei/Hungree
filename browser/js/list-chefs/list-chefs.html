@@ -11,4 +11,5 @@
             <!-- /input-group -->
         </div>
     </div>
-<chef-profile chef="chef" ng-repeat="chef in chefs" ui-sref="oneChef({id: chef._id})"></chef-profile>
+    <pre> searched For: {{query}}</pre>
+<chef-profile chef="chef" ng-repeat="chef in chefs | filter:{name: query}" ui-sref="oneChef({id: chef._id})"></chef-profile>
