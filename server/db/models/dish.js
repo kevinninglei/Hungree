@@ -26,7 +26,7 @@ var dishSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Review'
     }],
-    rating: Number
+    rating: {type: Number, default: 0}
 });
 
 //@params: tags: [String]
@@ -61,17 +61,5 @@ dishSchema.statics.findDish = function(id){
             throw err.message;
         });
 }
-
-// dishSchema.virtual('rating').get(function() { //average rating
-//     this.populate('reviews').exec()
-//     .then(function(dish) {
-        
-//     })
-//     return (this.reviews.reduce(function(startVal, review) {
-//         return startVal+review.rating
-//     }, 0) / this.reviews.length)
-// })
-
-// dishSchema.set('toJSON', {virtuals: true});
 
 mongoose.model('Dish', dishSchema);
