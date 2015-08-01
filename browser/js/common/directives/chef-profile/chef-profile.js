@@ -7,7 +7,7 @@ app.directive('chefProfile', function() {
     },
     templateUrl: 'js/common/directives/chef-profile/chef-profile.html',
     link: function(scope, element, attribute) {
-      element.on("click").
     }
   };
 });
+
