@@ -86,7 +86,7 @@ var users = [
         password: 'password',
         facebook: null,
         google: null,
-        admin: false,
+        isAdmin: false,
         address: {shipping: addresses[0], lat: 41.3091229, lng: -74.2024038},
         billing: {billingAddress: addresses[1], number: 3245558323493406, ccv: 445, exp: {month: 10, year: 2015}, cardType: 'Visa'},
         dishes: [dishes[0], dishes[1]],
@@ -103,7 +103,7 @@ var users = [
         password: 'potus',
         facebook: null,
         google: null,
-        admin: true,
+        isAdmin: true,
         address: {shipping: addresses[2], lat: 42.404326, lng: -71.12380499999999},
         billing: {billingAddress: addresses[3], number: 6453965834530596, ccv: 997, exp: {month: 09, year: 2015}, cardType: 'MasterCard'},
         dishes: [dishes[2]],
@@ -120,7 +120,7 @@ var users = [
         facebook: null,
         dishes:[dishes[3]],
         google: null,
-        admin: false,
+        isAdmin: false,
         address: {shipping: addresses[4], lat: 41.3091229, lng: -74.2024038},
         status: 'busy',
         cart: carts[2]
@@ -154,7 +154,7 @@ var wipeDB = function() {
 var seed = function() {
     var promiseArr = models.map(function(currModel, index){
         return currModel.create(data[index]);
-    })
+    });
     q.all(promiseArr)
         .then(function(data){
             console.log("database seeded!");
@@ -162,8 +162,8 @@ var seed = function() {
         })
         .then(function(err){
             console.log("error! is: ", err.message);
-            process.kill(0)
-        })
+            process.kill(0);
+        });
 };
 
 connectToDb.then(function() {
