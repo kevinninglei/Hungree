@@ -1888,6 +1888,7 @@ var dishes = [{
 }];
 
 dishes=_.map(dishes,function(dish){
+    _.assign(dish,{price: Math.floor((Math.random()*100)+10)})
     return new Dish(dish);
 });
 // dishes = dishes.map(function(dish){
@@ -1909,11 +1910,11 @@ var dishesStack = _.slice(dishes);
 var addresses = [];
 
 var address =[
-{street: '5 Hanover Square', city: 'New York', state: 'NY', zip: 10004},
-{street: '754 Metropolitan Ave', city: 'Brooklyn', state: 'NY', zip: 11211},
-{street: '1299 McCarter Hwy', city: 'Newark', state: 'NJ', zip: 07104},
-{street: '44 W 17th St', city: 'New York', state: 'NY', zip: 10011},
-{street: '148 W 4th St', city: 'New York', state: 'NY', zip: 10012}
+[{street: '5 Hanover Square', city: 'New York', state: 'NY', zip: 10004},40.70508,-74.00916],
+[{street: '754 Metropolitan Ave', city: 'Brooklyn', state: 'NY', zip: 11211},40.70934,-73.95656],
+[{street: '1299 McCarter Hwy', city: 'Newark', state: 'NJ', zip: 07104},40.77585,-74.16510],
+[{street: '44 W 17th St', city: 'New York', state: 'NY', zip: 10011},40.73864,-73.99451],
+[{street: '148 W 4th St', city: 'New York', state: 'NY', zip: 10012},40.72506,-73.99769]
 ];
 
 var users = _.times(numUsers, randUser);
@@ -1922,9 +1923,10 @@ function randUser() {
     var gender = chance.gender();
     var pickDishes = dishesStack.pop();
     var favoriteDish = dishes[Math.floor(Math.random()*(dishes.length-1))];
-    var newReviews = randReview(favoriteDish);
-
-    var newAddress = new Address(address[Math.floor(Math.random()*(address.length-1))]);
+    var badDish = dishes[Math.floor(Math.random()*(dishes.length-1))];
+    var newReviews = randReview(favoriteDish,badDish);
+    var addressIndex = Math.floor(Math.random()*(address.length-1));
+    var newAddress = new Address(address[addressIndex][0]);
     addresses.push(newAddress);
     var newUser = new User({
         name: {
@@ -1933,7 +1935,7 @@ function randUser() {
             }),
             last: chance.last()
         },
-        address: {shipping: newAddress},
+        address: {shipping: newAddress, lat:address[addressIndex][1], lng:address[addressIndex][2] },
         picture: randPhoto(gender),
         email: chance.email({
             domain: 'example.com'
@@ -1949,10 +1951,15 @@ function randUser() {
         favorites: [favoriteDish]
     });
 
+    var quantity = Math.floor(Math.random()*5)+1;
 
-    var newOrder = new Order({user: newUser, dishes: [{dishId: favoriteDish, quantity: 2, total: 100}]});
-    newUser.orders = newOrder;
-    orders.push(newOrder);
+    var newGoodOrder = new Order({user: newUser, dishes: [{dishId: favoriteDish, quantity: quantity, total: quantity*favoriteDish.price}]});
+
+    var newBadOrder = new Order({user: newUser, dishes: [{dishId: badDish, quantity: quantity, total: quantity*badDish.price}]});
+
+
+    newUser.orders = [newGoodOrder,newBadOrder];
+    orders.concat([newGoodOrder,newBadOrder]);
 
     return newUser;
 }
@@ -1970,7 +1977,7 @@ function randPhoto(gender) {
     return 'http://api.randomuser.me/portraits/thumb/' + g + '/' + n + '.jpg';
 }
 
-function randReview(favoriteDish) {
+function randReview(favoriteDish,badDish) {
     var newGoodReview = new Review({
         description: chance.sentence(),
         rating: chance.natural({
@@ -1984,6 +1991,8 @@ function randReview(favoriteDish) {
         rating: 2
     });
 
+    favoriteDish.reviews.concat(newGoodReview);
+    badDish.reviews.concat(newBadReview);
 
     reviews = reviews.concat(newGoodReview).concat(newBadReview);
     return [newGoodReview,newBadReview];
