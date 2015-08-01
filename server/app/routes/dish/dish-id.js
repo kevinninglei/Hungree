@@ -15,6 +15,7 @@ router.get('/reviews', function(req, res){
 });
 
 router.put('/', function(req, res, next) {
+	console.log(req.dish, req.body)
 	_.extend(req.dish, req.body);
 	req.dish.save()
 	.then(function (dish) {
