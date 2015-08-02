@@ -3,8 +3,7 @@ app.directive('reviewItem', function() {
     restrict: 'E',
     scope: {
       review: "=",
-      user: "=",
-      orders: "="
+      chef: "=",
     },
     templateUrl: 'js/common/directives/review-item/review-item.html'
   };
