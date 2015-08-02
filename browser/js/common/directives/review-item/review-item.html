@@ -8,9 +8,8 @@
         </div>
         <div class="col-md-10">
             <div class="row">
-                <span ng-repeat="star in review.rating track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in 5-review.rating track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> {{chef.name.first}} wrote on {{review.date | date : format : 'MMMM d, y'}}</div>
+            <span ng-repeat="star in getNumber(review.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"> </span><span ng-repeat="star in getNumberInverse(review.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> {{chef.name.first}} wrote on {{review.date | date : format : 'MMMM d, y'}}</div>
             <div class="row">{{review.description}}</div>
         </div>
     </div>
 </div>
-<pre>REview:{{review}}</pre>

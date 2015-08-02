@@ -18,4 +18,5 @@ app.controller('ChefTabCtrl', function ($scope, $state) {
             tab.active = $scope.active(tab.route);
         });
     });
+
 });

@@ -1888,7 +1888,8 @@ var dishes = [{
 }];
 
 dishes=_.map(dishes,function(dish){
-    _.assign(dish,{price: Math.floor((Math.random()*100)+10)})
+    _.assign(dish,{price: Math.floor((Math.random()*100)+10)});
+    dish.description = chance.paragraph();
     return new Dish(dish);
 });
 // dishes = dishes.map(function(dish){
@@ -1944,7 +1945,8 @@ function randUser() {
             max: 3
         })],
         isAdmin: false,
-        favorites: [favoriteDish]
+        favorites: [favoriteDish],
+        description: 'I am '+ chance.paragraph()
     });
 
     if(!!pickDishes) newUser.dishes= [pickDishes];
@@ -1978,7 +1980,7 @@ function randPhoto(gender) {
 
 function randReview(favoriteDish,badDish,user) {
     var newGoodReview = new Review({
-        description: favoriteDish.name + chance.sentence(),
+        description: favoriteDish.name +' is '+ chance.paragraph(),
         user: user,
         dish: favoriteDish,
         rating: chance.natural({
@@ -1989,7 +1991,7 @@ function randReview(favoriteDish,badDish,user) {
 
 
     var newBadReview = new Review({
-        description: badDish.name + chance.sentence(),
+        description: badDish.name +' is '+ chance.paragraph(),
         user: user,
         dish: badDish,
         rating: 2

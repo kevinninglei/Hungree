@@ -5,7 +5,7 @@
 		class="form-control"
 		style="display: inline-block"
 		ng-model="selectedFilter">
-		<option 
+		<option
 			ng-repeat="category in categories">{{category.name}}</option>
 	</select>
 </div>
@@ -26,7 +26,7 @@
 	            <div style="height:61px">
 	                    <h4>{{dish.name}}</h4>
 	                <div>
-	                	<div>{{dish.description}}</div>
+	                	<!-- <div>{{dish.description}}</div> -->
 	                    <span ng-repeat="star in getNumber(dish.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumberInverse(dish.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
 	                </div>
 	            </div>
