@@ -1944,9 +1944,10 @@ function randUser() {
             max: 3
         })],
         isAdmin: false,
-        dishes: [pickDishes] || null,
         favorites: [favoriteDish]
     });
+
+    if(!!pickDishes) newUser.dishes= [pickDishes];
 
     var quantity = Math.floor(Math.random()*5)+1;
 
@@ -1979,6 +1980,7 @@ function randReview(favoriteDish,badDish,user) {
     var newGoodReview = new Review({
         description: favoriteDish.name + chance.sentence(),
         user: user,
+        dish: favoriteDish,
         rating: chance.natural({
             min: 4,
             max: 5
@@ -1989,6 +1991,7 @@ function randReview(favoriteDish,badDish,user) {
     var newBadReview = new Review({
         description: badDish.name + chance.sentence(),
         user: user,
+        dish: badDish,
         rating: 2
     });
 

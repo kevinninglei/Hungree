@@ -14,10 +14,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 				return Dish.getDishesForChef($stateParams.id);
 			},
 			reviews: function(Reviews, $stateParams) {
-				return Reviews.getReviews($stateParams.id)
+				return Reviews.getReviews($stateParams.id);
+			},
+			orders: function(Orders,$stateParams){
+				return Orders.getDishesInOrders($stateParams.id);
 			},
 			favorites: function(Favorites, $stateParams) {
-				return Favorites.getFavsForUser($stateParams.id)
+				return Favorites.getFavsForUser($stateParams.id);
 			}
 		}
 	})
@@ -35,5 +38,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		controller: 'ChefTabCtrl',
 		url: '/favorites',
 		templateUrl: '/js/one-chef/chef-tab-favorites.html'
-	})
-})
+	});
+});
