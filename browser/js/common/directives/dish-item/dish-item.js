@@ -9,7 +9,14 @@ app.directive('dishItem', function($state, Chefs) {
     	scope.goToDish = function(dish) {
     		Chefs.viewDish = dish;
       		$state.go('oneDish', {id: dish._id})
-      	}
+      	};
+      scope.getNumber = function(num) {
+        return new Array(Math.round(num))
+      };
+      scope.getNumberInverse = function(num) {
+        return new Array(5-Math.round(num));
+      };
+
     }
   };
 });

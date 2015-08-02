@@ -12,95 +12,103 @@ router.get('/', function(req, res) {
 });
 
 router.get('/dishes', function(req, res, next) {
-	Dish.find({
-			_id: {
-				$in: req.CurrentUser.dishes
-			}
-		}).exec()
-		.then(function(dishes) {
-			console.log('dishes!');
-			res.json(dishes);
+	Dish.populate(req.CurrentUser, {
+			path: 'dishes'
+		})
+		.then(function(data) {
+			res.json(data.dishes);
 		})
 		.then(null, next);
 });
 
 //gets the reviews that the user has written
 router.get('/reviews', function(req, res, next) {
-	Review.find({
-			_id: {
-				$in: req.CurrentUser.reviews
-			}
-		}).populate('user').exec()
-		.then(function(reviews) {
-			res.json(reviews);
+	User.populate(req.CurrentUser, {
+			path: 'reviews'
+		})
+		.then(function(data) {
+			return Dish.populate(data.reviews,{path:'dish'})
+		})
+		.then(function(result){
+			res.json(result);
 		})
 		.then(null, next);
+
 });
 
 router.get('/orders', function(req, res, next) {
-	Order.find({
-			_id: {
-				$in: req.CurrentUser.orders
-			}
-		}).exec()
+	Order.populate(req.CurrentUser, {
+			path: 'orders'
+		})
+		.then(function(user) {
+			return user.orders;
+		})
 		.then(function(orders) {
-			res.json(orders);
+			return Dish.populate(orders, {
+				path: 'dishes.dishId'
+			});
+		})
+		.then(function(popOrder) {
+			return Review.populate(popOrder, {
+				path: 'dishes.dishId.reviews'
+			});
+		})
+		.then(function(result) {
+			res.json(result);
 		})
 		.then(null, next);
 });
 
 router.get('/favorites', function(req, res, next) {
-	Dish.find({
-			_id: {
-				$in: req.CurrentUser.favorites
-			}
-		}).exec()
-		.then(function(favorites) {
-			res.json(favorites);
+	Dish.populate(req.CurrentUser, {
+			path: 'favorites'
+		})
+		.then(function(data) {
+			res.json(data.favorites);
 		})
 		.then(null, next);
 });
 
 router.get('/cart', function(req, res, next) {
 	Order.findById(req.CurrentUser.cart).populate('dishes.dishId').exec()
-		.then(function (order){
+		.then(function(order) {
 			res.json(order);
 		})
 		.then(null, next);
 });
 
-router.put('/cart', function (req, res, next){
+router.put('/cart', function(req, res, next) {
 	console.log('PUTTING NOW')
 	var newDishObj = {
 			dishId: req.body.dish,
 			quantity: req.body.quantity
 		}
-	//--> if user has an existing cart(order), then push the dish + quantity and save
-	// the user///and res.respond with dish
-	//--> if the user doesn't have an existing cart(order), create a cart with the single dish
-	// then save the user...and res.respond with dish 
-	if (!req.CurrentUser.cart){
+		//--> if user has an existing cart(order), then push the dish + quantity and save
+		// the user///and res.respond with dish
+		//--> if the user doesn't have an existing cart(order), create a cart with the single dish
+		// then save the user...and res.respond with dish
+	if (!req.CurrentUser.cart) {
 		Order.create({
-						user: req.CurrentUser._id, 
-						dishes:[newDishObj]
-					})
-			.then(function(order){
+				user: req.CurrentUser._id,
+				dishes: [newDishObj]
+			})
+			.then(function(order) {
 				//now that you have the order, you must save it to the current user
 				req.CurrentUser.cart = order;
 				return req.CurrentUser.save();
 			})
-			.then(function(user){
+			.then(function(user) {
 				res.json(user.cart);
 			})
 			.then(null, next);
-	}else{
+	} else {
 		Order.findById(req.CurrentUser.cart._id).exec()
-			.then(function(order){
+			.then(function(order) {
 
 				order.dishes.push(newDishObj);
 				return order.save();
 			})
-			.then(function(order){
+			.then(function(order) {
 				res.json(order);
 			})
 			.then(null, next);

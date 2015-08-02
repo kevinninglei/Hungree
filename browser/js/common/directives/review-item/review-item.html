@@ -1,21 +1,15 @@
 <div class="panel panel-default container">
     <div class="panel-heading row">
-        <div class="col-md-2">{{review.user.name.first}}</div>
-        <div class="col-md-10">
-            <div>
-                <i class="fa fa-star"> </i>
-                <i class="fa fa-star"> </i>
-                <i class="fa fa-star"> </i>
-                <i class="fa fa-star-half-o"> </i>
-                <i class="fa fa-star-o"> </i>
-            </div>
-        </div>
+        {{review.dish.name}}
     </div>
     <div class="panel-body row">
         <div class="col-md-2">
-            <img class="text-center" src="{{review.user.picture}}" id="profile-pic">
+            <img class="text-center" ng-src="{{review.dish.picture}}" id="profile-pic">
         </div>
-        <div class="col-md-10">{{review.description}}</div>
-
+        <div class="col-md-10">
+            <div class="row">
+            <span ng-repeat="star in getNumber(review.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"> </span><span ng-repeat="star in getNumberInverse(review.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> {{chef.name.first}} wrote on {{review.date | date : format : 'MMMM d, y'}}</div>
+            <div class="row">{{review.description}}</div>
+        </div>
     </div>
 </div>

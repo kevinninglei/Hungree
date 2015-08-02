@@ -7,9 +7,9 @@ app.factory('OrderFactory', function($http){
 			return $http.get(orderApiPath)
 				.then(function(orders){
 					return orders.data;
-				})
+				});
 
 		}
-	}
+	};
 
-})
+});

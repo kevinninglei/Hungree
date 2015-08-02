@@ -5,6 +5,13 @@ var mongoose = require('mongoose');
 var Review = mongoose.model('Review');
 var _ = require('lodash');
 
+
+router.get('/',function(req,res,next){
+	Review.find()
+	.then(function(reviews){
+		res.status(201).json(reviews);
+	});
+});
 // /api/reviews
 router.post('/', function(req, res, next){
 	Review.create(req.body)
