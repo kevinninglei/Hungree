@@ -21,6 +21,10 @@ footer {
   color: primary;
 }
 
+body{
+  padding-top: 70px;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
