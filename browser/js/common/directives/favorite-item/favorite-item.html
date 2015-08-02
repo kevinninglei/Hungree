@@ -9,11 +9,7 @@
                 <a ng-click="goToDish(favorite)">
                     <h4> {{favorite.name}} </h4></a>
                 <div>
-                    <i class="fa fa-star"> </i>
-                    <i class="fa fa-star"> </i>
-                    <i class="fa fa-star"> </i>
-                    <i class="fa fa-star-half-o"> </i>
-                    <i class="fa fa-star-o"> </i>
+            <span ng-repeat="star in getNumber(favorite.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"> </span><span ng-repeat="star in getNumberInverse(favorite.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 </div>
             </div>
         </div>
