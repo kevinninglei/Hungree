@@ -28,29 +28,23 @@ router.get('/dishes', function(req, res, next) {
 router.get('/reviews', function(req, res, next) {
 
 	User.populate(req.CurrentUser,{path:'reviews'},function(err,data){
-		res.json(data);
+		res.json(data.reviews);
 	});
-	Review.find({
-			_id: {
-				$in: req.CurrentUser.reviews
-			}
-		}).populate('user').exec()
-		.then(function(reviews) {
-			res.json(reviews);
-		})
-		.then(null, next);
 });
 
 router.get('/orders', function(req, res, next) {
-	Order.find({
-			_id: {
-				$in: req.CurrentUser.orders
-			}
-		}).exec()
-		.then(function(orders) {
-			res.json(orders);
-		})
-		.then(null, next);
+	User.populate(req.CurrentUser,{path:'orders'},function(err,data){
+		res.json(data);
+	});
+	// Order.find({
+	// 		_id: {
+	// 			$in: req.CurrentUser.orders
+	// 		}
+	// 	}).exec()
+	// 	.then(function(orders) {
+	// 		res.json(orders);
+	// 	})
+	// 	.then(null, next);
 });
 
 router.get('/favorites', function(req, res, next) {

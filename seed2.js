@@ -1895,8 +1895,7 @@ dishes=_.map(dishes,function(dish){
 //     return new Dish(dish);
 // });
 
-var orders = [
-];
+var orders = [];
 
 
 var carts = [
@@ -1958,9 +1957,8 @@ function randUser() {
     var newReviews = randReview(favoriteDish,badDish,newUser);
 
     newUser.orders = [newGoodOrder,newBadOrder];
-    orders.concat([newGoodOrder,newBadOrder]);
+    orders = _.union(orders,[newGoodOrder,newBadOrder]);
     newUser.reviews = newReviews;
-
     return newUser;
 }
 
