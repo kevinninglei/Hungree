@@ -1,19 +1,16 @@
-app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, CartFactory) {
+app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, CartFactory, populateCart) {
   $scope.price = price;
-  console.log($scope);
 
   $scope.setFormScope = function(scope) {
     this.$form = $("#form-payment");
   };
 
   $scope.closeAlert=function(){
-    console.log("called");
     $scope.error = null;
     $scope.$digest();
   };
 
   $scope.stripeResponseHandler = function(status, response) {
-    console.log(status, response);
     if (response.error) {
       $scope.error = response.error.message;
       $scope.$digest();
@@ -29,15 +26,18 @@ app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, Ca
       $modalInstance.close();
       CartFactory.confirmOrder()
         .then(function(order){
-          
+          //injected from parent controller
+          populateCart(order);
+
+          //Not working to reidrect to account, why?
+          //$state.go('account');
         });
-      //$state.go('home');
+
     }
 
   };
 
   $scope.ok = function(card) {
-    console.log("card", card);
     if(!card) return false;
     Stripe.setPublishableKey('pk_test_ZJ2EdpJbGoQokkcIwkci5gOY');
     Stripe.card.createToken(

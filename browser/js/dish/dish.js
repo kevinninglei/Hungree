@@ -28,8 +28,10 @@ app.controller('DishCtrl', function($scope, CartFactory, $stateParams, dish, $st
 
 	$scope.getNumber = Stars.getNumber;
 	$scope.getNumberInverse = Stars.getNumberInverse;
+
+	//TODO: allow for various quantities
+	
 	$scope.addToOrder = function() {
-		CartFactory.cartOrders.push($scope.dish);
 		CartFactory.addToCart($scope.dish, 1);
 		$state.go('listDishes');
 	}
