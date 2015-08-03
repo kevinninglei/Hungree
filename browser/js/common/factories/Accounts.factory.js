@@ -1,13 +1,13 @@
 app.factory('Accounts',function($http){
   return{
     updateInfo: function(user) { //returns array of chef objects with dishes array
-            return $http.put(`/api/users/${user._id}`)
+            return $http.put(`/api/users/${user._id}`, user)
             .then(function(res) {
                 return res.data;
             });
         },
-    updatePW: function(id) {
-    	return $http.get('/api/users/' + id)
+    updatePW: function(pw, id) {
+    	return $http.put(`/api/users/${id}/password`, pw)
     		.then(function (res) {
     			return res.data;
     		});
