@@ -24,9 +24,14 @@ app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, Ca
         // Insert the token into the form so it gets submitted to the server
       $scope.$form.append($('<input type="hidden" name="stripeToken" />').val(token));
       // and submit
+
       $scope.$form.submit();
       $modalInstance.close();
-      $state.go('home');
+      CartFactory.confirmOrder()
+        .then(function(order){
+          
+        });
+      //$state.go('home');
     }
 
   };
