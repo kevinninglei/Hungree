@@ -19,8 +19,26 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		return updatedDishQuantityObj;
 	}
 
+	var temporarilyUpdateTotal = function(){
+		//needs to iterate through the newQuantities to calculate total
+		return $scope.cart.reduce(function(accum, elem){
+
+			var newQuant = elem.newQuantity === "" ? 0:Number(elem.newQuantity); 
+			accum += elem.dish.price * newQuant;
+			return accum;
+		}, 0)
+
+	}
+	
 	$scope.showUpdateItems = function(){
-		$scope.showUpdateItemsButton = Object.keys(getUpdatedItems()).length > 0;
+		if (Object.keys(getUpdatedItems()).length > 0){
+			$scope.showUpdateItemsButton = true;
+			$scope.totalPrice = temporarilyUpdateTotal();
+		}else {
+			$scope.showUpdateItemsButton = false;
+		}
+
+		//$scope.showUpdateItemsButton = Object.keys(getUpdatedItems()).length > 0;
 	};
 
 	var populateCart = function(order){
@@ -77,8 +95,6 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 				}
 			}
 		});
-
-
 
 		modalInstance.result.then(function(selectedItem) {
 			$scope.selected = selectedItem;
