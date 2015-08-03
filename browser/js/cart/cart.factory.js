@@ -22,7 +22,7 @@ app.factory('CartFactory', function($http, OrderFactory, AuthService, $state){
 			return AuthService.getLoggedInUser()
 				.then(function(user){
 					if (!user) throw new Error('Not Logged In');
-					return $http.put('/api/users/' + user._id + '/cart', dishReqLoad);
+					return $http.put('/api/users/' + user._id + '/cart/add', dishReqLoad);
         		})
         		.then(function(cart){
         			return cart.data;
@@ -31,6 +31,22 @@ app.factory('CartFactory', function($http, OrderFactory, AuthService, $state){
         			$state.go('home');
         		})
 		},
+		removeFromCart: function(dishesToRemove){
+			return AuthService.getLoggedInUser()
+				.then(function(user){
+					if (!user) throw new Error('Not Logged In');
+					return $http.put('/api/users/' + user._id + '/cart/remove', {dishesToRemove: dishesToRemove});
+        		})
+        		.then(function(cart){
+        			console.log('removed from cart, data is:', cart.data);
+        			return cart.data;
+        		})
+        		.then(null, function(err){
+        			$state.go('home');
+        		})
+
+		},
+
 
 		cartOrders: []
 	}

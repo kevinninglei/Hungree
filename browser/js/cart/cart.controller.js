@@ -1,22 +1,12 @@
 app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
-	$scope.total = 49;
+	$scope.total = 0;
 	//1. given an existing 'order', populate the cart
 	//2. ability to easy add dishes to the current order
 	//3. keep the current order as a factory
 
-
-	var selectedItems = {};
 	$scope.updateSelectedCartItem = function(ind) {
-		selectedItems[ind] = !selectedItems[ind];
-		var hasSelected = false;
-		for (var k in selectedItems){
-			if (selectedItems[k]){
-				hasSelected = true;
-				break;
-			}
-		}
-		console.log(hasSelected);
-		$scope.showDeleteItemsButton = hasSelected;
+		$scope.showDeleteItemsButton = _.some($scope.cart, 'isSelected', true)
+
 	};
 
 	var populateCart = function(order){
@@ -29,24 +19,24 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		var calculatedTotal = 0;
 		order.dishes.forEach(function(dish) {
 			currCart.push({
-				dishName: dish.dishId.name,
-				dishDescription: dish.dishId.description,
-				//price of a single dish
-				dishPrice: dish.dishId.price,
-				//used to configure the current <select>
+				dish: dish.dishId,
 				quantity: dish.quantity,
 				isSelected: false
 			});
 		});
 		$scope.cart = currCart;
 		$scope.totalPrice = order.total;
-		//console.log(currCart);
 	};
 
 	$scope.showDeleteItemsButton = false;
 
 	$scope.deleteItems = function() {
-		console.log(selectedItems);
+		var deleteIds = _.pluck(_.filter($scope.cart, { 'isSelected': true }), 'dish._id');
+		CartFactory.removeFromCart(deleteIds)
+			.then(function(order){
+				console.log('order is: ', order);
+				populateCart(order);
+			});
 	};
 
 	CartFactory.getCurrentCart()

@@ -14,11 +14,11 @@
               <td><input type="checkbox" ng-change="updateSelectedCartItem({{$index}})" ng-model="cartItem.isSelected"></td>
               <td>
                 <div>
-                  <strong>{{ cartItem.dishName }}</strong><br>
-                  <em>{{ cartItem.dishDescription }}</em>
+                  <strong>{{ cartItem.dish.name }}</strong><br>
+                  <em>{{ cartItem.dish.description }}</em>
                 </div>
               </td>
-              <td><span>$</span><span>{{ cartItem.dishPrice }}</span></td>
+              <td><span>$</span><span>{{ cartItem.dish.price }}</span></td>
               <td>
                 <input type="text"
                        size="2"
