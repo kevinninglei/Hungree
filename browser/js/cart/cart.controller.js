@@ -4,8 +4,37 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 	//2. ability to easy add dishes to the current order
 	//3. keep the current order as a factory
 
-	$scope.updateSelectedCartItem = function(ind) {
+	$scope.showDeleteItems = function() {
 		$scope.showDeleteItemsButton = _.some($scope.cart, 'isSelected', true)
+	};
+
+
+	var getUpdatedItems = function() {
+		var updatedDishQuantityObj = {};
+		$scope.cart.forEach(function(dishInCart){
+			if (dishInCart.newQuantity != dishInCart.quantity){
+				updatedDishQuantityObj[String(dishInCart.dish._id)] = dishInCart.newQuantity;
+			}
+		});
+		return updatedDishQuantityObj;
+	}
+
+	var temporarilyUpdateTotal = function(){
+		//needs to iterate through the newQuantities to calculate total
+		return $scope.cart.reduce(function(accum, elem){
+			accum += elem.dish.price * elem.newQuantity;
+			return accum;
+		}, 0)
+
+	}
+
+	$scope.showUpdateItems = function(){
+		if (Object.keys(getUpdatedItems()).length > 0){
+			$scope.showUpdateItemsButton = true;
+			$scope.totalPrice = temporarilyUpdateTotal();
+		}else {
+			$scope.showUpdateItemsButton = false;
+		}
 
 	};
 
@@ -21,11 +50,13 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 			currCart.push({
 				dish: dish.dishId,
 				quantity: dish.quantity,
-				isSelected: false
+				isSelected: false,
+				newQuantity: dish.quantity
 			});
 		});
 		$scope.cart = currCart;
 		$scope.totalPrice = order.total;
+		$scope.showUpdateItems();
 	};
 
 	$scope.showDeleteItemsButton = false;
@@ -33,6 +64,13 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 	$scope.deleteItems = function() {
 		var deleteIds = _.pluck(_.filter($scope.cart, { 'isSelected': true }), 'dish._id');
 		CartFactory.removeFromCart(deleteIds)
+			.then(function(order){
+					populateCart(order);
+			});
+	};
+
+	$scope.updateItems = function() {
+		CartFactory.updateDishQuantity(getUpdatedItems())
 			.then(function(order){
 				populateCart(order);
 			});
@@ -55,8 +93,6 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 				}
 			}
 		});
-
-
 
 		modalInstance.result.then(function(selectedItem) {
 			$scope.selected = selectedItem;
