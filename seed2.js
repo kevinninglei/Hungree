@@ -669,7 +669,7 @@ var dishes = [{
   ],
   "image": "https://api.pearson.com/kitchen-manager/v1/images/full/southeast_asian_style_peanut_sauce.jpg",
   "thumb": "https://api.pearson.com/kitchen-manager/v1/images/thumbs/southeast_asian_style_peanut_sauce_thumb.jpg",
-  "picture": "https://api.pearson.com/kitchen-manager/v1/images/full/southeast_asian_style_peanut_sauce.jpg",
+  "picture": "http://s3-media1.fl.yelpcdn.com/bphoto/WXfvxIyCr-wJArn5Dx9Agw/348s.jpg",
   "tags": [
     tags[10]
   ]
@@ -1804,7 +1804,7 @@ var dishes = [{
   ],
   "image": "https://api.pearson.com/kitchen-manager/v1/images/full/noc_cham_(vietnamese_dipping_sauce).jpg",
   "thumb": "https://api.pearson.com/kitchen-manager/v1/images/thumbs/nuoc_cham_(vietnamese_dipping_sauce)_thumb.jpg",
-  "picture": "https://api.pearson.com/kitchen-manager/v1/images/full/noc_cham_(vietnamese_dipping_sauce).jpg",
+  "picture": "http://www.taste.com.au/images/recipes/agt/2006/12/14682_l.jpg",
   "tags": [
     tags[15]
   ]

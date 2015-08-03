@@ -4,6 +4,5 @@ app.controller('OneChefCtrl', function ($scope, chef, dishes, reviews, favorites
 	$scope.reviews = reviews;
 	$scope.favorites = favorites;
   	$scope.orders = orders;
-  	console.log(reviews);
 });
 

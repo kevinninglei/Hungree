@@ -4,8 +4,8 @@
 	</div>
 	<div class="col-sm-8">
 		<h1>{{dish.name}} - ${{dish.price}}</h1>
-		<p>{{dish.chef.name.first}} {{dish.chef.name.last}}</p>
 		<div class="col-lg-8" style="padding-left:0px">
+			<h4 class="clickable underline" ui-sref="oneChef({id: dish.user._id})">By {{dish.user.name.first}} {{dish.user.name.last}}</h4>
 			<div>
 				<h3 style="margin-top:0px">Rating</h3>
 				<span popover="Average: {{dish.rating}}" popover-trigger="mouseenter"><span ng-repeat="star in getNumber(dish.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumberInverse(dish.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></span>
@@ -20,7 +20,7 @@
 				ng-click="addToOrder()"
 				>Add Dish</button>
 			<div class="col-lg-2" ng-controller="ModalDemoCtrl">
-			    <script type="text/ng-template" id="myModalContent.html">
+			    <script type="text/ng-template" id="postReview.html">
 			        <div class="modal-header">
 			            <h3 class="modal-title">Your Review</h3>
 			        </div>
@@ -35,18 +35,14 @@
 						</div>
 			        </div>
 			        <div class="modal-footer">
-			            <button class="btn btn-primary" ng-click="ok()">OK</button>
+			            <button class="btn btn-primary" ng-click="postReview()">OK</button>
 			            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 			        </div>
 			    </script>
 
 			    <button class="btn btn-primary" ng-click="open()">Post Review</button>
 			</div>
-<!-- 			<button
-				type="button"
-				class="btn btn-primary"
-				ng-click="postReview()"
-				>Post Review</button> -->
+
 		</div>
 		<div class="col-lg-4">
 			<div>
@@ -73,33 +69,6 @@
 	</div>
 	<div class="col-lg-12">
 		<h3>Reviews</h3>
-		<div ng-repeat="review in dish.reviews" class="panel panel-default container">
-		    <div class="panel-heading row">
-		        {{review.user.name.first}} {{review.user.name.last}}
-		    </div>
-			<div class="panel-body row">
-		        <div class="col-md-2">
-		            <img class="text-center" ng-src="{{review.user.picture}}" id="profile-pic">
-		        </div>
-		        <div class="col-md-10">
-		            <div class="row">
-		            <span ng-repeat="star in getNumber(review.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"> </span><span ng-repeat="star in getNumberInverse(review.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> {{review.user.name.first}} wrote on {{review.date | date : format : 'MMMM d, y'}}</div>
-		            <div class="row">{{review.description}}</div>
-		        </div>
-		    </div>
-		</div>
-
-	<!-- 	<div ng-repeat="review in dish.reviews">
-			<div class="row">
-				<div class="col-lg-1">
-					<img class="fit" ng-src="{{review.user.picture}}">
-					<b>{{review.user.name.first}} {{review.user.name.last}}</b>
-				</div>
-				<div class="col-lg-11">
-					<span ng-repeat="star in getNumber(review.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumber(5-review.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-					<p>{{review.description}}</p>
-				</div>
-			</div>
-		</div> -->
+		<dish-review user="user" review="review" ng-repeat="review in dish.reviews"></dish-review>
 	</div>
 </div>

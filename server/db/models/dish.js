@@ -60,7 +60,7 @@ dishSchema.statics.findAllDishes = function(){
 }
 
 dishSchema.statics.findDish = function(id){
-    return this.findById(id).deepPopulate('tags reviews.user').exec()
+    return this.findById(id).deepPopulate('tags reviews.user user').exec()
         .then(function(dish){
             return dish;
         })

@@ -132,6 +132,11 @@ var users = [
         })
 ];
 
+dishes[0].user = users[0];
+dishes[1].user = users[0];
+dishes[2].user = users[1];
+dishes[3].user = users[2];
+
 orders[0].user = users[0];
 orders[1].user = users[1];
 orders[2].user = users[1];

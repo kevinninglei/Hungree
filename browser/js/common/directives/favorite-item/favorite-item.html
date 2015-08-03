@@ -6,8 +6,7 @@
         <div class="panel-heading">
             <div>
 
-                <a ng-click="goToDish(favorite)">
-                    <h4> {{favorite.name}} </h4></a>
+                    <h4 ng-click="goToDish(favorite)" class="underline clickable"> {{favorite.name}} </h4>
                 <div>
             <span ng-repeat="star in getNumber(favorite.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"> </span><span ng-repeat="star in getNumberInverse(favorite.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 </div>
