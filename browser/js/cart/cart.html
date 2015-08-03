@@ -20,7 +20,7 @@
                   <em>{{ cartItem.dish.description }}</em>
                 </div>
               </td>
-              <td><span>$</span><span>{{ cartItem.dish.price }}</span></td>
+              <td><span>{{ cartItem.dish.price | currency}}</span></td>
               <td>
                 <input type="number"
                        size="2"
@@ -36,7 +36,7 @@
             <tr class="totalrow">
               <td></td>
               <td><span style="font-weight:bold">TOTAL</span></td>
-              <td><span>$</span>{{ totalPrice }}</th>
+              <td>{{ totalPrice | currency }}</th>
             </tr>
           </tbody>
         </table>
@@ -50,6 +50,14 @@
                 style="float:right" 
                 ng-click="updateItems()" 
                 ng-show="showUpdateItemsButton">Update Item(s)</button>
+
+       <button type="button" 
+                class="btn btn-default" 
+                style="float:right" 
+                ng-click="confirmOrder()" 
+                ng-show="true">Confirm Order</button>
+
+        <em ng-show="didNotConfirmUpdate">Please confirm your updated cart before checking out</em>
       </form>
     </div>
 
@@ -60,7 +68,7 @@
           <h3 class="panel-title">Cart</h3>
         </div>
         <div class="panel-body">
-            <p>Total <span>({{ cart.length }})</span> orders: $<span>{{totalPrice}}</span> </p>
+            <p>Total <span>({{ cart.length }})</span> orders: <span>{{totalPrice | currency}}</span> </p>
             <button type="button" class="btn btn-default" ng-click="open(totalPrice)"> Checkout</button>
         </div>
       </div>

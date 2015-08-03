@@ -60,6 +60,21 @@ app.factory('CartFactory', function($http, OrderFactory, AuthService, $state){
         			$state.go('home');
         		})
 		},
+
+		confirmOrder: function() {
+			return AuthService.getLoggedInUser()
+				.then(function(user){
+					if (!user) throw new Error('Not Logged In');
+					return $http.delete('/api/users/' + user._id + '/cart/checkout');
+        		})
+        		.then(function(res){
+        			return res.data.cart;
+        		})
+        		.then(null, function(err){
+        			$state.go('home');
+        		})	
+		},
+
 		cartOrders: []
 	}
 

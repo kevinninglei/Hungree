@@ -32,6 +32,7 @@ router.put('/:id', function(req, res, next) {
 		return review.save();
 	})
 	.then(function(review) {
+		console.log(review)
 		res.status(200).json(review);
 	})
 	.then(null, next);
