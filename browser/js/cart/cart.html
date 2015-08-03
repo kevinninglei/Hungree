@@ -22,9 +22,11 @@
               </td>
               <td><span>$</span><span>{{ cartItem.dish.price }}</span></td>
               <td>
-                <input type="text"
+                <input type="number"
                        size="2"
-                       style="border:none"
+                       style="border:none; width: 2em"
+                       min= "0"
+                       max= "{{ cartItem.dish.inventory }}}"
                        value="{{ cartItem.quantity }}"
                        ng-model="cartItem.newQuantity"
                        ng-change="showUpdateItems()"

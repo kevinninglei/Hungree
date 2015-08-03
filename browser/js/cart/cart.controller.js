@@ -12,7 +12,7 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 	var getUpdatedItems = function() {
 		var updatedDishQuantityObj = {};
 		$scope.cart.forEach(function(dishInCart){
-			if (Number(dishInCart.newQuantity) != dishInCart.quantity){
+			if (dishInCart.newQuantity != dishInCart.quantity){
 				updatedDishQuantityObj[String(dishInCart.dish._id)] = dishInCart.newQuantity;
 			}
 		});
@@ -22,14 +22,12 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 	var temporarilyUpdateTotal = function(){
 		//needs to iterate through the newQuantities to calculate total
 		return $scope.cart.reduce(function(accum, elem){
-
-			var newQuant = elem.newQuantity === "" ? 0:Number(elem.newQuantity); 
-			accum += elem.dish.price * newQuant;
+			accum += elem.dish.price * elem.newQuantity;
 			return accum;
 		}, 0)
 
 	}
-	
+
 	$scope.showUpdateItems = function(){
 		if (Object.keys(getUpdatedItems()).length > 0){
 			$scope.showUpdateItemsButton = true;
@@ -38,7 +36,6 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 			$scope.showUpdateItemsButton = false;
 		}
 
-		//$scope.showUpdateItemsButton = Object.keys(getUpdatedItems()).length > 0;
 	};
 
 	var populateCart = function(order){
@@ -59,6 +56,7 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		});
 		$scope.cart = currCart;
 		$scope.totalPrice = order.total;
+		$scope.showUpdateItems();
 	};
 
 	$scope.showDeleteItemsButton = false;
