@@ -4,11 +4,18 @@ var User = mongoose.model('User');
 var Dish = mongoose.model('Dish');
 var Review = mongoose.model('Review');
 var Order = mongoose.model('Order');
+var Address = mongoose.model('Address');
 var router = require('express').Router();
 var _ = require('lodash');
 
-router.get('/', function(req, res) {
-	res.json(req.CurrentUser);
+router.get('/', function(req, res,next) {
+	Address.populate(req.CurrentUser, {
+			path: 'address.shipping'
+		})
+		.then(function(data) {
+			res.json(data);
+		})
+		.then(null, next);
 });
 
 router.get('/dishes', function(req, res, next) {
@@ -17,6 +24,16 @@ router.get('/dishes', function(req, res, next) {
 		})
 		.then(function(data) {
 			res.json(data.dishes);
+		})
+		.then(null, next);
+});
+
+router.get('/address', function(req, res, next) {
+	Address.populate(req.CurrentUser, {
+			path: 'address.shipping'
+		})
+		.then(function(data) {
+			res.json(data.address);
 		})
 		.then(null, next);
 });
@@ -77,8 +94,7 @@ router.get('/cart', function(req, res, next) {
 		.then(null, next);
 });
 
-router.put('/cart', function(req, res, next) {
-	console.log('PUTTING NOW')
+router.put('/cart/add', function(req, res, next) {
 	var newDishObj = {
 			dishId: req.body.dish,
 			quantity: req.body.quantity
@@ -114,6 +130,35 @@ router.put('/cart', function(req, res, next) {
 			.then(null, next);
 	}
 });
+
+//to remove dishes from an order you want to:
+// 1. retrieve the order
+// 2. remove the orders that are passed in
+router.put('/cart/remove', function(req, res, next){
+	var removeDishIds = req.body.dishesToRemove;
+	Order.findById(req.CurrentUser.cart._id).exec()
+		.then(function(order) {
+
+			var dishesToSave = [];
+			order.dishes.forEach(function(dish, index){
+				if (!(removeDishIds.indexOf(String(dish.dishId)) >= 0)){
+					dishesToSave.push(dish);
+				}
+			});
+
+			order.dishes = dishesToSave;
+			return order.save();
+		})
+		.then(function(order) {
+			order.populate('dishes.dishId', function(err, newOrder){
+				res.json(newOrder);
+			})
+		})
+		
+		.then(null, next);
+
+});
+
 
 router.put('/', function(req, res, next) {
 	_.extend(req.CurrentUser, req.body);
