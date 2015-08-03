@@ -38,7 +38,6 @@ app.factory('CartFactory', function($http, OrderFactory, AuthService, $state){
 					return $http.put('/api/users/' + user._id + '/cart/remove', {dishesToRemove: dishesToRemove});
         		})
         		.then(function(cart){
-        			console.log('removed from cart, data is:', cart.data);
         			return cart.data;
         		})
         		.then(null, function(err){

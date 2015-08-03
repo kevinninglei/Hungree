@@ -34,7 +34,6 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		var deleteIds = _.pluck(_.filter($scope.cart, { 'isSelected': true }), 'dish._id');
 		CartFactory.removeFromCart(deleteIds)
 			.then(function(order){
-				console.log('order is: ', order);
 				populateCart(order);
 			});
 	};
