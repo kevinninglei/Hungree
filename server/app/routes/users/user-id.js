@@ -201,6 +201,20 @@ router.put('/', function(req, res, next) {
 		.then(null, next);
 });
 
+router.put('/password', function(req, res, next) {
+	if (req.CurrentUser.password !== User.encryptPassword(req.body.old, req.CurrentUser.salt))
+		res.status(200).json({status: 403, message: 'The password you have entered is incorrect.'});
+	else {
+		_.extend(req.CurrentUser, {password: req.body.new});
+		req.CurrentUser.save()
+			// User.findByIdAndUpdate(req.CurrentUser._id, req.body, { new: true }).exec()
+			.then(function(user) {
+				res.status(200).json({status:200, message: 'Password updated.', user: user});
+			})
+			.then(null, next);
+		}
+});
+
 
 
 router.delete('/', function(req, res, next) {

@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-xs-4">
 		<img class="fit" src="{{dish.picture}}">
 	</div>
 	<div class="col-sm-8">
@@ -8,7 +8,7 @@
 			<h4 class="clickable underline" ui-sref="oneChef({id: dish.user._id})">By {{dish.user.name.first}} {{dish.user.name.last}}</h4>
 			<div>
 				<h3 style="margin-top:0px">Rating</h3>
-				<span popover="Average: {{dish.rating}}" popover-trigger="mouseenter"><span ng-repeat="star in getNumber(dish.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumberInverse(dish.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></span>
+				<span popover="Average: {{dish.rating}}" popover-trigger="mouseenter"><star num="dish.rating"></star></span>
 			</div>
 			<div>
 				<h3>Description</h3>
