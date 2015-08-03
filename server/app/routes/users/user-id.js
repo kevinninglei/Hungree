@@ -160,7 +160,6 @@ router.put('/cart/remove', function(req, res, next){
 });
 
 router.put('/cart/update', function(req, res, next){
-	console.log('DISHES TO UPDATE: ', req.body.dishesToUpdate);
 	Order.findById(req.CurrentUser.cart._id).exec()
 		.then(function(order) {
 			order.dishes.forEach(function(dish, index){
@@ -175,10 +174,20 @@ router.put('/cart/update', function(req, res, next){
 			order.populate('dishes.dishId', function(err, newOrder){
 				res.json(newOrder);
 			})
-		})
-		
+		})		
 		.then(null, next);
+});
 
+//checkout is going to just modify the user
+//by adding the cart to the dishes and removing cart
+router.delete('/cart/checkout', function(req, res, next){
+	req.CurrentUser.orders.push(req.CurrentUser.cart);
+	req.CurrentUser.cart = undefined;
+	req.CurrentUser.save()
+		.then(function(user){
+			res.json(user);
+		})
+		.then(null, next);
 });
 
 
