@@ -1,20 +1,26 @@
 //User factory is used to get/create/update an arbitrary user
-app.factory('UserFactory', function ($http) {
+app.factory('UserFactory', function ($http, $state) {
 	var userApiPath = '/api/users';
 	return {
 		createUser: function (signupInfo) {
 			return $http.post(userApiPath, signupInfo)
 				.then(function(user){
+					$state.go('listDishes');
 					return user.data;
 				})
-        .then(null,next);
+        .then(null,function(err){
+        	console.log(err.message);
+        });
 		},
     getUser: function(id){
       return $http.get(userApiPath+'/'+id)
       .then(function(res){
+      	$state.go('listDishes');
         return res.data;
       })
-      .then(null,next);
+      .then(null,function(err){
+      	console.log(err.message);
+      });
     }
 	};
 });
