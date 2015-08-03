@@ -36,7 +36,7 @@ orderSchema.pre('save', function(next) {
 	var order = this;
 	//creates an array of promises for q to process
 	var promiseArr = this.dishes.map(function(dishInOrder) {
-		return Dish.findById(dishInOrder.dishId).exec();
+		return Dish.findById(dishInOrder.dishId).exec(); //this fails
 	});
 
 	//once array of promises are resolved, the results is an

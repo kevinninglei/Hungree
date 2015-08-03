@@ -119,24 +119,26 @@ router.put('/cart/add', function(req, res, next) {
 // 2. remove the orders that are passed in
 router.put('/cart/remove', function(req, res, next){
 	var removeDishIds = req.body.dishesToRemove;
-	Order.findById(req.CurrentUser.cart._id).populate('dishes.dishId').exec()
+	Order.findById(req.CurrentUser.cart._id).exec()
 		.then(function(order) {
 
 			var dishesToSave = [];
 			order.dishes.forEach(function(dish, index){
-				if (!(removeDishIds.indexOf(String(dish.dishId._id)) >= 0)){
+				if (!(removeDishIds.indexOf(String(dish.dishId)) >= 0)){
 					dishesToSave.push(dish);
 				}
 			});
+
 			order.dishes = dishesToSave;
 			return order.save();
 		})
 		.then(function(order) {
-			res.json(order);
+			order.populate('dishes.dishId', function(err, newOrder){
+				res.json(newOrder);
+			})
 		})
+		
 		.then(null, next);
-
-
 
 });
 
