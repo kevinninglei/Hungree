@@ -1999,8 +1999,7 @@ function randUser() {
       max: 3
     })],
     isAdmin: false,
-    favorites: [favoriteDish],
-    description: 'I am ' + chance.paragraph()
+    favorites: [favoriteDish]
   });
 
   if (!!pickDishes) newUser.dishes = [pickDishes];
@@ -2032,6 +2031,7 @@ function randUser() {
   newUser.orders = [newGoodOrder, newBadOrder];
   orders = _.union(orders, [newGoodOrder, newBadOrder]);
   newUser.reviews = newReviews;
+  newUser.description = 'I am ' + newUser.name.first + ' and ' + chance.paragraph();
   return newUser;
 }
 

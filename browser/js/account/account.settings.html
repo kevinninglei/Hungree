@@ -1,0 +1,48 @@
+<!-- <h1>Settings</h1> -->
+<div class="col-md-12">
+    <div class="alert alert-info">
+        <h2> User Bio: </h2>
+        <h4>{{user.description}}</h4>
+    </div>
+</div>
+<div class="col-md-6">
+<h3> Basic Information</h3>
+<pre>{{user.name}} {{user.email}}</pre>
+      <!-- <p ng-show="isAdmin || user._id == currentUser._id" class="list-group-item"> -->
+
+    <label>First Name</label>
+    <input type="text" class="form-control" placeholder="{{user.name.first}}">
+    <label>Last Name</label>
+    <input type="text" class="form-control" placeholder="{{user.name.last}}">
+    <label>Registered Email</label>
+    <input type="text" class="form-control" placeholder="{{user.email}}">
+    <br>
+    <a href="#" class="btn btn-success">Update Details</a>
+</div>
+<div class="col-md-6">
+<h3>Change your password:</h3>
+ <label>Old Password</label>
+    <input type="text" class="form-control" placeholder="">
+    <label>New Password</label>
+    <input type="text" class="form-control" placeholder="">
+    <label>Confirm New Password</label>
+    <input type="text" class="form-control" placeholder="">
+    <br>
+    <a href="#" class="btn btn-warning">Update Details</a>
+<!--     <pre>{{user}}</pre>
+    <img ng-src="{{user.picture}}"> Email: {{user.email}} Address: {{user.address.shipping}} } } -->
+</div>
+<div class="col-md-6">
+<h3>Your Location:</h3>
+<pre>{{user.address.shipping}}</pre>
+ <!-- <label>Old Password</label>
+    <input type="text" class="form-control" placeholder="">
+    <label>New Password</label>
+    <input type="text" class="form-control" placeholder="">
+    <label>Confirm New Password</label>
+    <input type="text" class="form-control" placeholder="">
+    <br>
+    <a href="#" class="btn btn-warning">Update Details</a> -->
+    <pre>{{user}}</pre>
+</div>
+
