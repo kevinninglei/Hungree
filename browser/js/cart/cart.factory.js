@@ -67,8 +67,8 @@ app.factory('CartFactory', function($http, OrderFactory, AuthService, $state){
 					if (!user) throw new Error('Not Logged In');
 					return $http.delete('/api/users/' + user._id + '/cart/checkout');
         		})
-        		.then(function(res){
-        			return res.data.cart;
+        		.then(function(user){
+        			return user.data.cart;
         		})
         		.then(null, function(err){
         			$state.go('home');

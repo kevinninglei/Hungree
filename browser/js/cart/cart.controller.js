@@ -84,13 +84,6 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 			});
 	};
 
-	$scope.confirmOrder = function(){
-		CartFactory.confirmOrder()
-			.then(function(order){
-				populateCart(order);
-			});
-	}
-
 	CartFactory.getCurrentCart()
 		.then(function(order) {
 			populateCart(order);
@@ -108,6 +101,9 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 				resolve: {
 					price: function() {
 						return price;
+					},
+					populateCart: function(){
+						return populateCart;
 					}
 				}
 			});
