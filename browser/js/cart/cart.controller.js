@@ -4,6 +4,8 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 	//2. ability to easy add dishes to the current order
 	//3. keep the current order as a factory
 
+	$scope.didNotConfirmUpdate = false;
+
 	$scope.showDeleteItems = function() {
 		$scope.showDeleteItemsButton = _.some($scope.cart, 'isSelected', true)
 	};
@@ -19,6 +21,10 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		return updatedDishQuantityObj;
 	}
 
+	var cartUpdated = function() {
+		return Object.keys(getUpdatedItems()).length > 0;
+	}
+
 	var temporarilyUpdateTotal = function(){
 		//needs to iterate through the newQuantities to calculate total
 		return $scope.cart.reduce(function(accum, elem){
@@ -29,7 +35,7 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 	}
 
 	$scope.showUpdateItems = function(){
-		if (Object.keys(getUpdatedItems()).length > 0){
+		if (cartUpdated()){
 			$scope.showUpdateItemsButton = true;
 			$scope.totalPrice = temporarilyUpdateTotal();
 		}else {
@@ -57,6 +63,7 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		$scope.cart = currCart;
 		$scope.totalPrice = order.total;
 		$scope.showUpdateItems();
+		$scope.showDeleteItems();
 	};
 
 	$scope.showDeleteItemsButton = false;
@@ -73,8 +80,16 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		CartFactory.updateDishQuantity(getUpdatedItems())
 			.then(function(order){
 				populateCart(order);
+				$scope.didNotConfirmUpdate = false;
 			});
 	};
+
+	$scope.confirmOrder = function(){
+		CartFactory.confirmOrder()
+			.then(function(order){
+				populateCart(order);
+			});
+	}
 
 	CartFactory.getCurrentCart()
 		.then(function(order) {
@@ -82,23 +97,27 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 		});
 
 	$scope.open = function(price) {
-		var modalInstance = $modal.open({
-			animation: true,
-			scope: $scope,
-			templateUrl: 'js/cart/payment/payment.html',
-			controller: 'paymentCtrl',
-			resolve: {
-				price: function() {
-					return price;
+		if (cartUpdated()){
+			$scope.didNotConfirmUpdate = true;
+		}else{
+			var modalInstance = $modal.open({
+				animation: true,
+				scope: $scope,
+				templateUrl: 'js/cart/payment/payment.html',
+				controller: 'paymentCtrl',
+				resolve: {
+					price: function() {
+						return price;
+					}
 				}
-			}
-		});
+			});
 
-		modalInstance.result.then(function(selectedItem) {
-			$scope.selected = selectedItem;
-		}, function() {
-			$log.info('Modal dismissed at: ' + new Date());
-		});
+			modalInstance.result.then(function(selectedItem) {
+				$scope.selected = selectedItem;
+			}, function() {
+				$log.info('Modal dismissed at: ' + new Date());
+			});
+		}
 	};
 
 	$scope.toggleAnimation = function() {
