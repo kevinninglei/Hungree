@@ -11,6 +11,9 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 return AuthService.isAuthenticated();
             };
 
+            scope.goToAccount = function(){
+                $state.go('account',{id: scope.user._id});
+            };
 
             scope.logout = function () {
                 AuthService.logout().then(function () {
