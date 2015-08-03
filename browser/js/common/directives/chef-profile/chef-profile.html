@@ -7,17 +7,14 @@
         <div class="panel-heading">
             <div>
 
-                <i ng-class="chef.status" class="fa fa-square" id="status">  {{chef.status}}</i>
+                <i ng-class="chef.status" class="fa fa-square" id="status"></i>
                 <a ui-sref="viewChef({id: chef._id})">
                     <h4>{{chef.name.first}} {{chef.name.last}} </h4></a>
                 <div>
                 <div>{{chef.address.shipping.city}} , {{chef.address.shipping.state}} </div>
 
-                    <i class="fa fa-star"> </i>
-                    <i class="fa fa-star"> </i>
-                    <i class="fa fa-star"> </i>
-                    <i class="fa fa-star-half-o"> </i>
-                    <i class="fa fa-star-o"> </i>
+                <span ng-repeat="star in getNumber(rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumberInverse(rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+
                 </div>
             </div>
         </div>
