@@ -1,37 +1,72 @@
-<tag-search></tag-search>
-<div class="col-lg-3 pull-right">
-	Filter by:
-	<select
-		class="form-control"
-		style="display: inline-block"
-		ng-model="selectedFilter">
-		<option
-			ng-repeat="category in categories">{{category.name}}</option>
-	</select>
+<div class="container well" id="chef-nav">
+	<div class="row">
+		<div class="col-md-3">
+			<h2 id="chef-title"> Dishes </h2>
+			<!-- <tag-search></tag-search> -->
+		</div>
+		<div class="col-md-3">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Filter:</span>
+				<select
+					class="form-control"
+					ng-model="selectedFilter"
+					aria-describedby="basic-addon1">
+					<option
+					ng-repeat="category in categories">{{category.name}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="input-group">
+					<div class="input-group-btn" dropdown>
+						<button type="button" class="btn btn-default" dropdown-toggle>
+						Tags
+						<span class="caret"></span>
+						</button>
+						<ul style="padding:5px 5px" class="dropdown-menu" role="menu" aria-labelledby="split-button">
+							<li class="clickable" role="menuitem" ng-repeat="tag in tags" ng-click="addTag(tag)">{{tag.name}}</li>
+						</ul>
+					</div>
+					<input type="text" class="form-control" aria-label="..." ng-model="query" placeholder="Search for...">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<h4><span
+			style="margin:0px 1px; cursor: pointer"
+			class="label label-default"
+			ng-repeat="tag in tagsToAdd">{{tag}}&nbsp;
+			<span
+				class="glyphicon glyphicon-remove"
+				aria-hidden="true"
+			ng-click="removeTag($index)"></span>
+		</span></h4>
+	</div>
 </div>
-<div style="clear:both">
+<div style="clear:both" class="container">
 	<div style="text-align:center" ng-show="loading">
 		<img src="../assets/images/loader.gif"/>
 	</div>
-
 	<div class="col-md-3" id="thumbnail"
-		ng-repeat="dish in nearbyDishes | tags | orderBy: selectedFilter" >
-	    <div class="panel panel-default dish-img"
+		ng-repeat="dish in nearbyDishes | tags | orderBy: selectedFilter | filter: search">
+		<div class="panel panel-default dish-img"
 			ng-click="goToDish(dish)"
 			ng-style="{'background-image': 'url({{dish.picture}})'}" ng-class="{'chef-hover':hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
-	        <div class="panel-body row">
-	            <div style="height:100px"></div>
-	        </div>
-	        <div class="panel-heading dish-label clickable" >
-	            <div style="height:61px">
-	                    <h4>{{dish.name}}</h4>
-	                <div>
-	                	<!-- <div>{{dish.description}}</div> -->
-	                    <span ng-repeat="star in getNumber(dish.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumberInverse(dish.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+			<div class="panel-body row">
+				<div style="height:100px"></div>
+			</div>
+			<div class="panel-heading dish-label clickable">
+				<div style="height:61px">
+					<h4>{{dish.name}}</h4>
+					<div>
+						<!-- <div>{{dish.description}}</div> -->
+						<span ng-repeat="star in getNumber(dish.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"></span><span ng-repeat="star in getNumberInverse(dish.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-
