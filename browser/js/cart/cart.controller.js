@@ -6,9 +6,17 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 
 
 	var selectedItems = {};
-	$scope.updateSelectedCartItem = function() {
-		console.log('deleting button showing...');
-		$scope.showDeleteItemsButton = true;
+	$scope.updateSelectedCartItem = function(ind) {
+		selectedItems[ind] = !selectedItems[ind];
+		var hasSelected = false;
+		for (var k in selectedItems){
+			if (selectedItems[k]){
+				hasSelected = true;
+				break;
+			}
+		}
+		console.log(hasSelected);
+		$scope.showDeleteItemsButton = hasSelected;
 	};
 
 	var populateCart = function(order){
@@ -38,7 +46,7 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 	$scope.showDeleteItemsButton = false;
 
 	$scope.deleteItems = function() {
-		console.log($scope.cart);
+		console.log(selectedItems);
 	};
 
 	CartFactory.getCurrentCart()

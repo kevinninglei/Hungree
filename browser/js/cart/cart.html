@@ -11,7 +11,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="cartItem in cart">
-              <td><input type="checkbox" ng-change="updateSelectedCartItem()" ng-model="cartItem.isSelected"></td>
+              <td><input type="checkbox" ng-change="updateSelectedCartItem({{$index}})" ng-model="cartItem.isSelected"></td>
               <td>
                 <div>
                   <strong>{{ cartItem.dishName }}</strong><br>

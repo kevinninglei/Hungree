@@ -78,7 +78,6 @@ router.get('/cart', function(req, res, next) {
 });
 
 router.put('/cart', function(req, res, next) {
-	console.log('PUTTING NOW')
 	var newDishObj = {
 			dishId: req.body.dish,
 			quantity: req.body.quantity
@@ -114,6 +113,7 @@ router.put('/cart', function(req, res, next) {
 			.then(null, next);
 	}
 });
+
 
 router.put('/', function(req, res, next) {
 	_.extend(req.CurrentUser, req.body);
