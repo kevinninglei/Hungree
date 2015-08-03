@@ -1993,7 +1993,7 @@ function randUser() {
     },
     picture: randPhoto(gender),
     email: emails.pop(),
-    password: chance.word(),
+    password: 'jkay',
     status: status[chance.natural({
       min: 0,
       max: 3

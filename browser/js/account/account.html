@@ -1,11 +1,64 @@
+<div class="container well" id="chef-nav">
+    <h3 id="chef-title">My Account</h3>
+</div>
 <div class="container">
-    <h3>My Account</h3>
-    <ul>
-        <li>Personal info</li>
-        <li>dishes</li>
-        <li>favorited dishes</li>
-        <li>Orders</li>
-        <li>Dishes sold? DashBoard-ish</li>
-    </ul>
-    <pre>{{user}}</pre>
+    <div class="col-md-3 text-center" id="profile-sidebar">
+        <img ng-src="{{user.picture}}" id="profile-pic">
+        <h4> {{user.name.first }} {{user.name.last}} </h4>
+        <!--                       <div class="profile-userbuttons">
+          <button type="button" class="btn btn-success btn-sm">Go Online</button>
+          <button type="button" class="btn btn-danger btn-sm">Go Offline</button>
+        </div> -->
+        <div class="profile-usermenu">
+            <ul class="nav">
+                <li class="active">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-home"></i> Overview </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-user"></i> Account Settings </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <i class="glyphicon glyphicon-cutlery"></i> My Dish </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <i class="fa fa-heart"></i> Favorite Dish </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-shopping-cart"></i> My Orders </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<!--raw DAta-->
+<ul>
+    <li>Personal info</li>
+    <li>dishes</li>
+    <li>favorited dishes</li>
+    <li>Orders</li>
+    <li>Dishes sold? DashBoard-ish</li>
+</ul>
+<pre>User: {{user}}</pre>
+<div class="row text-center">
+    <img ng-src="{{user.picture}}"> Email: {{user.email}} Address: {{user.address.shipping}} } }
+    <div class="row">
+        <pre>Dishes: {{dishes}}</pre>
+        <dish-item dish="dish" ng-repeat="dish in dishes"></dish-item>
+    </div>
+    <div class="row">
+        <pre>Favorites: {{favorites}}</pre>
+        <dish-item dish="dish" ng-repeat="dish in favorites"></dish-item>
+    </div>
+    <div class="row">
+        <pre>Orders: {{orders}}</pre>
+    </div>
+    <div class="row">
+        <pre>Dishes Sold: ??</pre>
+    </div>
 </div>
