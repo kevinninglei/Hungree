@@ -1,11 +1,11 @@
 <div class="col-md-12">
-    <div class="panel panel-default" ng-repeat="dish in dishes">
+    <div class="panel panel-default" ng-repeat="dish in myDishes">
         <div class="panel-heading"><a ui-sref="oneDish({id: dish._id})"> {{dish.name}} </a></div>
         <div class="panel-body">
             <div class="col-md-2 text-center">
                 <img class="text-center" ng-src="{{dish.picture}}" id="profile-pic">
                 <star num="dish.rating">
-                    <star>
+                    </star>
             </div>
             <div class="col-md-10">
                 <div class="row">Description: {{dish.description}}</div>
