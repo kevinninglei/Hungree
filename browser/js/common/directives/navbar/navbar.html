@@ -11,10 +11,10 @@
             <li>
                 <a ui-sref-active="active" ui-sref="cart"> <i class="fa fa-shopping-cart"></i> Cart </a>
             </li>
-            <li><a ui-sref-active="active" ui-sref="logIn"> My Account</a></li>
-            <li><a ui-sref-active="active" ui-sref="logIn"> login</a></li>
-            <li><a ui-sref-active="active" ui-sref="signUp"> signup</a></li>
-             <li><a ng-click="logout()">logout</a></li>
+            <li><a ui-sref-active="active" ng-show="isLoggedIn()" ui-sref="account"> My Account</a></li>
+            <li><a ng-hide="isLoggedIn()" ui-sref-active="active" ui-sref="logIn"> login</a></li>
+            <li><a ng-hide="isLoggedIn()" ui-sref-active="active" ui-sref="signUp"> signup</a></li>
+             <li><a ng-show="isLoggedIn()" ng-click="logout()" href="">logout</a></li>
         </ul>
         <div>
     </div>
