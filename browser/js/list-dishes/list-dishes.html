@@ -15,14 +15,14 @@
 	</div>
 
 	<div class="col-md-3" id="thumbnail"
-		ng-repeat="dish in nearbyDishes | tags | orderBy: selectedFilter">
+		ng-repeat="dish in nearbyDishes | tags | orderBy: selectedFilter" >
 	    <div class="panel panel-default dish-img"
 			ng-click="goToDish(dish)"
-			ng-style="{'background-image': 'url({{dish.picture}})'}">
+			ng-style="{'background-image': 'url({{dish.picture}})'}" ng-class="{'chef-hover':hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
 	        <div class="panel-body row">
 	            <div style="height:100px"></div>
 	        </div>
-	        <div class="panel-heading dish-label clickable">
+	        <div class="panel-heading dish-label clickable" >
 	            <div style="height:61px">
 	                    <h4>{{dish.name}}</h4>
 	                <div>
