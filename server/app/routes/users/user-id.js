@@ -159,6 +159,28 @@ router.put('/cart/remove', function(req, res, next){
 
 });
 
+router.put('/cart/update', function(req, res, next){
+	console.log('DISHES TO UPDATE: ', req.body.dishesToUpdate);
+	Order.findById(req.CurrentUser.cart._id).exec()
+		.then(function(order) {
+			order.dishes.forEach(function(dish, index){
+				var newQuan = req.body.dishesToUpdate[String(dish.dishId)]; 
+				if (newQuan) {
+					dish.quantity = Number(newQuan);
+				}
+			});
+			return order.save();
+		})
+		.then(function(order) {
+			order.populate('dishes.dishId', function(err, newOrder){
+				res.json(newOrder);
+			})
+		})
+		
+		.then(null, next);
+
+});
+
 
 router.put('/', function(req, res, next) {
 	_.extend(req.CurrentUser, req.body);

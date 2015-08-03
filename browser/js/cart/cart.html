@@ -11,7 +11,9 @@
           </thead>
           <tbody>
             <tr ng-repeat="cartItem in cart">
-              <td><input type="checkbox" ng-change="updateSelectedCartItem({{$index}})" ng-model="cartItem.isSelected"></td>
+              <td><input type="checkbox" 
+                         ng-change="showDeleteItems()" 
+                         ng-model="cartItem.isSelected"></td>
               <td>
                 <div>
                   <strong>{{ cartItem.dish.name }}</strong><br>
@@ -20,11 +22,14 @@
               </td>
               <td><span>$</span><span>{{ cartItem.dish.price }}</span></td>
               <td>
-                <input type="text"
+                <input type="number"
                        size="2"
-                       style="border:none"
+                       style="border:none; width: 2em"
+                       min= "0"
+                       max= "{{ cartItem.dish.inventory }}}"
                        value="{{ cartItem.quantity }}"
-                       ng-model="cartItem.quantity"
+                       ng-model="cartItem.newQuantity"
+                       ng-change="showUpdateItems()"
                        >
               </td>
             </tr>
@@ -35,8 +40,16 @@
             </tr>
           </tbody>
         </table>
-        <button type="button" class="btn btn-default" style="float:right" ng-click="deleteItems()" ng-show="showDeleteItemsButton">Delete Item(s)</button>
-
+        <button type="button" 
+                class="btn btn-default" 
+                style="float:right" 
+                ng-click="deleteItems()" 
+                ng-show="showDeleteItemsButton">Delete Item(s)</button>
+        <button type="button" 
+                class="btn btn-default" 
+                style="float:right" 
+                ng-click="updateItems()" 
+                ng-show="showUpdateItemsButton">Update Item(s)</button>
       </form>
     </div>
 

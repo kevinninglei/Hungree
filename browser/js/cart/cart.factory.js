@@ -46,7 +46,20 @@ app.factory('CartFactory', function($http, OrderFactory, AuthService, $state){
 
 		},
 
-
+		//dishesToUpdate is a object with key: dish_id val: new quantity
+		updateDishQuantity: function(dishesToUpdate){
+			return AuthService.getLoggedInUser()
+				.then(function(user){
+					if (!user) throw new Error('Not Logged In');
+					return $http.put('/api/users/' + user._id + '/cart/update', {dishesToUpdate: dishesToUpdate});
+        		})
+        		.then(function(cart){
+        			return cart.data;
+        		})
+        		.then(null, function(err){
+        			$state.go('home');
+        		})
+		},
 		cartOrders: []
 	}
 
