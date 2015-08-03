@@ -1,7 +1,7 @@
 <div class="col-md-3" id="thumbnail">
     <div class="panel panel-default">
         <div class="panel-body row text-center">
-            <img src="{{favorite.picture}}" id="profile-pic">
+            <img ng-src="{{favorite.picture}}" id="profile-pic">
         </div>
         <div class="panel-heading">
             <div>
@@ -9,9 +9,7 @@
                 <a ng-click="goToDish(favorite)">
                     <h4> {{favorite.name}} </h4></a>
                 <div>
-            <span ng-repeat="star in getNumber(favorite.rating) track by $index" class="glyphicon glyphicon-star" aria-hidden="true"> </span><span ng-repeat="star in getNumberInverse(favorite.rating) track by $index" class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                </div>
-            </div>
+<star num="favorite.rating"></star>
         </div>
     </div>
 </div>
