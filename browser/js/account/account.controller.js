@@ -1,6 +1,7 @@
-app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorites, Accounts, $stateParams) {
+
+app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorites, Accounts, $stateParams, CartFactory) {
    $scope.user = chef;
-   $scope.dishes = dishes;
+   $scope.myDishes = dishes;
    $scope.reviews = reviews;
    $scope.orders = orders;
    $scope.favorites = favorites;
@@ -22,4 +23,8 @@ app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorit
    			else $scope.green = true;
    		})
    }
+  $scope.addToOrder = function(dish) {
+    CartFactory.cartOrders.push(dish);
+    CartFactory.addToCart(dish, 1);
+  };
 });
