@@ -11,22 +11,25 @@
       <!-- <p ng-show="isAdmin || user._id == currentUser._id" class="list-group-item"> -->
 
     <label>First Name</label>
-    <input type="text" class="form-control" placeholder="{{user.name.first}}">
+    <input type="text" ng-model="updatedUser.name.first" class="form-control" placeholder="{{user.name.first}}">
     <label>Last Name</label>
-    <input type="text" class="form-control" placeholder="{{user.name.last}}">
+    <input type="text" ng-model="updatedUser.name.last" class="form-control" placeholder="{{user.name.last}}">
     <label>Registered Email</label>
-    <input type="text" class="form-control" placeholder="{{user.email}}">
+    <input type="text" ng-model="updatedUser.email" class="form-control" placeholder="{{user.email}}">
     <br>
-    <a href="#" class="btn btn-success">Update Details</a>
+    <a href="#" class="btn btn-success" ng-click="updateInfo()">Update Details</a>
 </div>
 <div class="col-md-6">
 <h3>Change your password:</h3>
  <label>Old Password</label>
-    <input type="text" class="form-control" placeholder="">
+    <input type="text" ng-model="updatedPW.old" class="form-control" placeholder="">
     <label>New Password</label>
-    <input type="text" class="form-control" placeholder="">
+    <input type="text" ng-model="updatedPW.new" class="form-control" placeholder="">
     <label>Confirm New Password</label>
-    <input type="text" class="form-control" placeholder="">
+    <input type="text" ng-model="updatedPW.confirm" class="form-control" placeholder="">
+    <div class="alert alert-danger" ng-show="updatedPW.new !== updatedPW.confirm">
+        Your passwords need to match
+    </div>
     <br>
     <a href="#" class="btn btn-warning">Update Details</a>
 <!--     <pre>{{user}}</pre>
