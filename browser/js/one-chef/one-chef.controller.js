@@ -3,6 +3,6 @@ app.controller('OneChefCtrl', function ($scope, chef, dishes, reviews, favorites
 	$scope.dishes = dishes;
 	$scope.reviews = reviews;
 	$scope.favorites = favorites;
-  $scope.orders = orders;
+  	$scope.orders = orders;
 });
 

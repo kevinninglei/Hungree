@@ -16,6 +16,15 @@ app.factory('Reviews',function($http){
     	.then(function(res) {
     		return res.data;
 		})
+    },
+    editReview: function(reviewId, review, dishId, dish) {
+    	return $http.put(`/api/reviews/${reviewId}`, review)
+		.then(function(res) {
+			return $http.put(`/api/dishes/${dishId}`, dish)
+		})
+    	.then(function(res) {
+    		return res.data;
+		})
     }
   }
 })
