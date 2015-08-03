@@ -1923,6 +1923,7 @@ var numUsers = 100;
 var status = "busy online offline".split(' ');
 var dishesStack = _.slice(dishes);
 var addresses = [];
+var dishToCreate = [];
 
 var address = [
   [{
@@ -1974,6 +1975,7 @@ var users = _.times(numUsers, randUser);
 function randUser() {
   var gender = chance.gender();
   var pickDishes = dishesStack.pop();
+  if(pickDishes) dishToCreate.push(pickDishes);
   var favoriteDish = dishes[Math.floor(Math.random() * (dishes.length - 1))];
   var badDish = dishes[Math.floor(Math.random() * (dishes.length - 1))];
   var addressIndex = Math.floor(Math.random() * (address.length - 1));
@@ -2002,7 +2004,10 @@ function randUser() {
     favorites: [favoriteDish]
   });
 
-  if (!!pickDishes) newUser.dishes = [pickDishes];
+  if (!!pickDishes){
+    newUser.dishes = [pickDishes];
+    pickDishes.user = newUser;
+  }
 
   var quantity = Math.floor(Math.random() * 5) + 1;
 
@@ -2090,7 +2095,7 @@ function randReview(favoriteDish, badDish, user) {
 
 //update dishes rating
 
-
+dishes = dishToCreate;
 var models = [User, Address, Dish, Order, Review, Tag];
 var data = [users, addresses, dishes, orders, reviews, tags];
 

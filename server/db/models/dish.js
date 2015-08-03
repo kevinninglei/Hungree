@@ -26,7 +26,11 @@ var dishSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Review'
     }],
-    rating: {type: Number, default: 0}
+    rating: {type: Number, default: 0},
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }
 });
 
 //@params: tags: [String]
