@@ -15,7 +15,7 @@ app.config(function($stateProvider) {
           return Reviews.getReviews($stateParams.id);
         },
         orders: function(Orders, $stateParams) {
-          return Orders.getDishesInOrders($stateParams.id);
+          return Orders.getOrders($stateParams.id);
         },
         favorites: function(Favorites, $stateParams) {
           return Favorites.getFavsForUser($stateParams.id);
@@ -51,6 +51,11 @@ app.config(function($stateProvider) {
       controller: 'AccountCtrl',
       url: '/orders',
       templateUrl: 'js/account/account.orders.html'
+    })
+    .state('account.reviews', {
+      controller: 'AccountCtrl',
+      url: '/reviews',
+      templateUrl: 'js/account/account.reviews.html'
     });
 
 
