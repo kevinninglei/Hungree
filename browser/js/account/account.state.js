@@ -34,22 +34,22 @@ app.config(function($stateProvider) {
     })
     .state('account.overview', {
       controller: 'AccountCtrl',
-      url: '/settings',
+      url: '/overview',
       templateUrl: 'js/account/account.overview.html'
     })
     .state('account.dishes', {
       controller: 'AccountCtrl',
-      url: '/settings',
+      url: '/dishes',
       templateUrl: 'js/account/account.dishes.html'
     })
     .state('account.favorites', {
       controller: 'AccountCtrl',
-      url: '/settings',
+      url: '/favorites',
       templateUrl: 'js/account/account.favorites.html'
     })
     .state('account.orders', {
       controller: 'AccountCtrl',
-      url: '/settings',
+      url: '/orders',
       templateUrl: 'js/account/account.orders.html'
     });
 
