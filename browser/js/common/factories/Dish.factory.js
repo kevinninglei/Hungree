@@ -7,5 +7,5 @@ app.factory('Dish',function($http){
           return res.data;
       });
     }
-  }
-})
+  };
+});

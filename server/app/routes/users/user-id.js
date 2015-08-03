@@ -4,11 +4,18 @@ var User = mongoose.model('User');
 var Dish = mongoose.model('Dish');
 var Review = mongoose.model('Review');
 var Order = mongoose.model('Order');
+var Address = mongoose.model('Address');
 var router = require('express').Router();
 var _ = require('lodash');
 
-router.get('/', function(req, res) {
-	res.json(req.CurrentUser);
+router.get('/', function(req, res,next) {
+	Address.populate(req.CurrentUser, {
+			path: 'address.shipping'
+		})
+		.then(function(data) {
+			res.json(data);
+		})
+		.then(null, next);
 });
 
 router.get('/dishes', function(req, res, next) {
@@ -17,6 +24,16 @@ router.get('/dishes', function(req, res, next) {
 		})
 		.then(function(data) {
 			res.json(data.dishes);
+		})
+		.then(null, next);
+});
+
+router.get('/address', function(req, res, next) {
+	Address.populate(req.CurrentUser, {
+			path: 'address.shipping'
+		})
+		.then(function(data) {
+			res.json(data.address);
 		})
 		.then(null, next);
 });
