@@ -1,4 +1,4 @@
-app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, CartFactory, populateCart) {
+app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, CartFactory, populateCart,user) {
   $scope.price = price;
 
   $scope.setFormScope = function(scope) {
@@ -28,10 +28,11 @@ app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, Ca
         .then(function(order){
           //injected from parent controller
           populateCart(order);
-
+          console.log("user", user);
           //Not working to reidrect to account, why?
-          //$state.go('account');
-        });
+          $state.go('account.purchases',{id: user._id});
+        })
+        ;
 
     }
 

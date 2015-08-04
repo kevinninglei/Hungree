@@ -47,10 +47,10 @@ app.config(function($stateProvider) {
       url: '/favorites',
       templateUrl: 'js/account/account.favorites.html'
     })
-    .state('account.orders', {
+    .state('account.purchases', {
       controller: 'AccountCtrl',
-      url: '/orders',
-      templateUrl: 'js/account/account.orders.html'
+      url: '/purchases',
+      templateUrl: 'js/account/account.purchases.html'
     })
     .state('account.reviews', {
       controller: 'AccountCtrl',

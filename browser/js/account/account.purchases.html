@@ -17,7 +17,7 @@
                                 {{dish.dishId.description | limitTo: !dish.collapsed ? 100 : 10000}} <a href="" ng-click="dish.collapsed = !dish.collapsed"><span ng-show="!dish.collapsed">...</span><i ng-show="dish.collapsed" class="fa fa-long-arrow-left"></i></a>
                             </div>
                             <div class="text-right">
-                                <a type="button" class="btn btn-success btn-sm" ng-click="addToOrder(dish.dishId)">Order Again</a>
+                                <a type="button" class="btn btn-success btn-sm" ng-click="addToOrder(dish.dishId)">Add to Cart</a>
                             </div>
                         </div>
                         <div class="col-xs-3 text-right">

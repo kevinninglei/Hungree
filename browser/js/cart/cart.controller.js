@@ -1,4 +1,4 @@
-app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
+app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log,AuthService) {
 	$scope.total = 0;
 	//1. given an existing 'order', populate the cart
 	//2. ability to easy add dishes to the current order
@@ -104,6 +104,9 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log) {
 					},
 					populateCart: function(){
 						return populateCart;
+					},
+					user: function(){
+						return AuthService.getLoggedInUser();
 					}
 				}
 			});
