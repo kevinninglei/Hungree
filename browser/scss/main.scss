@@ -25,7 +25,11 @@ footer {
 
 body{
   padding-top: 70px;
+    // background: url("../assets/images/congruent_pentagon.png") repeat;
+
   // background-image: url("../assets/images/congruent_pentagon.png") repeat;
+      // background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../assets/images/congruent_pentagon.png") repeat;
+
 }
 
 
@@ -39,3 +43,9 @@ body{
 @import 'signup/main';
 @import 'list-chef/main';
 @import 'account/main';
+
+.navbar-inverse {
+    // background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../assets/images/congruent_pentagon.png") repeat;
+    // background: url("../assets/images/congruent_pentagon.png") repeat;
+}
+
