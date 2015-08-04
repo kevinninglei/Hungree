@@ -21,6 +21,15 @@ app.factory('UserFactory', function ($http, $state) {
       .then(null,function(err){
       	console.log(err.message);
       });
+    },
+    getAllUsers: function(){
+      return $http.get(userApiPath)
+      .then(function(res){
+        return res.data;
+      })
+      .then(null,function(err){
+        console.log(err.message);
+      });
     }
 	};
 });

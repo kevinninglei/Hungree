@@ -6,7 +6,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         link: function (scope) {
             scope.user = null;
             scope.isAdmin = function(){
-                return true;
+                return scope.user.isAdmin;
             };
 
             scope.isLoggedIn = function () {
