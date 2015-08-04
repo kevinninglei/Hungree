@@ -1,6 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
 @import 'bootstrap.custom.scss';
 
+
+
 * {
   box-sizing: border-box;
 }
@@ -23,6 +25,7 @@ footer {
 
 body{
   padding-top: 70px;
+  // background-image: url("../assets/images/congruent_pentagon.png") repeat;
 }
 
 
