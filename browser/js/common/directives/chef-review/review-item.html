@@ -8,7 +8,8 @@
         </div>
         <div class="col-md-10">
             <div class="row">
-            <star num="review.rating"></star></span> {{chef.name.first}} wrote on {{review.date | date : format : 'MMMM d, y'}}</div>
+            <div><star num="review.rating"></star></div> 
+            {{chef.name.first}} wrote on {{review.date | date : format : 'MMMM d, y'}}</div>
             <div class="row">{{review.description}}</div>
         </div>
     </div>
