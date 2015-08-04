@@ -1,11 +1,13 @@
-
-app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorites,receivedOrders, Accounts, $stateParams, CartFactory, Orders) {
-   $scope.user = chef;
+app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorites, receivedOrders, Accounts, $stateParams, CartFactory,currentUser, Orders) {
+   $scope.user = currentUser;
    $scope.myDishes = dishes;
    $scope.reviews = reviews;
    $scope.orders = orders;
    $scope.favorites = favorites;
+
    $scope.receivedOrders = receivedOrders;
+   $scope.adminToggle = false;
+   $scope.isAdmin = $scope.user.isAdmin;
    $scope.success = false;
 
    $scope.updateInfo = function() {

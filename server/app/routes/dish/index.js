@@ -3,6 +3,7 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var Dish = mongoose.model('Dish');
+var User = mongoose.model('User');
 
 //  /api/dishes/
 router.param('id', function(req, res, next, id) {
@@ -22,7 +23,10 @@ router.param('id', function(req, res, next, id) {
 router.get('/', function(req, res, next){
 	Dish.findAllDishes()
 		.then(function(dishes){
-			res.json(dishes);
+			return User.populate(dishes,{path: 'user'});
+		})
+		.then(function(popDishes){
+			res.json(popDishes);
 		})
 		.then(null, next);
 
