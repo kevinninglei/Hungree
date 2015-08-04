@@ -189,6 +189,9 @@ router.delete('/cart/checkout', function(req, res, next){
 	// 1. find the appropriate chef
 	// 2. push the order 
 	//console.log(req.CurrentUser.cart);
+
+	//there's a problem when in one order you have
+	//multiple dishes from same user
 	var cart;
 	req.CurrentUser.cart.populate('dishes.dishId').execPopulate()
 		.then(function(populatedCart){
@@ -201,6 +204,7 @@ router.delete('/cart/checkout', function(req, res, next){
 		})
 		.then(function(arr_chefs){
 
+			//GIVE THE CHEF THE ORDER
 			var chefPromArr = [];
 			arr_chefs.forEach(function(chef){
 				chef.receivedOrders.push(cart);
@@ -210,21 +214,25 @@ router.delete('/cart/checkout', function(req, res, next){
 			return Promise.all(chefPromArr);
 		})
 		.then(function(saved_arr_chefs){
-			// console.log('-------')
-			// console.log(saved_arr_chefs);
-			// console.log('-------')
-			console.log('CHEFS GOT ORDERS!');
+
+			//DELETE CART AND FINISH CHECKOUT
+			req.CurrentUser.orders.push(req.CurrentUser.cart);
+			req.CurrentUser.cart = undefined;
+			return req.CurrentUser.save();
 		})
-		.then(null, next);
-
-
-	req.CurrentUser.orders.push(req.CurrentUser.cart);
-	req.CurrentUser.cart = undefined;
-	req.CurrentUser.save()
 		.then(function(user){
 			res.json(user);
-		})
+		})	
 		.then(null, next);
+
+	// PRE CHECKOUT CODE
+	// req.CurrentUser.orders.push(req.CurrentUser.cart);
+	// req.CurrentUser.cart = undefined;
+	// req.CurrentUser.save()
+	// 	.then(function(user){
+	// 		res.json(user);
+	// 	})
+	// 	.then(null, next);
 });
 
 
