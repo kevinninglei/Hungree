@@ -17,7 +17,12 @@ var orderSchema = new mongoose.Schema({
 			type: mongoose.Schema.ObjectId,
 			ref: 'Dish'
 		},
-		quantity: Number
+		quantity: Number,
+		status: {
+			type: String,
+			default: 'pending'
+		}
+		//status [completed, pending, rejected]
 	}],
 	//make static to calculate total for checkout
 	total: {

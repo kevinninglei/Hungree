@@ -49,6 +49,10 @@ var userSchema = new mongoose.Schema({
     dishes: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
     favorites: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
     orders: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
+    receivedOrders:{
+        type: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
+        default: []
+    },
     reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}],
     status:{
         type: String,
