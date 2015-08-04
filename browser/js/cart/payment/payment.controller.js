@@ -28,11 +28,9 @@ app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, Ca
         .then(function(order){
           //injected from parent controller
           populateCart(order);
-          console.log("user", user);
           //Not working to reidrect to account, why?
           $state.go('account.purchases',{id: user._id});
-        })
-        ;
+        });
 
     }
 
