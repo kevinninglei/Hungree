@@ -72,7 +72,7 @@ app.config(function($stateProvider) {
             // controller: 'AccountCtrl',
             url: '/newDish',
             templateUrl: 'js/account/account.newdish.html'
-        });
+        })
         .state('account.adminusers', {
             controller: 'AccountCtrl',
             url: '/admin/users',
