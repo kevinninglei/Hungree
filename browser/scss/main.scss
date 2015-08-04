@@ -15,6 +15,13 @@ body {
     height: 100%;
 }
 
+body {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    // background-color: rgba(28, 28, 28, 0.11);
+    background-color: white;
+}
+
 .wrapper {
     min-height: 100%;
     height: auto !important;
@@ -43,12 +50,6 @@ body {
     position: relative;
 }
 
-body {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
-    // background-color: rgba(28, 28, 28, 0.11);
-    background-color: white;
-}
 
 .footer {
     background-color: #DDDDDD;
@@ -109,4 +110,6 @@ body {
 a {
     font-color: #2C3E50!important;
 }
+
+
 
