@@ -31,7 +31,8 @@ var dishSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
-    }
+    },
+    archived: {type: Boolean, default: false}
 });
 
 dishSchema.plugin(deepPopulate, {});

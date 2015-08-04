@@ -5,25 +5,35 @@ var Dish = mongoose.model('Dish');
 var router = require('express').Router();
 var _ = require('lodash');
 
-router.get('/', function (req, res, next) {
-	Tag.find({}).exec()
-		.then(function(tags) {
-			res.json(tags)
-		})
-		.then(null, next);
+router.get('/', function(req, res, next) {
+    Tag.find({}).exec()
+        .then(function(tags) {
+            res.json(tags)
+        })
+        .then(null, next);
 })
 
 //find all dishes with that tagname
-router.get('/:tagname', function (req, res, next) {
-	Dish.find({}).populate('tags').exec()
-		.then(function (dishes) {
-			var filtered = dishes.filter(function (dish) {
-				var tags = dish.tags;
-				return _.some(tags, {name: req.params.tagname});
-			});
-			res.json(filtered);
-		})
-		.then(null, next);
+router.get('/:tagname', function(req, res, next) {
+    Dish.find({}).populate('tags').exec()
+        .then(function(dishes) {
+            var filtered = dishes.filter(function(dish) {
+                var tags = dish.tags;
+                return _.some(tags, {
+                    name: req.params.tagname
+                });
+            });
+            res.json(filtered);
+        })
+        .then(null, next);
+})
+
+router.post('/', function(req, res, next) {
+    Tag.createMany(req.body)
+        .then(function(tags) {
+            console.log(tags);
+            res.json(tags)
+        })
 })
 
 module.exports = router;
