@@ -32,7 +32,7 @@ app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorit
 
 
   $scope.updateDishOrder = function(order, dish, orderIndex, status){
-    Orders.updateDishOrder(chef._id, order, dish, status)
+    Orders.updateDishOrder(currentUser._id, order, dish, status)
       .then(function(updatedOrder){
         $scope.receivedOrders[orderIndex] = updatedOrder;
       })

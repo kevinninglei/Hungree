@@ -20,15 +20,12 @@ app.config(function($stateProvider) {
         favorites: function(Favorites, $stateParams) {
           return Favorites.getFavsForUser($stateParams.id);
         },
-<<<<<<< HEAD
         receivedOrders: function(Orders, $stateParams) {
           return Orders.getReceivedOrders($stateParams.id);
         },
-=======
         currentUser: function(AuthService) {
           return AuthService.getLoggedInUser();
         }
->>>>>>> master
 
         //not working dont know why
         // currentUser: function (UserFactory, $stateParams) {
