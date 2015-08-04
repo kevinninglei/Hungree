@@ -83,14 +83,7 @@ app.controller('CartCtrl', function($scope, $http, CartFactory, $modal, $log,Aut
 				$scope.didNotConfirmUpdate = false;
 			});
 	};
-
-	$scope.showUser = function(){
-		AuthService.getLoggedInUser()
-			.then(function(user){
-				console.log(user);
-        	})
-	};
-
+	
 	CartFactory.getCurrentCart()
 		.then(function(order) {
 			populateCart(order);
