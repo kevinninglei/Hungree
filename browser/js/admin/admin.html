@@ -1,0 +1,40 @@
+<div class="container well" id="chef-nav">
+    <h3 id="chef-title">Admin Panel</h3>
+</div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3" id="profile-sidebar">
+            <div class="profile-top text-center">
+                <img ng-src="{{user.picture}}" id="profile-pic">
+                <h4> {{user.name.first }} {{user.name.last}} </h4>
+            </div>
+            <!--                       <div class="profile-userbuttons">
+          <button type="button" class="btn btn-success btn-sm">Go Online</button>
+          <button type="button" class="btn btn-danger btn-sm">Go Offline</button>
+        </div> -->
+            <div class="profile-usermenu">
+                <ul class="nav">
+                   <li class="active" ui-sref-active="active">
+                        <a ui-sref="admin.dishes">
+                            <i class="glyphicon glyphicon-cutlery"></i> Dishes Management </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="admin.orders">
+                            <i class="fa fa-shopping-cart"></i> Order Management </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="admin.users">
+                            <i class="glyphicon glyphicon-user"></i> User Management </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <ui-view></ui-view>
+            </div>
+        </div>
+    </div>
+</div>
+
