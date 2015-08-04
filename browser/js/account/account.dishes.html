@@ -1,18 +1,22 @@
 <div class="col-md-12">
-    <div class="panel panel-default" ng-repeat="dish in myDishes">
-        <div class="panel-heading"><a ui-sref="oneDish({id: dish._id})"> {{dish.name}} </a></div>
-        <div class="panel-body">
-            <div class="col-md-2 text-center">
-                <img class="text-center" ng-src="{{dish.picture}}" id="profile-pic">
-                <star num="dish.rating">
-                    </star>
-            </div>
-            <div class="col-md-10">
-                <div class="row">Description: {{dish.description}}</div>
-                <div class="row"> Ingredients: <span ng-repeat="ingredient in dish.ingredients">{{ingredient}}</span></div>
-                <div class="row"> Price: {{dish.price | currency}} </div>
-        </div>
-<!--         <pre>{{dish}}</pre> -->
-    </div>
+    <button class="btn btn-success btn-sm pull-right" ui-sref="account.newDish">Add Dish</button>
 </div>
+<br><br>
+<div class="col-md-12">
+        <div class="panel panel-default" ng-repeat="dish in myDishes">
+            <div class="panel-heading"><a ui-sref="oneDish({id: dish._id})"> {{dish.name}} </a></div>
+            <div class="panel-body">
+                <div class="col-md-2 text-center">
+                    <img class="text-center" ng-src="{{dish.picture}}" id="profile-pic">
+                    <star num="dish.rating">
+                    </star>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">Description: {{dish.description}}</div>
+                    <div class="row"> Ingredients: <span ng-repeat="ingredient in dish.ingredients">{{ingredient}}</span></div>
+                    <div class="row"> Price: {{dish.price | currency}} </div>
+                </div>
+                <!--         <pre>{{dish}}</pre> -->
+            </div>
+        </div>
 </div>
