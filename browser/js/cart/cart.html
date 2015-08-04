@@ -11,13 +11,13 @@
           </thead>
           <tbody>
             <tr ng-repeat="cartItem in cart">
-              <td><input type="checkbox" 
-                         ng-change="showDeleteItems()" 
+              <td><input type="checkbox"
+                         ng-change="showDeleteItems()"
                          ng-model="cartItem.isSelected"></td>
               <td>
                 <div>
                   <strong>{{ cartItem.dish.name }}</strong><br>
-                  <em>{{ cartItem.dish.description }}</em>
+                  <em>{{ cartItem.dish.description | limitTo: !dish.collapsed ? 120 : 10000}}</em> <a href="" ng-click="dish.collapsed = !dish.collapsed"><span ng-show="!dish.collapsed">...</span><i ng-show="dish.collapsed" class="fa fa-long-arrow-left"></i></a>
                 </div>
               </td>
               <td><span>{{ cartItem.dish.price | currency}}</span></td>
@@ -40,20 +40,20 @@
             </tr>
           </tbody>
         </table>
-        <button type="button" 
-                class="btn btn-default" 
-                style="float:right" 
-                ng-click="deleteItems()" 
+        <button type="button"
+                class="btn btn-default"
+                style="float:right"
+                ng-click="deleteItems()"
                 ng-show="showDeleteItemsButton">Delete Item(s)</button>
-        <button type="button" 
-                class="btn btn-default" 
-                style="float:right" 
-                ng-click="updateItems()" 
+        <button type="button"
+                class="btn btn-default"
+                style="float:right"
+                ng-click="updateItems()"
                 ng-show="showUpdateItemsButton">Update Item(s)</button>
 
         <em ng-show="didNotConfirmUpdate">Please confirm your updated cart before checking out</em>
 
-        
+
       </form>
     </div>
 
