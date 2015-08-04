@@ -1,12 +1,11 @@
 
-app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorites, Accounts, $stateParams, CartFactory) {
+app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorites,receivedOrders, Accounts, $stateParams, CartFactory, Orders) {
    $scope.user = chef;
    $scope.myDishes = dishes;
    $scope.reviews = reviews;
    $scope.orders = orders;
    $scope.favorites = favorites;
-
-
+   $scope.receivedOrders = receivedOrders;
    $scope.success = false;
 
    $scope.updateInfo = function() {
@@ -26,9 +25,17 @@ app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorit
    };
 
   $scope.addToOrder = function(dish) {
-    CartFactory.cartOrders.push(dish);
     CartFactory.addToCart(dish, 1);
   };
+
+
+  $scope.updateDishOrder = function(order, dish, orderIndex, status){
+    Orders.updateDishOrder(chef._id, order, dish, status)
+      .then(function(updatedOrder){
+        $scope.receivedOrders[orderIndex] = updatedOrder;
+      })
+  }
+
   $scope.toggleComment = function(){
     $scope.toggled = !$scope.toggled;
   };
