@@ -7,7 +7,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             // scope.user = null;
             scope.isAdmin = function(){
                 // return false
-                console.log(scope.user);
                 if(!scope.user) return false;
                 return scope.user.isAdmin;
             };
