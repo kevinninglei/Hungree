@@ -2,11 +2,15 @@
 var mongoose = require('mongoose');
 var Order = mongoose.model('Order');
 var router = require('express').Router();
+var User = mongoose.model('User');
 
 router.get('/', function(req, res, next) {
-	Order.find({}).populate('dishes.dishId').exec()
-		.then(function(orders) {
-			res.json(orders)
+	Order.find({}).populate('dishes.dishId user').exec()
+		.then(function(orders){
+			return User.populate(orders,{path:'dishes.dishId.user'});
+			})
+		.then(function(popOrders) {
+			res.json(popOrders)
 		})
 		.then(null, next);
 });

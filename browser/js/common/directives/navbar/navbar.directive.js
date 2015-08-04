@@ -4,8 +4,11 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         restrict: 'E',
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
-            scope.user = null;
+            // scope.user = null;
             scope.isAdmin = function(){
+                // return false
+                console.log(scope.user);
+                if(!scope.user) return false;
                 return scope.user.isAdmin;
             };
 
