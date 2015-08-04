@@ -10,7 +10,7 @@ app.factory('Chefs',function($http){
     	return $http.get('/api/users/' + id)
     		.then(function (res) {
     			return res.data;
-    		})
+    		});
     }
   }; // nearbyDishes attached here from home.state.js, viewDish from list.dishes.js
 });

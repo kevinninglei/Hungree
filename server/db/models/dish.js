@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate');
 
 var dishSchema = new mongoose.Schema({
     name: {
@@ -26,8 +27,14 @@ var dishSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Review'
     }],
-    rating: {type: Number, default: 0}
+    rating: {type: Number, default: 0},
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }
 });
+
+dishSchema.plugin(deepPopulate, {});
 
 //@params: tags: [String]
 dishSchema.statics.findByTags = function(tags){
@@ -53,7 +60,7 @@ dishSchema.statics.findAllDishes = function(){
 }
 
 dishSchema.statics.findDish = function(id){
-    return this.findById(id).populate('tags reviews').exec()
+    return this.findById(id).deepPopulate('tags reviews.user user').exec()
         .then(function(dish){
             return dish;
         })

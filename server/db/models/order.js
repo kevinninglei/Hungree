@@ -17,7 +17,12 @@ var orderSchema = new mongoose.Schema({
 			type: mongoose.Schema.ObjectId,
 			ref: 'Dish'
 		},
-		quantity: Number
+		quantity: Number,
+		status: {
+			type: String,
+			default: 'pending'
+		}
+		//status [completed, pending, rejected]
 	}],
 	//make static to calculate total for checkout
 	total: {
@@ -36,7 +41,7 @@ orderSchema.pre('save', function(next) {
 	var order = this;
 	//creates an array of promises for q to process
 	var promiseArr = this.dishes.map(function(dishInOrder) {
-		return Dish.findById(dishInOrder.dishId).exec();
+		return Dish.findById(dishInOrder.dishId).exec(); //this fails
 	});
 
 	//once array of promises are resolved, the results is an

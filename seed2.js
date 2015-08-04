@@ -120,7 +120,7 @@ var dishes = [{
     "celery",
     "green bell pepper",
     "garlic",
-    "filÃ© powder",
+    "filé powder",
     "dried bay leaves",
     "Chicken Stock",
     "andouille",
@@ -183,7 +183,7 @@ var dishes = [{
     tags[3]
   ]
 }, {
-  "name": "Chicken VeloutÃ©",
+  "name": "Chicken Velouté",
   "id": "chicken-velouta",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/chicken-velouta",
   "cuisine": tags[4],
@@ -233,7 +233,7 @@ var dishes = [{
     "onion",
     "celery",
     "broccoli",
-    "Chicken VeloutÃ©",
+    "Chicken Velouté",
     "Chicken Stock",
     "heavy cream",
     "salt",
@@ -306,7 +306,7 @@ var dishes = [{
   "id": "garden-frittata",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/garden-frittata",
   "cuisine": "American: California",
-  "cooking_method": "SautÃ©ing",
+  "cooking_method": "Sautéing",
   "ingredients": [
     "boneless skinless chicken breast",
     "garlic",
@@ -447,11 +447,11 @@ var dishes = [{
     tags[8]
   ]
 }, {
-  "name": "PurÃ©e of Split Pea Soup",
+  "name": "Purée of Split Pea Soup",
   "id": "pura-e-of-split-pea-soup",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/pura-e-of-split-pea-soup",
   "cuisine": tags[5],
-  "cooking_method": "PurÃ©e",
+  "cooking_method": "Purée",
   "ingredients": [
     "bacon",
     "Mirepoix",
@@ -477,7 +477,7 @@ var dishes = [{
   "id": "red-pepper-coulis",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/red-pepper-coulis",
   "cuisine": tags[4],
-  "cooking_method": "PurÃ©e",
+  "cooking_method": "Purée",
   "ingredients": [
     "vegetable oil",
     "garlic",
@@ -550,7 +550,7 @@ var dishes = [{
   "id": "roasted-poblano-chile-and-corn-soup",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/roasted-poblano-chile-and-corn-soup",
   "cuisine": tags[7],
-  "cooking_method": "PurÃ©e",
+  "cooking_method": "Purée",
   "ingredients": [
     "lime",
     "sour cream",
@@ -579,7 +579,7 @@ var dishes = [{
   "id": "roasted-vegetable-soup",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/roasted-vegetable-soup",
   "cuisine": tags[5],
-  "cooking_method": "PurÃ©e",
+  "cooking_method": "Purée",
   "ingredients": [
     "onion",
     "zucchini",
@@ -594,7 +594,7 @@ var dishes = [{
     "ground black pepper",
     "dried whole thyme",
     "Chicken Stock",
-    "Roasted Garlic PurÃ©e",
+    "Roasted Garlic Purée",
     "fresh parsley",
     "baguette"
   ],
@@ -605,11 +605,11 @@ var dishes = [{
     tags[5]
   ]
 }, {
-  "name": "Southeast Asian ConsommÃ© with Lemongrass",
+  "name": "Southeast Asian Consommé with Lemongrass",
   "id": "southeast-asian-consomma-with-lemongrass",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/southeast-asian-consomma-with-lemongrass",
   "cuisine": tags[10],
-  "cooking_method": "ConsommÃ©",
+  "cooking_method": "Consommé",
   "ingredients": [
     "egg whites",
     "boneless skinless chicken breast",
@@ -648,7 +648,7 @@ var dishes = [{
 }, {
   "name": "Southeast Asian-Style Peanut Sauce",
   "id": "southeast-asian-style-peanut-sauce",
-  "url": "https://api.pearson.com/kitchen-manager/v1/recipes/southeast-asian-style-peanut-sauce",
+  "url": "http://s3-media1.fl.yelpcdn.com/bphoto/WXfvxIyCr-wJArn5Dx9Agw/348s.jpg",
   "cuisine": tags[10],
   "cooking_method": null,
   "ingredients": [
@@ -669,18 +669,18 @@ var dishes = [{
   ],
   "image": "https://api.pearson.com/kitchen-manager/v1/images/full/southeast_asian_style_peanut_sauce.jpg",
   "thumb": "https://api.pearson.com/kitchen-manager/v1/images/thumbs/southeast_asian_style_peanut_sauce_thumb.jpg",
-  "picture": "https://api.pearson.com/kitchen-manager/v1/images/full/southeast_asian_style_peanut_sauce.jpg",
+  "picture": "http://s3-media1.fl.yelpcdn.com/bphoto/WXfvxIyCr-wJArn5Dx9Agw/348s.jpg",
   "tags": [
     tags[10]
   ]
 }, {
-  "name": "SuprÃªme Sauce",
+  "name": "Supréme Sauce",
   "id": "supra-me-sauce",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/supra-me-sauce",
   "cuisine": tags[4],
   "cooking_method": "Reduction",
   "ingredients": [
-    "Chicken VeloutÃ©",
+    "Chicken Velouté",
     "medium mushrooms",
     "heavy cream",
     "salt",
@@ -693,7 +693,7 @@ var dishes = [{
     tags[4]
   ]
 }, {
-  "name": "VeloutÃ©",
+  "name": "Velouté",
   "id": "velouta",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/velouta",
   "cuisine": tags[4],
@@ -716,7 +716,7 @@ var dishes = [{
   "id": "vichyssoise-cold-potato-leek-soup",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/vichyssoise-cold-potato-leek-soup",
   "cuisine": tags[4],
-  "cooking_method": "PurÃ©e",
+  "cooking_method": "Purée",
   "ingredients": [
     "leeks",
     "butter",
@@ -827,11 +827,11 @@ var dishes = [{
     tags[5]
   ]
 }, {
-  "name": "Beef ConsommÃ©",
+  "name": "Beef Consommé",
   "id": "beef-consomma",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/beef-consomma",
   "cuisine": tags[4],
-  "cooking_method": "ConsommÃ©",
+  "cooking_method": "Consommé",
   "ingredients": [
     "egg whites",
     "ground beef",
@@ -906,7 +906,7 @@ var dishes = [{
   "id": "beef-stroganoff",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/beef-stroganoff",
   "cuisine": tags[11],
-  "cooking_method": "SautÃ©ing",
+  "cooking_method": "Sautéing",
   "ingredients": [
     "beef tenderloin",
     "Clarified Butter",
@@ -939,7 +939,7 @@ var dishes = [{
     "salt",
     "ground black pepper",
     "vegetable oil",
-    "foie gras pÃ¢tÃ©",
+    "foie gras pÃ¢té",
     "truffle peelings",
     "Puff Pastry",
     "Egg Wash",
@@ -998,7 +998,7 @@ var dishes = [{
     "white wine",
     "milk",
     "ground nutmeg",
-    "Tomato ConcassÃ©",
+    "Tomato Concassé",
     "White Stock",
     "salt",
     "ground black pepper"
@@ -1053,7 +1053,7 @@ var dishes = [{
     "all purpose flour",
     "red wine",
     "Brown Stock",
-    "tomato purÃ©e",
+    "tomato purée",
     "dried bay leaves",
     "dried whole thyme",
     "whole black pepper",
@@ -1112,7 +1112,7 @@ var dishes = [{
     tags[9]
   ]
 }, {
-  "name": "ChÃ¢teaubriand",
+  "name": "Châteaubriand",
   "id": "cha-teaubriand",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/cha-teaubriand",
   "cuisine": tags[4],
@@ -1122,7 +1122,7 @@ var dishes = [{
     "salt",
     "ground black pepper",
     "Clarified Butter",
-    "BÃ©arnaise"
+    "Béarnaise"
   ],
   "image": "https://api.pearson.com/kitchen-manager/v1/images/full/chateaubriand.jpg",
   "thumb": "https://api.pearson.com/kitchen-manager/v1/images/thumbs/chateaubriand_thumb.jpg",
@@ -1186,7 +1186,7 @@ var dishes = [{
   "id": "entreca-tes-bordelaise",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/entreca-tes-bordelaise",
   "cuisine": tags[4],
-  "cooking_method": "SautÃ©ing",
+  "cooking_method": "Sautéing",
   "ingredients": [
     "beef marrow",
     "EntrecÃ´tes (14 oz)",
@@ -1276,7 +1276,7 @@ var dishes = [{
     "dried whole thyme",
     "whole black pepper",
     "fresh parsley",
-    "Tomato ConcassÃ©",
+    "Tomato Concassé",
     "frozen corn kernels",
     "salt",
     "ground black pepper"
@@ -1390,7 +1390,7 @@ var dishes = [{
   "id": "minute-steak-dijonaise",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/minute-steak-dijonaise",
   "cuisine": tags[4],
-  "cooking_method": "SautÃ©ing",
+  "cooking_method": "Sautéing",
   "ingredients": [
     "beef sirloin steak",
     "Dijon mustard",
@@ -1535,7 +1535,7 @@ var dishes = [{
     "celery",
     "all purpose flour",
     "Brown Stock",
-    "tomato purÃ©e",
+    "tomato purée",
     "dried bay leaves",
     "dried whole thyme",
     "whole black pepper",
@@ -1704,7 +1704,7 @@ var dishes = [{
     "salt pork",
     "Mirepoix",
     "fresh tomatoes",
-    "tomato purÃ©e",
+    "tomato purée",
     "dried whole thyme",
     "dried bay leaves",
     "garlic clove",
@@ -1769,7 +1769,7 @@ var dishes = [{
     tags[5]
   ]
 }, {
-  "name": "Fish VeloutÃ©",
+  "name": "Fish Velouté",
   "id": "fish-velouta",
   "url": "https://api.pearson.com/kitchen-manager/v1/recipes/fish-velouta",
   "cuisine": tags[4],
@@ -1790,7 +1790,7 @@ var dishes = [{
 }, {
   "name": "Nuoc Cham (Vietnamese Dipping Sauce)",
   "id": "nuoc-cham-vietnamese-dipping-sauce",
-  "url": "https://api.pearson.com/kitchen-manager/v1/recipes/nuoc-cham-vietnamese-dipping-sauce",
+  "url": "http://www.taste.com.au/images/recipes/agt/2006/12/14682_l.jpg",
   "cuisine": tags[15],
   "cooking_method": null,
   "ingredients": [
@@ -1804,7 +1804,7 @@ var dishes = [{
   ],
   "image": "https://api.pearson.com/kitchen-manager/v1/images/full/noc_cham_(vietnamese_dipping_sauce).jpg",
   "thumb": "https://api.pearson.com/kitchen-manager/v1/images/thumbs/nuoc_cham_(vietnamese_dipping_sauce)_thumb.jpg",
-  "picture": "https://api.pearson.com/kitchen-manager/v1/images/full/noc_cham_(vietnamese_dipping_sauce).jpg",
+  "picture": "http://www.taste.com.au/images/recipes/agt/2006/12/14682_l.jpg",
   "tags": [
     tags[15]
   ]
@@ -1857,7 +1857,7 @@ var dishes = [{
     "tomato paste",
     "brandy",
     "dry white wine",
-    "Fish VeloutÃ©",
+    "Fish Velouté",
     "dried bay leaves",
     "dried whole thyme",
     "whole black pepper",
@@ -1923,6 +1923,7 @@ var numUsers = 100;
 var status = "busy online offline".split(' ');
 var dishesStack = _.slice(dishes);
 var addresses = [];
+var dishToCreate = [];
 
 var address = [
   [{
@@ -1974,6 +1975,7 @@ var users = _.times(numUsers, randUser);
 function randUser() {
   var gender = chance.gender();
   var pickDishes = dishesStack.pop();
+  if(pickDishes) dishToCreate.push(pickDishes);
   var favoriteDish = dishes[Math.floor(Math.random() * (dishes.length - 1))];
   var badDish = dishes[Math.floor(Math.random() * (dishes.length - 1))];
   var addressIndex = Math.floor(Math.random() * (address.length - 1));
@@ -1993,17 +1995,19 @@ function randUser() {
     },
     picture: randPhoto(gender),
     email: emails.pop(),
-    password: chance.word(),
+    password: 'jkay',
     status: status[chance.natural({
       min: 0,
       max: 3
     })],
     isAdmin: false,
-    favorites: [favoriteDish],
-    description: 'I am ' + chance.paragraph()
+    favorites: [favoriteDish]
   });
 
-  if (!!pickDishes) newUser.dishes = [pickDishes];
+  if (!!pickDishes){
+    newUser.dishes = [pickDishes];
+    pickDishes.user = newUser;
+  }
 
   var quantity = Math.floor(Math.random() * 5) + 1;
 
@@ -2032,6 +2036,7 @@ function randUser() {
   newUser.orders = [newGoodOrder, newBadOrder];
   orders = _.union(orders, [newGoodOrder, newBadOrder]);
   newUser.reviews = newReviews;
+  newUser.description = 'I am ' + newUser.name.first + ' and ' + chance.paragraph();
   return newUser;
 }
 
@@ -2090,7 +2095,7 @@ function randReview(favoriteDish, badDish, user) {
 
 //update dishes rating
 
-
+dishes = dishToCreate;
 var models = [User, Address, Dish, Order, Review, Tag];
 var data = [users, addresses, dishes, orders, reviews, tags];
 

@@ -6,6 +6,12 @@ app.factory('Dish',function($http){
       .then(function(res) {
           return res.data;
       });
+    },
+    getOne: function(id) {
+      return $http.get(`/api/dishes/${id}`)
+      .then(function(res) {
+          return res.data;
+      });
     }
-  }
-})
+  };
+});

@@ -4,17 +4,17 @@
         <div class="navbar-header"><a ui-sref-active="active" ui-sref="home"><img id="logo" style="max-width:50px;" ng-src="../../assets/images/hungree-logo.png"></a></div>
         <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li><a ui-sref-active="active" ui-sref="listDishes"> Find Dishes </a></li>
+            <li><a ui-sref-active="active" ui-sref="listDishes">  Find Dishes </a></li>
             <li><a ui-sref-active="active" ui-sref="listChefs"> Find Chefs </a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <a ui-sref-active="active" ui-sref="cart"> <i class="fa fa-shopping-cart"></i> Cart </a>
             </li>
-            <li><a ui-sref-active="active" ui-sref="logIn"> My Account</a></li>
-            <li><a ui-sref-active="active" ui-sref="logIn"> login</a></li>
-            <li><a ui-sref-active="active" ui-sref="signUp"> signup</a></li>
-             <li><a ng-click="logout()">logout</a></li>
+            <li><a ui-sref-active="active" ng-show="isLoggedIn()" ng-click="goToAccount()" href=""> My Account</a></li>
+            <li><a ng-hide="isLoggedIn()" ui-sref-active="active" ui-sref="logIn"> login</a></li>
+            <li><a ng-hide="isLoggedIn()" ui-sref-active="active" ui-sref="signUp"> signup</a></li>
+             <li><a ng-show="isLoggedIn()" ng-click="logout()" href="">logout</a></li>
         </ul>
         <div>
     </div>

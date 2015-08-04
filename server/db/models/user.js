@@ -11,6 +11,10 @@ var userSchema = new mongoose.Schema({
         type: String,
         default: 'http://www.corporatetraveller.ca/assets/images/profile-placeholder.gif'
     },
+    description: {
+        type: String,
+        default: 'No Bio'
+    },
     email: {
         type: String,
         unique: true,
@@ -45,6 +49,10 @@ var userSchema = new mongoose.Schema({
     dishes: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
     favorites: [{type: mongoose.Schema.ObjectId, ref: 'Dish'}],
     orders: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
+    receivedOrders:{
+        type: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
+        default: []
+    },
     reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}],
     status:{
         type: String,
@@ -53,7 +61,8 @@ var userSchema = new mongoose.Schema({
     },
     cart: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Order'    }
+        ref: 'Order'
+    },
 
 });
 
