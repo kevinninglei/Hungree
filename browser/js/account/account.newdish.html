@@ -1,0 +1,91 @@
+<div class="col-md-2"></div>
+<div class="col-md-8">
+	<div class="panel panel-default">
+		<div class="panel-heading">Add a New Dish</div>
+		<div class="panel-body">
+			<form
+				name="newDish"
+				ng-submit="addDish()">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-12">
+							Name:
+							<input type="text" 
+								class="form-control" 
+								placeholder="e.g. Southeast Asian Peanut Sauce"
+								ng-model="newDish.name">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							Picture URL:
+							<input type="text" 
+								class="form-control"
+								ng-model="newDish.picture">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							Description:
+							<textarea 
+								class="form-control" 
+								rows="6"
+								ng-model="newDish.description"></textarea>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							Ingredients:
+							<textarea 
+								class="form-control" 
+								rows="3" 
+								placeholder="separate by commas"
+								ng-model="newDish.ingredients"></textarea>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-3">
+							Spiciness:
+							<select 
+								class="form-control"
+								ng-model="newDish.spiciness">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</select>
+						</div>
+						<div class="col-md-2"></div>
+						<div class="col-md-3">
+							Price:
+							<input type="number" 
+								class="form-control" 
+								placeholder="$"
+								ng-model="newDish.price">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							Tags:
+							<textarea 
+								class="form-control" 
+								rows="2" 
+								placeholder="separate by commas"
+								ng-model="newDish.tags"></textarea>
+						</div>
+					</div>
+					<br>
+					<div style="text-align:center">
+						<button type="submit" class="btn btn-success">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

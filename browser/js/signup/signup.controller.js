@@ -1,42 +1,22 @@
 app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory) {
     $scope.sendLogin = function (loginInfo) {
-        console.log(loginInfo);
-        console.log(AuthService)
     };
 
 
-    /*
-
-	Sign In Button Actions
-
-    */
     $scope.signInWithEmail = function () {
     	//validations checks for name + email + password,
     	//retrieve information and create user
         UserFactory.createUser($scope.info)
             .then(function(user){
-                console.log(user);
+                return AuthService.login($scope.info)
+            }).then(function () {
+                return AuthService.getLoggedInUser();
             })
-
-
-    }
-
-    $scope.signInWithGoogle = function () {
-
-    }
-
-    $scope.signInWithFacebook = function () {
-    	console.log($scope.info.firstname)
-
-    }
-
-    $scope.getCurrentUser = function () {
-        AuthService.getLoggedInUser().then(function(user){
-            console.log(user);
-
-        })
-
-        
+            .then(function(user){
+                $state.go('account',{id: user._id});
+            }).catch(function () {
+                console.log('error occured')
+            });
     }
 
 });
