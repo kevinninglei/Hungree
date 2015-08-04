@@ -13,6 +13,12 @@ app.factory('Dish', function($http) {
                     return res.data;
                 });
         },
+        getAll: function(id) {
+            return $http.get(`/api/dishes/`)
+                .then(function(res) {
+                    return res.data;
+                });
+        },
         postOne: function(dish) {
             return $http.post(`/api/dishes`, dish)
                 .then(function(res) {

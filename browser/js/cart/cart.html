@@ -51,6 +51,12 @@
                 ng-click="updateItems()"
                 ng-show="showUpdateItemsButton">Update Item(s)</button>
 
+        <button type="button"
+                class="btn btn-default"
+                style="float:right"
+                ng-click="showUser()"
+                ng-show="true">Dummy Log User</button>
+
         <em ng-show="didNotConfirmUpdate">Please confirm your updated cart before checking out</em>
 
 
@@ -65,7 +71,7 @@
         </div>
         <div class="panel-body">
             <p>Total <span>({{ cart.length }})</span> orders: <span>{{totalPrice | currency}}</span> </p>
-            <button type="button" class="btn btn-default" ng-click="open(totalPrice)"> Checkout</button>
+            <button type="button" class="btn btn-default" ng-click="open(totalPrice)"> Checkout</button> <img id="stripe" class="img-responsive pull-right" ng-src="../../../../assets/images/stripe/big.png">
         </div>
       </div>
 

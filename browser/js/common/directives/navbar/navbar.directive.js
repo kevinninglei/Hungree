@@ -4,8 +4,13 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         restrict: 'E',
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
-
-            scope.user = null;
+            // scope.user = null;
+            scope.isAdmin = function(){
+                // return false
+                console.log(scope.user);
+                if(!scope.user) return false;
+                return scope.user.isAdmin;
+            };
 
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
@@ -15,11 +20,17 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 $state.go('account',{id: scope.user._id});
             };
 
+            scope.goToAdmin = function(){
+                $state.go('admin');
+            };
+
             scope.logout = function () {
                 AuthService.logout().then(function () {
                    $state.go('home');
                 });
             };
+
+
 
             var setUser = function () {
                 AuthService.getLoggedInUser().then(function (user) {

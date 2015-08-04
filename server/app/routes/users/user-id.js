@@ -7,6 +7,7 @@ var Order = mongoose.model('Order');
 var Address = mongoose.model('Address');
 var router = require('express').Router();
 var _ = require('lodash');
+var bluebird = require('bluebird');
 
 router.get('/', function(req, res, next) {
     Address.populate(req.CurrentUser, {
@@ -77,6 +78,63 @@ router.get('/orders', function(req, res, next) {
         })
         .then(null, next);
 });
+
+router.get('/receivedorders', function(req, res, next) {
+    Order.populate(req.CurrentUser, {
+        path: 'receivedOrders'
+    })
+        .then(function(user) {
+            return user.receivedOrders;
+        })
+        .then(function(receivedOrders) {
+            return Dish.populate(receivedOrders, {
+                path: 'dishes.dishId'
+            });
+        })
+        .then(function(popOrder) {
+            return Review.populate(popOrder, {
+                path: 'dishes.dishId.reviews'
+            });
+        })
+        .then(function(result) {
+            res.json(result);
+        })
+        .then(null, next);
+});
+
+/*
+
+1. need to find the order in db using order id
+2. need to find the appropriate dish object that matches (using req)
+3. need to update the dish object from 'pending to complete'
+4. need to save the order and return the recieved orders of the chef again
+*/
+router.put('/receivedorders/update', function(req, res, next) {
+    var order = req.body.order;
+    var dish = req.body.dish;
+    var status = req.body.status;
+
+    Order.findById(order._id).exec()
+        .then(function(order) {
+            order.dishes.forEach(function(dishObj) {
+                if (String(dishObj.dishId) === dish._id) {
+                    console.log(status);
+                    dishObj.status = status;
+                }
+            })
+            console.log('ending res now.. for order', order);
+            return order.save();
+        })
+        .then(function(order) {
+
+            return order.populate('dishes.dishId user').execPopulate();
+        })
+        .then(function(order) {
+            res.json(order);
+        })
+        .then(null, next);
+});
+
 
 router.get('/favorites', function(req, res, next) {
     Dish.populate(req.CurrentUser, {
@@ -173,9 +231,11 @@ router.put('/cart/update', function(req, res, next) {
             return order.save();
         })
         .then(function(order) {
-            order.populate('dishes.dishId', function(err, newOrder) {
-                res.json(newOrder);
-            })
+            return order.populate('dishes.dishId').execPopulate();
+        })
+        .then(function(order) {
+            console.log(order);
+            res.json(order);
         })
         .then(null, next);
 });
@@ -183,13 +243,55 @@ router.put('/cart/update', function(req, res, next) {
 //checkout is going to just modify the user
 //by adding the cart to the dishes and removing cart
 router.delete('/cart/checkout', function(req, res, next) {
-    req.CurrentUser.orders.push(req.CurrentUser.cart);
-    req.CurrentUser.cart = undefined;
-    req.CurrentUser.save()
+    //for every dish in the user's cart
+    //we need to:
+    // 1. find the appropriate chef
+    // 2. push the order 
+    //console.log(req.CurrentUser.cart);
+
+    //there's a problem when in one order you have
+    //multiple dishes from same user
+    var cart;
+    req.CurrentUser.cart.populate('dishes.dishId').execPopulate()
+        .then(function(populatedCart) {
+            cart = populatedCart;
+            var chefPromArr = [];
+            populatedCart.dishes.forEach(function(dishObj) {
+                chefPromArr.push(User.findById(dishObj.dishId.user).exec());
+            });
+            return Promise.all(chefPromArr);
+        })
+        .then(function(arr_chefs) {
+
+            //GIVE THE CHEF THE ORDER
+            var chefPromArr = [];
+            arr_chefs.forEach(function(chef) {
+                chef.receivedOrders.push(cart);
+                chefPromArr.push(chef.save());
+            });
+
+            return Promise.all(chefPromArr);
+        })
+        .then(function(saved_arr_chefs) {
+
+            //DELETE CART AND FINISH CHECKOUT
+            req.CurrentUser.orders.push(req.CurrentUser.cart);
+            req.CurrentUser.cart = undefined;
+            return req.CurrentUser.save();
+        })
         .then(function(user) {
             res.json(user);
         })
         .then(null, next);
+
+    // PRE CHECKOUT CODE
+    // req.CurrentUser.orders.push(req.CurrentUser.cart);
+    // req.CurrentUser.cart = undefined;
+    // req.CurrentUser.save()
+    // 	.then(function(user){
+    // 		res.json(user);
+    // 	})
+    // 	.then(null, next);
 });
 
 

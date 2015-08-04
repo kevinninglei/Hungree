@@ -1,10 +1,13 @@
-app.controller('AccountCtrl', function($scope, chef, dishes, reviews, orders, favorites, Accounts, $stateParams, CartFactory, $state, Dish, Tags) {
-    $scope.user = chef;
+app.controller('AccountCtrl', function($scope, chef, dishes, reviews, orders, favorites, receivedOrders, Accounts, $stateParams, CartFactory, currentUser, Orders $state, Dish, Tags) {
+    $scope.user = currentUser;
     $scope.myDishes = dishes;
     $scope.reviews = reviews;
     $scope.orders = orders;
     $scope.favorites = favorites;
 
+    $scope.receivedOrders = receivedOrders;
+    $scope.adminToggle = false;
+    $scope.isAdmin = $scope.user.isAdmin;
     $scope.success = false;
 
     $scope.updateInfo = function() {
@@ -14,7 +17,6 @@ app.controller('AccountCtrl', function($scope, chef, dishes, reviews, orders, fa
             });
     };
     $scope.updatePW = function() {
-        if (!$scope.confirm) return alert("You haven't entered a new password!");
         $scope.red = false;
         $scope.green = false;
         Accounts.updatePW($scope.updatedPW, $stateParams.id)
@@ -25,12 +27,21 @@ app.controller('AccountCtrl', function($scope, chef, dishes, reviews, orders, fa
     };
 
     $scope.addToOrder = function(dish) {
-        CartFactory.cartOrders.push(dish);
         CartFactory.addToCart(dish, 1);
     };
+
+
+    $scope.updateDishOrder = function(order, dish, orderIndex, status) {
+        Orders.updateDishOrder(currentUser._id, order, dish, status)
+            .then(function(updatedOrder) {
+                $scope.receivedOrders[orderIndex] = updatedOrder;
+            })
+    }
+
     $scope.toggleComment = function() {
         $scope.toggled = !$scope.toggled;
     };
+
     $scope.goToDish = function(id) {
         Accounts.postingReview = true;
         $state.go('oneDish', {

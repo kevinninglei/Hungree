@@ -19,6 +19,12 @@ app.config(function($stateProvider) {
             },
             favorites: function(Favorites, $stateParams) {
                 return Favorites.getFavsForUser($stateParams.id);
+            },
+            receivedOrders: function(Orders, $stateParams) {
+                return Orders.getReceivedOrders($stateParams.id);
+            },
+            currentUser: function(AuthService) {
+                return AuthService.getLoggedInUser();
             }
 
             //not working dont know why
@@ -28,41 +34,60 @@ app.config(function($stateProvider) {
         }
     })
         .state('account.settings', {
-            controller: 'AccountCtrl',
+            // controller: 'AccountCtrl',
             url: '/settings',
             templateUrl: 'js/account/account.settings.html'
         })
         .state('account.overview', {
-            controller: 'AccountCtrl',
+            // controller: 'AccountCtrl',
             url: '/overview',
             templateUrl: 'js/account/account.overview.html'
         })
         .state('account.dishes', {
-            controller: 'AccountCtrl',
+            // controller: 'AccountCtrl',
             url: '/dishes',
             templateUrl: 'js/account/account.dishes.html'
         })
+        .state('account.chefdashboard', {
+            // controller: 'AccountCtrl',
+            url: '/chefdashboard',
+            templateUrl: 'js/account/account.chefdashboard.html'
+        })
         .state('account.favorites', {
-            controller: 'AccountCtrl',
+            // controller: 'AccountCtrl',
             url: '/favorites',
             templateUrl: 'js/account/account.favorites.html'
         })
-        .state('account.orders', {
-            controller: 'AccountCtrl',
-            url: '/orders',
-            templateUrl: 'js/account/account.orders.html'
+        .state('account.purchases', {
+            // controller: 'AccountCtrl',
+            url: '/purchases',
+            templateUrl: 'js/account/account.purchases.html'
         })
         .state('account.reviews', {
-            controller: 'AccountCtrl',
+            // controller: 'AccountCtrl',
             url: '/reviews',
             templateUrl: 'js/account/account.reviews.html'
         })
         .state('account.newDish', {
-            controller: 'AccountCtrl',
+            // controller: 'AccountCtrl',
             url: '/newDish',
             templateUrl: 'js/account/account.newdish.html'
         });
-
+        .state('account.adminusers', {
+            controller: 'AccountCtrl',
+            url: '/admin/users',
+            templateUrl: 'js/account/admin/admin.users.html'
+        })
+        .state('account.adminproducts', {
+            controller: 'AccountCtrl',
+            url: '/admin/products',
+            templateUrl: 'js/account/admin/admin.products.html'
+        })
+        .state('account.adminorders', {
+            controller: 'AccountCtrl',
+            url: '/admin/orders',
+            templateUrl: 'js/account/admin/admin.orders.html'
+        });
 
 
 });

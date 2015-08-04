@@ -1,0 +1,39 @@
+<div class="col-md-12" id="search-box">
+    <div class="input-group">
+        <input type="text" class="form-control" ng-model="query" placeholder="Search for...">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="panel panel-default" ng-repeat="order in orders">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-6">
+                Order placed on: {{order.date | date : format : 'MMMM d, y'}}
+        by <em>  <a ui-sref="oneChef({id:oder.user._id})">{{order.user.name.first}}  {{order.user.name.last}} </a></em>
+                </div>
+                <div class="col-xs-6 text-right">Total: {{order.total | currency}}</div>
+            </div>
+        </div>
+        <div class="panel-body">
+        <pre>{{order}} </pre>
+            <div class="row" ng-repeat="dish in order.dishes">
+                <div class="col-md-2 text-center"><img class="text-center" ng-src="{{dish.dishId.picture}}" id="profile-pic"></div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <div class="row"><a ui-sref="oneDish({id: dish.dishId._id})">{{dish.dishId.name}}</a> prepared by Chef <a>{{dish.dishId.user.name}}</a></div>
+                            <div class="row">
+                                {{dish.dishId.description | limitTo: !dish.collapsed ? 100 : 10000}} <a href="" ng-click="dish.collapsed = !dish.collapsed"><span ng-show="!dish.collapsed">...</span><i ng-show="dish.collapsed" class="fa fa-long-arrow-left"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                        <div>Quantity: {{dish.quantity}}</div>
+
+                        Price: {{order.total | currency}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
