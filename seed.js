@@ -128,7 +128,7 @@ var users = [
         new User({
             email: 'admin',
             password:'jkay',
-            admin: true
+            isAdmin: true
         })
 ];
 

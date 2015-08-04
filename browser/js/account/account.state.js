@@ -19,6 +19,9 @@ app.config(function($stateProvider) {
         },
         favorites: function(Favorites, $stateParams) {
           return Favorites.getFavsForUser($stateParams.id);
+        },
+        currentUser: function(AuthService) {
+          return AuthService.getLoggedInUser();
         }
 
         //not working dont know why
@@ -56,8 +59,22 @@ app.config(function($stateProvider) {
       controller: 'AccountCtrl',
       url: '/reviews',
       templateUrl: 'js/account/account.reviews.html'
+    })
+    .state('account.adminusers', {
+      controller: 'AccountCtrl',
+      url: '/admin/users',
+      templateUrl: 'js/account/admin/admin.users.html'
+    })
+    .state('account.adminproducts', {
+      controller: 'AccountCtrl',
+      url: '/admin/products',
+      templateUrl: 'js/account/admin/admin.products.html'
+    })
+    .state('account.adminorders', {
+      controller: 'AccountCtrl',
+      url: '/admin/orders',
+      templateUrl: 'js/account/admin/admin.orders.html'
     });
-
 
 
 });
