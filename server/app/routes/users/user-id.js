@@ -7,6 +7,7 @@ var Order = mongoose.model('Order');
 var Address = mongoose.model('Address');
 var router = require('express').Router();
 var _ = require('lodash');
+var bluebird = require('bluebird');
 
 router.get('/', function(req, res,next) {
 	Address.populate(req.CurrentUser, {
@@ -171,16 +172,52 @@ router.put('/cart/update', function(req, res, next){
 			return order.save();
 		})
 		.then(function(order) {
-			order.populate('dishes.dishId', function(err, newOrder){
-				res.json(newOrder);
-			})
-		})		
+			return order.populate('dishes.dishId').execPopulate();
+		})
+		.then(function(order){
+			console.log(order);
+			res.json(order);
+		})
 		.then(null, next);
 });
 
 //checkout is going to just modify the user
 //by adding the cart to the dishes and removing cart
 router.delete('/cart/checkout', function(req, res, next){
+	//for every dish in the user's cart
+	//we need to:
+	// 1. find the appropriate chef
+	// 2. push the order 
+	//console.log(req.CurrentUser.cart);
+	var cart;
+	req.CurrentUser.cart.populate('dishes.dishId').execPopulate()
+		.then(function(populatedCart){
+			cart = populatedCart;
+			var chefPromArr = [];
+			populatedCart.dishes.forEach(function(dishObj){
+				chefPromArr.push(User.findById(dishObj.dishId.user).exec());
+			});
+			return Promise.all(chefPromArr);
+		})
+		.then(function(arr_chefs){
+
+			var chefPromArr = [];
+			arr_chefs.forEach(function(chef){
+				chef.receivedOrders.push(cart);
+				chefPromArr.push(chef.save());
+			});
+
+			return Promise.all(chefPromArr);
+		})
+		.then(function(saved_arr_chefs){
+			// console.log('-------')
+			// console.log(saved_arr_chefs);
+			// console.log('-------')
+			console.log('CHEFS GOT ORDERS!');
+		})
+		.then(null, next);
+
+
 	req.CurrentUser.orders.push(req.CurrentUser.cart);
 	req.CurrentUser.cart = undefined;
 	req.CurrentUser.save()
