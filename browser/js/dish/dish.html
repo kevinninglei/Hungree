@@ -14,12 +14,14 @@
 				<h3>Description</h3>
 				<p>{{dish.description}}</p>
 			</div>
-			<button
-				type="button"
-				class="btn btn-primary col-lg-2"
-				ng-click="addToOrder()"
-				>Add Dish</button>
-			<div class="col-lg-2" ng-controller="ModalDemoCtrl">
+			<div style="display: inline">
+				<button
+					type="button"
+					class="btn btn-primary"
+					ng-click="addToOrder()"
+					><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>
+			</div>
+			<div style="display: inline" ng-controller="ModalDemoCtrl">
 			    <script type="text/ng-template" id="postReview.html">
 			        <div class="modal-header">
 			            <h3 class="modal-title">Your Review</h3>
@@ -35,12 +37,15 @@
 						</div>
 			        </div>
 			        <div class="modal-footer">
-			            <button class="btn btn-primary" ng-click="postReview()">OK</button>
+			            <button class="btn btn-primary" ng-click="postReview(user)">OK</button>
 			            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 			        </div>
 			    </script>
 
-			    <button class="btn btn-primary" ng-click="open()">Post Review</button>
+			    <button 
+			    	class="btn btn-primary" 
+			    	ng-show="ordered"
+			    	ng-click="open()"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></button>
 			</div>
 
 		</div>
@@ -69,6 +74,6 @@
 	</div>
 	<div class="col-lg-12">
 		<h3>Reviews</h3>
-		<dish-review user="user" review="review" ng-repeat="review in dish.reviews"></dish-review>
+		<dish-review user="user" review="review" ng-repeat="review in dish.reviews | filter:{archived:false}"></dish-review>
 	</div>
 </div>

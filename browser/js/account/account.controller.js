@@ -1,11 +1,10 @@
 
-app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorites, Accounts, $stateParams, CartFactory) {
+app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorites, Accounts, $stateParams, CartFactory, $state) {
    $scope.user = chef;
    $scope.myDishes = dishes;
    $scope.reviews = reviews;
    $scope.orders = orders;
    $scope.favorites = favorites;
-
 
    $scope.success = false;
 
@@ -16,6 +15,7 @@ app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorit
    		});
    };
    $scope.updatePW = function() {
+   		if (!$scope.confirm) return alert("You haven't entered a new password!");
    		$scope.red = false;
    		$scope.green = false;
    		Accounts.updatePW($scope.updatedPW, $stateParams.id)
@@ -32,4 +32,8 @@ app.controller('AccountCtrl', function($scope,chef,dishes,reviews,orders,favorit
   $scope.toggleComment = function(){
     $scope.toggled = !$scope.toggled;
   };
+  $scope.goToDish = function(id) {
+    Accounts.postingReview = true;
+    $state.go('oneDish', {id: id})
+  }
 });

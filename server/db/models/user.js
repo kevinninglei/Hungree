@@ -59,6 +59,7 @@ var userSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Order'
     },
+    archived: {type: Boolean, default: false}
 
 });
 

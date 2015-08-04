@@ -1,4 +1,4 @@
-app.controller('ModalDemoCtrl', function ($scope, $modal, $log, Reviews) {
+app.controller('ModalDemoCtrl', function ($scope, $modal, $log, Reviews, Accounts) {
 
   $scope.open = function () {
 
@@ -12,6 +12,11 @@ app.controller('ModalDemoCtrl', function ($scope, $modal, $log, Reviews) {
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
+
+  if (Accounts.postingReview) {
+    $scope.open();
+    Accounts.postingReview = false;
+  }
 
   $scope.edit = function (review) {
 
@@ -28,6 +33,17 @@ app.controller('ModalDemoCtrl', function ($scope, $modal, $log, Reviews) {
     });
   };
 
+  $scope.confirm = function() {
+    var modalInstance = $modal.open({
+      animation: true,
+      templateUrl: 'confirm.html',
+      controller: 'ModalInstanceCtrl'
+    });
+
+    modalInstance.result.then(null, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  }
 
   $scope.toggleAnimation = function () {
     $scope.animationsEnabled = !$scope.animationsEnabled;
@@ -56,25 +72,31 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Reviews, $
   };
 
   $scope.editReview = function (user) {
-    $modalInstance.close();
-  	var updatedReview = {description: $scope.editDescription, rating: $scope.editRate, user: user, date: new Date()};
+    var updatedReview = {description: $scope.editDescription, rating: $scope.editRate, user: user, date: new Date()};
     Chefs.viewDish.rating = (Chefs.viewDish.rating*Chefs.viewDish.reviews.length - Reviews.reviewToEdit.rating + $scope.editRate) / (Chefs.viewDish.reviews.length);
     Reviews.editReview(Reviews.reviewToEdit._id, updatedReview, $stateParams.id, Chefs.viewDish)
     .then(function() {
+      $modalInstance.close();
       var index = Chefs.viewDish.reviews.indexOf(Reviews.reviewToEdit);
       Chefs.viewDish.reviews[index] = updatedReview;
     }); //posting review by updating dish
   };
 
-  $scope.postReview = function () {
+  $scope.postReview = function (user) {
     $modalInstance.close();
-    AuthService.getLoggedInUser()
-    .then(function(user) {
-    	var newReview = {description: $scope.description, rating: $scope.rate, user: user};
-    	Chefs.viewDish.rating = (Chefs.viewDish.rating*Chefs.viewDish.reviews.length + $scope.rate) / (Chefs.viewDish.reviews.length + 1);
-    	Reviews.postReview(newReview, $stateParams.id, Chefs.viewDish); //posting review by updating dish
-    })
+  	var newReview = {description: $scope.description, rating: $scope.rate, user: user};
+  	Chefs.viewDish.rating = (Chefs.viewDish.rating*Chefs.viewDish.reviews.length + $scope.rate) / (Chefs.viewDish.reviews.length + 1);
+  	Reviews.postReview(newReview, $stateParams.id, Chefs.viewDish); //posting review by updating dish
   };
+
+  $scope.archive = function(review) {
+    console.log(review)
+    review.archived = true;
+    Reviews.archiveReview(review)
+    .then(function() {
+      $modalInstance.close();
+    })
+  }
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');

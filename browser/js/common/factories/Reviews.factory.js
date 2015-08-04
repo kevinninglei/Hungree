@@ -25,6 +25,12 @@ app.factory('Reviews',function($http){
     	.then(function(res) {
     		return res.data;
 		})
+    },
+    archiveReview: function(review) {
+    	return $http.put(`/api/reviews/${review._id}`, review)
+    	.then(function(res) {
+    		return res.data;
+    	})
     }
   }
 })

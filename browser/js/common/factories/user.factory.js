@@ -21,6 +21,12 @@ app.factory('UserFactory', function ($http, $state) {
       .then(null,function(err){
       	console.log(err.message);
       });
+    },
+    getOrders: function(id) {
+      return $http.get(`/api/users/${id}/orders`)
+      .then(function(res) {
+        return res.data;
+      })
     }
 	};
 });

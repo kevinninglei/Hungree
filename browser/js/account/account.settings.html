@@ -42,7 +42,7 @@
         Your passwords need to match
     </div>
     <br>
-    <a href="#" class="btn btn-warning" ng-click="updatePW()">Update Details</a>
+    <button ng-disabled="updatedPW.new !== confirm" class="btn btn-warning" ng-click="updatePW()">Update Details</button>
 <!--     <pre>{{user}}</pre>
     <img ng-src="{{user.picture}}"> Email: {{user.email}} Address: {{user.address.shipping}} } } -->
 </div>
