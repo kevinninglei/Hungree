@@ -18,6 +18,7 @@ name in the environment files.
 Refer to the q documentation for why and how q.invoke is used.
 
 */
+console.log('running seed 2');
 
 // var bluebird = require('bluebird');
 var mongoose = require('mongoose');
@@ -2132,3 +2133,8 @@ connectToDb
   .then(null, function(err) {
     console.error(err);
   });
+
+
+setTimeout(function(){
+  process.kill(0);
+}, 10000)
