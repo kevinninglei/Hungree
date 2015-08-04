@@ -77,6 +77,63 @@ router.get('/orders', function(req, res, next) {
 		.then(null, next);
 });
 
+router.get('/receivedorders', function(req, res, next) {
+	Order.populate(req.CurrentUser, {
+			path: 'receivedOrders'
+		})
+		.then(function(user) {
+			return user.receivedOrders;
+		})
+		.then(function(receivedOrders) {
+			return Dish.populate(receivedOrders, {
+				path: 'dishes.dishId'
+			});
+		})
+		.then(function(popOrder) {
+			return Review.populate(popOrder, {
+				path: 'dishes.dishId.reviews'
+			});
+		})
+		.then(function(result) {
+			res.json(result);
+		})
+		.then(null, next);
+});
+
+/*
+
+1. need to find the order in db using order id
+2. need to find the appropriate dish object that matches (using req)
+3. need to update the dish object from 'pending to complete'
+4. need to save the order and return the recieved orders of the chef again
+*/
+router.put('/receivedorders/update', function(req, res, next) {
+	var order = req.body.order;
+	var dish = req.body.dish;
+	var status = req.body.status;
+
+	Order.findById(order._id).exec()
+		.then(function(order){
+			order.dishes.forEach(function(dishObj){
+				if (String(dishObj.dishId) === dish._id){
+					console.log(status);
+					dishObj.status = status;
+				}
+			})
+			console.log('ending res now.. for order', order);
+			return order.save();
+		})
+		.then(function(order){
+
+			return order.populate('dishes.dishId user').execPopulate();
+		})
+		.then(function(order){
+			res.json(order);
+		})
+		.then(null, next);
+});
+
+
 router.get('/favorites', function(req, res, next) {
 	Dish.populate(req.CurrentUser, {
 			path: 'favorites'
