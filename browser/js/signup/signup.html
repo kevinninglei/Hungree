@@ -1,0 +1,67 @@
+<div class="container" ng-controller="SignupCtrl">
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-default" style="width:50%;  display:table; margin: 0 auto;">
+
+            <!-- Panel Heading -->
+            <div class="panel-heading">
+              <h1 class="panel-title">Signup in 2 steps!</h1>
+            </div>
+
+            <!-- Panel Body -->
+            <div class="panel-body">
+              <!-- Basic Information Row-->
+              <div class="row" > 
+                <div class='col-lg-12'>
+                    <form class="form">
+                      <h3 style="color:#DDDDDD"> <span class="form-step">1</span> Basic Information </h3>
+                      <div class="form-group">
+                        <span><em>Please enter your first name</em></span>
+                        <input type="text" class="form-control" placeholder="Firstname" ng-model="info.name.first">
+                      </div>
+                      <div class="form-group">
+                        <span><em>Please enter your last name</em></span>
+                        <input type="text" class="form-control" placeholder="Lastname" ng-model="info.name.last">
+                      </div>
+                      <div class="form-group">
+                        <label>Upload Profile Picture</label><br>
+                        <input type="file">
+                      </div>
+                    </form>
+                </div>
+              </div>
+              <!-- Sign In Row-->
+              <div class="row">
+                <div class='col-lg-12'>
+                    <form class="form">
+                      <h3 style="color:#DDDDDD"> <span class="form-step">2</span> Join Now! </h3>
+                      <div class="form-group">
+                        <span><em>Please enter your email</em></span>
+                        <input type="email" class="form-control" placeholder="Email" ng-model="info.email">
+                      </div>
+                      <div class="form-group">
+                        <span><em>Please enter your password</em></span>
+                        <input type="password" class="form-control" placeholder="Password" ng-model="info.password">
+                      </div>
+                      <button type="button" class="btn btn-default" style="float:right" ng-click="signInWithEmail()">Sign in with email</button>
+
+                      <button type="button" class="btn btn-default" style="float:right" ng-click="getCurrentUser()">PrintUserInfomation</button>
+
+                    </form>
+                </div>
+              </div>
+
+            </div> <!-- end panel footer -->
+
+            <!-- Panel Footer -->
+            <div class="panel-footer" style="background-color:white">
+              <div style="display:table; margin: 0 auto;">
+                  <oauth-button provider-name="Google" style="margin: 0 10px 0 0" ng-click="signInWithGoogle()"></oauth-button>
+                  <oauth-button provider-name="Facebook" style="margin: 0 0 0 10px" ng-click="signInWithFacebook()"></oauth-button>
+              </div>
+            </div> 
+
+            </div> <!-- panel -->
+        </div> <!-- main col for panel -->
+    </div> <!-- end row for container !-->
+</div> <!-- end container -->

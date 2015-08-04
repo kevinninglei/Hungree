@@ -1,0 +1,27 @@
+<div class="container chef-info">
+	<div class="row">
+		<div class="col-sm-4">
+			<img ng-src="{{chef.picture}}">
+		</div>
+		<div class="col-sm-8">
+			<h1>{{chef.name.first}} {{chef.name.last}}</h1>
+			<div>
+				<h3>Location</h3>
+				<p>{{ chef.location }}</p>
+			</div>
+			<div>
+				<h3>Description</h3>
+				<p>{{ chef.description }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-controller="ChefTabCtrl">
+	<tabset>
+    <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled" select="go(tab.route)">
+      {{tab.content}}
+			<ui-view></ui-view>
+    </tab>
+  </tabset>
+</div>
+
