@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <div class="panel panel-default" ng-repeat="order in orders">
+    <div class="panel panel-default" ng-repeat="order in orders | orderBy:'date':true">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-6">Order placed on: {{order.date | date : format : 'MMMM d, y'}}</div>
