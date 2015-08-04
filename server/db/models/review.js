@@ -9,7 +9,8 @@ var reviewSchema = new mongoose.Schema({
   //Add userID?
   user: {type: mongoose.Schema.ObjectId, ref: 'User'},
   dish: {type:mongoose.Schema.ObjectId, ref:'Dish'},
-  date: {type: Date, default: Date.now()}
+  date: {type: Date, default: Date.now()},
+  archived: {type: Boolean, default: false}
 });
 
 //i am a review, go to list of users, does my id exist in their array of reviews

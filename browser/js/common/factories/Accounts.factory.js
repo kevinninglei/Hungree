@@ -11,6 +11,7 @@ app.factory('Accounts',function($http){
     		.then(function (res) {
     			return res.data;
     		});
-    }
+    },
+    postingReview: false
   }; // nearbyDishes attached here from home.state.js, viewDish from list.dishes.js
 });
