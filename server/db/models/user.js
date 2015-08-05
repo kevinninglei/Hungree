@@ -53,7 +53,10 @@ var userSchema = new mongoose.Schema({
         type: [{type: mongoose.Schema.ObjectId, ref: 'Order'}],
         default: []
     },
-    reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}],
+    reviews: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Review'
+    }],
     status:{
         type: String,
         enum: status,

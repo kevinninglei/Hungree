@@ -7,15 +7,21 @@ app.factory('Reviews', function($http) {
                     return res.data;
                 });
         },
-        postReview: function(review, dishId, dish) { //put request because updating the dish
+        postReview: function(review, dishId, dish,user) { //put request because updating the dish
             return $http.post('/api/reviews', review)
-                .then(function(res) {
-                    dish.reviews.push(res.data);
+                .then(function(review) {
+                    dish.reviews.push(review.data._id);
+                    user.reviews.push(review.data._id);
+                    console.log(user);
                     return $http.put(`/api/dishes/${dishId}`, dish)
                 })
-                .then(function(res) {
-                    return res.data;
-                })
+                // .then(function(res){
+                //     console.log("user2",user);
+                //     return $http.put(`/api/users/${user._id}`,user);
+                // })
+                .then(function(user) {
+                    return user.data;
+                });
         },
         editReview: function(review, dish) {
             return $http.put(`/api/reviews/${review._id}`, review)
