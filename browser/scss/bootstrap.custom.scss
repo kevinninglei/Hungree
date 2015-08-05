@@ -1,14 +1,14 @@
-//DEfault : #DC8802
+//DEfault : #5D0101
 //Color : #686868
 //
 //.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 //     color: #FEFFFF;
-//     background-color: #FF9D00;
+//     background-color: #983838;
 // }
 //
 // .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 //     color: #FEFFFF;
-//     background-color: #FF9D00;
+//     background-color: #983838;
 // }
 
 /*!
@@ -1096,10 +1096,10 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.42857143;
-  color: #2c3e50;
+  color: #3A0606;
   background-color: #ffffff;
 }
 input,
@@ -1198,10 +1198,14 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.1;
-  color: inherit;
+  color: #9A7474;
+}
+
+h1, h3 {
+  color: #3A0606;
 }
 h1 small,
 h2 small,
@@ -3947,7 +3951,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #2c3e50;
+  color: #3A0606;
   background-color: #ffffff;
   border: 1px solid #E6E6E6;
   border-bottom-color: transparent;
@@ -4406,7 +4410,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #DC8802;
+  background-color: #5D0101;
   border-color: transparent;
 }
 .navbar-default .navbar-brand {
@@ -5332,7 +5336,7 @@ a.list-group-item-danger.active:focus {
   border-top-left-radius: 3px;
 }
 .panel-heading > .dropdown .dropdown-toggle {
-  color: inherit;
+  color: #3A0606;
 }
 .panel-title {
   margin-top: 0;
@@ -5549,7 +5553,7 @@ a.list-group-item-danger.active:focus {
   border-color: #E6E6E6;
 }
 .panel-default > .panel-heading {
-  color: #2c3e50;
+  color: #3A0606;
   background-color: #E6E6E6;
   border-color: #E6E6E6;
 }
@@ -5854,7 +5858,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1.4;
@@ -5961,7 +5965,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: normal;
   line-height: 1.42857143;
@@ -6874,9 +6878,13 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: "HelveticaNeue-Light",Helvetica,Arial,sans-serif;
+    font-weight: 500;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 hr.star-light,
@@ -6941,7 +6949,7 @@ header img {
 header .intro-text .name {
     display: block;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 2em;
     font-weight: 700;
 }
@@ -6992,8 +7000,8 @@ header .intro-text .skills {
 
 .navbar {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
 }
 
 .navbar a:focus {

@@ -7,16 +7,17 @@
 			<h1>{{chef.name.first}} {{chef.name.last}}</h1>
 			<div>
 				<h3>Location</h3>
-				<p>{{ chef.location }}</p>
+				<p class="dish-text">{{ chef.location }}</p>
 			</div>
 			<div>
 				<h3>Description</h3>
-				<p>{{ chef.description }}</p>
+				<p class="dish-text">{{ chef.description }}</p>
 			</div>
 		</div>
 	</div>
 </div>
-<div ng-controller="ChefTabCtrl">
+<div class="col-md-2"></div>
+<div ng-controller="ChefTabCtrl" class="col-md-8">
 	<tabset>
     <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled" select="go(tab.route)">
       {{tab.content}}
