@@ -8,19 +8,39 @@ app.controller('AdminCtrl', function($scope, $stateParams, dishes, orders, users
 
 
   $scope.promote = function(id) {
-    UserFactory.promote(id);
+    UserFactory.promote(id).then(function(){
+      return UserFactory.getAllUsers();
+    })
+    .then(function(users){
+      $scope.users =users;
+    });
   };
 
   $scope.demote = function(id) {
-    UserFactory.demote(id);
+    UserFactory.demote(id).then(function(){
+      return UserFactory.getAllUsers();
+    })
+    .then(function(users){
+      $scope.users =users;
+    });
   };
 
   $scope.updateUser = function(user) {
-    UserFactory.update(user);
+    UserFactory.update(user).then(function(){
+      return UserFactory.getAllUsers();
+    })
+    .then(function(users){
+      $scope.users =users;
+    });
   };
 
   $scope.deleteUser = function(id) {
-    UserFactory.delete(id);
+    UserFactory.delete(id).then(function(){
+      return UserFactory.getAllUsers();
+    })
+    .then(function(users){
+      $scope.users =users;
+    });
   };
 
 });

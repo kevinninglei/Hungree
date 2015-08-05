@@ -17,7 +17,7 @@
                         <div class="col-xs-9">
                             <div class="row"><a ui-sref="oneDish({id: dish.dishId._id})"><span> [ {{dish.status | uppercase}} ] </span>{{dish.dishId.name}}</a></div>
                             <div class="row">
-                                {{dish.dishId.description | limitTo: !dish.collapsed ? 100 : 10000}} <a href="" ng-click="dish.collapsed = !dish.collapsed"><span ng-show="!dish.collapsed">...</span><i ng-show="dish.collapsed" class="fa fa-long-arrow-left"></i></a>
+                                {{dish.dishId.description | limitTo: !dish.collapsed ? 100 : 10000}} <a href="" ng-show="dish.dishId.description.length>100" ng-click="dish.collapsed = !dish.collapsed"><span ng-show="!dish.collapsed">...</span><i ng-show="dish.collapsed" class="fa fa-long-arrow-left"></i></a>
                             </div>
                             <div class="text-right">
                                 <a type="button" class="btn btn-success btn-sm" ng-click="addToOrder(dish.dishId)">Add to Cart</a>
