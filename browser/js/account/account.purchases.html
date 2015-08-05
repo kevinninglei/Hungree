@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <div class="alert alert-info" ng-show={{!reviews.length}}>
+    <div class="alert alert-info" ng-show={{!orders.length}}>
         <h4 class="text-center"><i class="fa fa-warning"> </i> There seems to be nothing here. Checkout our <a ui-sref="listDishes"> yummy dishes! </a> </h4>
     </div>
     <div class="panel panel-default" ng-repeat="order in orders | orderBy:'date':true">

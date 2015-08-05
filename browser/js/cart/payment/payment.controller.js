@@ -2,7 +2,7 @@ app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, Ca
   $scope.price = price;
 
   $scope.setFormScope = function(scope) {
-    this.$form = $("#form-payment");
+    this.$form = $("#payment-form");
   };
 
   $scope.closeAlert=function(){
@@ -21,8 +21,7 @@ app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, Ca
         // Insert the token into the form so it gets submitted to the server
       $scope.$form.append($('<input type="hidden" name="stripeToken" />').val(token));
       // and submit
-
-      $scope.$form.submit();
+      console.log($scope.$form);
       $modalInstance.close();
       CartFactory.confirmOrder()
         .then(function(order){
@@ -40,12 +39,7 @@ app.controller('paymentCtrl', function($scope, $modalInstance, price, $state, Ca
     if(!card) return false;
     Stripe.setPublishableKey('pk_test_ZJ2EdpJbGoQokkcIwkci5gOY');
     Stripe.card.createToken(
-      {
-        number: card.number,
-        cvc: card.cvc,
-        exp_month: card.month,
-        exp_year: card.year
-      }, $scope.stripeResponseHandler);
+      $scope.$form, $scope.stripeResponseHandler);
     return false;
   };
 

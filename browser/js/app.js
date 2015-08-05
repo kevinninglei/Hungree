@@ -65,12 +65,12 @@ app.run(function(Chefs, $rootScope) {
 
     function getChefsCloseBy(position) {
         Chefs.position = position;
-        // Chefs.nearbyDishes = 
+        // Chefs.nearbyDishes =
         Chefs.getChefs().then(function(chefs) {
             return chefs.filter(function(chef) {
-                var φ1 = chef.address.lat.toRadians(), 
-                    φ2 = position.coords.latitude.toRadians(), 
-                    Δλ = (position.coords.longitude-chef.address.lng).toRadians(), 
+                var φ1 = chef.address.lat.toRadians(),
+                    φ2 = position.coords.latitude.toRadians(),
+                    Δλ = (position.coords.longitude-chef.address.lng).toRadians(),
                     R = 6371000; // gives d in metres
                 var d = Math.acos( Math.sin(φ1)*Math.sin(φ2) + Math.cos(φ1)*Math.cos(φ2) * Math.cos(Δλ) ) * R;
                 // console.log(chef);
