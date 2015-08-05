@@ -8,12 +8,16 @@
             <div class="col-md-2 text-center">
                 <img class="text-center" ng-src="{{dish.picture}}" style="width:100%">
                 <star num="dish.rating">
-                    </star>
+                </star>
             </div>
             <div class="col-md-10">
                 <div class="row">Description: {{dish.description}}</div>
                 <div class="row"> Ingredients: <span ng-repeat="ingredient in dish.ingredients">{{ingredient}}</span></div>
                 <div class="row"> Price: {{dish.price | currency}} </div>
+                <div class="text-right">
+                    <a type="button" class="btn btn-success btn-sm" ng-click="addToOrder(dish.dishId)">Add to Cart</a>
+                    <a type="button" class="btn btn-success btn-sm" ng-click="goToDish(dish.dishId._id)">Post Review</a>
+                </div>
             </div>
         </div>
     </div>

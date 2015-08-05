@@ -17,7 +17,7 @@
 					</div>
 		        </div>
 		        <div class="modal-footer">
-		            <button class="btn btn-primary" ng-click="editReview(user)">OK</button>
+		            <button class="btn btn-success" ng-click="editReview(user)">OK</button>
 		            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 		        </div>
 		    </script>
@@ -27,7 +27,7 @@
 		            <h3 class="modal-title">Are you sure you want to delete?</h3>
 		        </div>
 		        <div class="modal-footer">
-		            <button class="btn btn-primary" ng-click="archive(review)">OK</button>
+		            <button class="btn btn-success" ng-click="archive(review)">OK</button>
 		            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 		        </div>
 		    </script>
@@ -52,7 +52,7 @@
 		</div>
 		<div class="col-md-10">
 			<div class="row">
-				<div><star num="review.rating"></star></div> 
+				<div><star num="review.rating"></star></div>
 				{{review.user.name.first}} wrote on {{review.date | date : format : 'MMMM d, y'}}</div>
 				<div class="row">{{review.description}}</div>
 			</div>
