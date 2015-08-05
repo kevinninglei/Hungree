@@ -1,13 +1,22 @@
-
-<section id="home">
-  <div class="container-fluid">
-  
-    <img class="background-pic" src='../../assets/images/steak.JPG'>
-    <h1>Hungree?</h1>
+<div ng-controller="HomeCtrl">
+  <div style="width: 100%; position:absolute; top:60px; left:0px">
+    <carousel 
+      interval="myInterval" no-wrap="noWrapSlides">
+    <slide 
+      ng-repeat="slide in slides" active="slide.active">
+      <div 
+        class="carousel-img"
+        ng-style="{'background-image': 'url({{slide.image}})'}"></div>
+ <!--    <img 
+      ng-src="{{slide.image}}" style="margin:auto; vertical-align:middle"> -->
+    </slide>
+    </carousel>
   </div>
+</div>
+<section id="home">
   <div class="container information">
     <h2>
-      How hungree works
+    How hungree works
     </h2>
     <div class="row step">
       <div class="icon-box col-md-2">
@@ -18,7 +27,7 @@
         <h3>Browse home cooked items from nearby chefs</h3>
         <div class="sub-heading">
           <h5><i class="fa fa-list-ul"></i>Filter by rating, distance and category</h5>
-      </div>
+        </div>
       </div>
     </div>
     <div class="row step">
@@ -30,7 +39,7 @@
         <h3>Add dishes to your cart</h3>
         <div class="sub-heading">
           <h5><i class="fa fa-mouse-pointer"></i>Select a dish to see more information </h5>
-      </div>
+        </div>
       </div>
     </div>
     <div class="row step">
@@ -42,7 +51,7 @@
         <h3>Checkout using our secure payment processor</h3>
         <div class="sub-heading">
           <h5><i class="fa fa-male"></i>Create a profile to store information for future purchases</h5>
-      </div>
+        </div>
       </div>
     </div>
     <div class="row step">
@@ -54,7 +63,7 @@
         <h3>Wait for Hungree to be delivered to your door!</h3>
         <div class="sub-heading">
           <h5><i class="fa fa-map-marker"></i>We use a drone delivery system to bring you your food quickly</h5>
-      </div>
+        </div>
       </div>
     </div>
     <div class="centered">
