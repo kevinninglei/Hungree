@@ -1,5 +1,7 @@
 <div class="container well" id="chef-nav">
-    <h2 id="chef-title">Admin Panel</h2>
+    <h2 id="chef-title">Admin Panel
+        <span ng-show="$scope.state"> <i class="fa fa-angle-right"></i> <small> {{$scope.state}} Management </small></span>
+    </h2>
 </div>
 <div class="container">
     <div class="row">
@@ -15,17 +17,17 @@
         </div> -->
             <div class="profile-usermenu">
                 <ul class="nav">
-                   <li class="active" ui-sref-active="active">
+                   <li class="active" ui-sref-active="active" ng-click="$scope.state='dishes'">
                         <a ui-sref="admin.dishes">
                             <i class="glyphicon glyphicon-cutlery"></i> Dishes Management </a>
                     </li>
-                    <li ui-sref-active="active">
+                    <li ui-sref-active="active" ng-click="$scope.state='orders'">
                         <a ui-sref="admin.orders">
-                            <i class="fa fa-shopping-cart"></i> Order Management </a>
+                            <i class="fa fa-shopping-cart"></i> Orders Management </a>
                     </li>
-                    <li ui-sref-active="active">
+                    <li ui-sref-active="active" ng-click="$scope.state='users'">
                         <a ui-sref="admin.users">
-                            <i class="glyphicon glyphicon-user"></i> User Management </a>
+                            <i class="glyphicon glyphicon-user"></i> Users Management </a>
                     </li>
                 </ul>
             </div>

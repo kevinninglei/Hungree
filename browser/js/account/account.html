@@ -1,5 +1,7 @@
 <div class="container well" id="chef-nav">
-    <h2 id="chef-title"> My Account </h2>
+    <h2 id="chef-title"> My Account
+        <span ng-show="$scope.state"> <i class="fa fa-angle-right"></i> <small> {{$scope.state}} </small></span>
+        </h2>
 </div>
 <div class="container">
     <div class="row">
@@ -15,31 +17,31 @@
         </div> -->
             <div class="profile-usermenu">
                 <ul class="nav">
-                    <li class="active" ui-sref-active="active">
+                    <li class="active" ui-sref-active="active" ng-click="$scope.state='overview'">
                         <a ui-sref="account.overview">
                             <i class="glyphicon glyphicon-home"></i> Overview </a>
                     </li>
-                    <li ui-sref-active="active">
+                    <li ui-sref-active="active" ng-click="$scope.state='settings'">
                         <a ui-sref="account.settings">
                             <i class="glyphicon glyphicon-user"></i> Account Settings </a>
                     </li>
-                    <li ui-sref-active="active">
+                    <li ui-sref-active="active" ng-click="$scope.state='My Dishes'">
                         <a ui-sref="account.dishes">
                             <i class="glyphicon glyphicon-cutlery"></i> My Dishes </a>
                     </li>
-                    <li ui-sref-active="active" ng-show="!!myDishes.length">
+                    <li ui-sref-active="active" ng-show="!!myDishes.length" ng-click="$scope.state='Chef Dashboard'">
                         <a ui-sref="account.chefdashboard">
                             <i class="fa fa-dashboard"></i> Chef Dashboard </a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="account.favorites">
+                        <a ui-sref="account.favorites" ng-click="$scope.state='My favorite Dishes'">
                             <i class="fa fa-heart"></i> Favorite Dishes </a>
                     </li>
-                    <li ui-sref-active="active">
+                    <li ui-sref-active="active" ng-click="$scope.state='My Review'">
                         <a ui-sref="account.reviews">
                             <i class="fa fa-pencil-square"></i> My Reviews </a>
                     </li>
-                    <li ui-sref-active="active">
+                    <li ui-sref-active="active" ng-click="$scope.state='My Purchases'">
                         <a ui-sref="account.purchases">
                             <i class="fa fa-shopping-cart"></i> My Purchases </a>
                     </li>
