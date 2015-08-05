@@ -5,39 +5,41 @@
     </div>
 </div>
 <div class="col-md-12">
-    <div class="panel panel-default" ng-repeat="user in users">
-        <div class="panel-heading">
-            <a ui-sref="oneChef({id: user._id})"> <span ng-hide="scope.editable">{{user.name.first}} {{user.name.last}}</span></a>
-            <input type="text" ng-show="scope.editable" type="text" ng-model="user.name.first">
-            <input type="text" ng-show="scope.editable" type="text" ng-model="user.name.last">
-            <a class="text-danger"><i ng-click="" tooltip="Delete" ng-click="" class="glyphicon glyphicon-remove pull-right"></i></a>
-            <a class="text-primary" ng-hide="scope.editable" ng-click="scope.editable= !scope.editable"><i tooltip="Edit"  class="fa fa-pencil pull-right"></i></a>
-            <a class="text-success" ng-show="scope.editable" ng-click="scope.editable= !scope.editable"><i tooltip="Save"  class="glyphicon glyphicon-ok pull-right"></i></a></div>
-        <div class="panel-body">
-            <div class="col-md-2 text-center">
-                <img class="text-center" ng-src="{{user.picture}}" id="profile-pic">
-                <star num="dish.rating">
-                </star>
-            </div>
-            <div class="col-md-10">
-                <!--             <pre>{{user}}</pre> -->
-                <div class="row"> Email:
-                    <span ng-hide="scope.editable">{{user.email}}</span>
-                    <input type="text" ng-show="scope.editable" type="text" ng-model="user.email">
+    <div ng-repeat="user in users | filter:{_id : '!'+ currentUser._id}">
+        <div class="panel panel-default" span ng-show="!scope.deleted">
+            <div class="panel-heading">
+                <a ui-sref="oneChef({id: user._id})"> <span ng-hide="scope.editable">{{user.name.first}} {{user.name.last}}</span></a>
+                <input type="text" ng-show="scope.editable" type="text" ng-model="user.name.first">
+                <input type="text" ng-show="scope.editable" type="text" ng-model="user.name.last">
+                <a class="text-danger" ng-click="deleteUser(user._id); scope.deleted=true"><i tooltip="Delete" class="glyphicon glyphicon-remove pull-right"></i></a>
+                <a class="text-primary" ng-hide="scope.editable" ng-click="scope.editable= !scope.editable"><i tooltip="Edit"  class="fa fa-pencil pull-right"></i></a>
+                <a class="text-success" ng-show="scope.editable" ng-click="scope.editable= !scope.editable; updateUser(user)"><i tooltip="Save"  class="glyphicon glyphicon-ok pull-right"></i></a></div>
+            <div class="panel-body">
+                <div class="col-md-2 text-center">
+                    <img class="text-center" ng-src="{{user.picture}}" id="profile-pic">
+                    <!--               <star num="user.rating">
+                </star> -->
                 </div>
-                <div class="row"> Admin:
-                    <span ng-hide="scope.editable">{{user.isAdmin ? 'Yes' : 'No'}}</span>
-                    <input type="text" ng-show="scope.editable" type="text" ng-model="user.isAdmin">
-                </div>
-                <div class="row"> Bio:
-                    <span ng-hide="scope.editable">{{user.description}} </span>
-                    <input type="text" ng-show="scope.editable" type="text" ng-model="user.description">
-                </div>
-                <div class="text-right" ng-hide="user.isAdmin">
-                    <a type="button" class="btn btn-success btn-sm" ng-click="">Promote to Admin</a>
-                </div>
-                <div class="text-right" ng-show="user.isAdmin">
-                    <a type="button" class="btn btn-danger btn-sm" ng-click="">Demote to User</a>
+                <div class="col-md-10">
+                    <!--             <pre>{{user}}</pre> -->
+                    <div class="row"> Email:
+                        <span ng-hide="scope.editable">{{user.email}}</span>
+                        <input type="text" ng-show="scope.editable" type="text" ng-model="user.email">
+                    </div>
+                    <div class="row"> Admin:
+                        <span ng-hide="scope.editable">{{user.isAdmin ? 'Yes' : 'No'}}</span>
+                        <input type="text" ng-show="scope.editable" type="text" ng-model="user.isAdmin">
+                    </div>
+                    <div class="row"> Bio:
+                        <span ng-hide="scope.editable">{{user.description}} </span>
+                        <input type="text" ng-show="scope.editable" type="text" ng-model="user.description">
+                    </div>
+                    <div class="text-right" ng-hide="user.isAdmin">
+                        <a type="button" class="btn btn-success btn-sm" ng-click="promote(user); user.isAdmin = true">Promote to Admin</a>
+                    </div>
+                    <div class="text-right" ng-show="user.isAdmin">
+                        <a type="button" class="btn btn-danger btn-sm" ng-click="demote(user._id);  user.isAdmin = false">Demote to User</a>
+                    </div>
                 </div>
             </div>
         </div>
