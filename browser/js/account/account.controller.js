@@ -1,4 +1,5 @@
 app.controller('AccountCtrl', function($scope, chef, dishes, reviews, orders, favorites, receivedOrders, Accounts, $stateParams, CartFactory, currentUser, Orders, $state, Dish, Tags) {
+    console.log(reviews)
     $scope.user = currentUser;
     $scope.myDishes = dishes;
     $scope.reviews = reviews;
