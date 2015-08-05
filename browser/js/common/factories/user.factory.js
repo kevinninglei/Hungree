@@ -68,8 +68,8 @@ app.factory('UserFactory', function($http, $state) {
                     console.log(err.message)
                 });
         },
-        delete:function(id){
-            return $http.delete(userApiPath + '/'+id)
+        delete: function(id) {
+            return $http.delete(userApiPath + '/' + id)
                 .then(function(promotedUser) {
                     return promotedUser.data;
                 })

@@ -127,7 +127,7 @@ var users = [
     }),
         new User({
             description: 'Take the blue pill!',
-            name: {first:'Morpheux',last:'InDaMatrix'},
+            name: {first:'Morpheus',last:'InDaMatrix'},
             email: 'admin',
             password:'jkay',
             isAdmin: true,

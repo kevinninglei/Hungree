@@ -48,7 +48,14 @@ app.controller('DishCtrl', function($scope, CartFactory, $stateParams, dish, $st
     $scope.addToOrder = function() {
         CartFactory.addToCart($scope.dish, 1);
         $state.go('listDishes');
-    }
+    };
+
+    $scope.addToFavorite = function() {
+        if($scope.user.favorites.indexOf($scope.dish._id)===-1){
+        $scope.user.favorites.push($scope.dish._id);
+        return Accounts.updateInfo($scope.user)
+        }
+    };
 
     $scope.open = function() {
         var modalInstance = $modal.open({
