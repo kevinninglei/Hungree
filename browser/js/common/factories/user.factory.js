@@ -36,6 +36,47 @@ app.factory('UserFactory', function($http, $state) {
                 .then(null, function(err) {
                     console.log(err.message);
                 });
+        },
+        promote: function(id) {
+            return $http.put(userApiPath + '/' + id, {
+                    isAdmin: true
+                })
+                .then(function(promotedUser) {
+                    return promotedUser.data;
+                })
+                .then(null, function(err) {
+                    console.log(err.message)
+                });
+        },
+        demote: function(id) {
+            return $http.put(userApiPath + '/' + id, {
+                    isAdmin: false
+                })
+                .then(function(promotedUser) {
+                    return promotedUser.data;
+                })
+                .then(null, function(err) {
+                    console.log(err.message)
+                });
+        },
+        update: function(user) {
+            return $http.put(userApiPath + '/' + user._id, user)
+                .then(function(promotedUser) {
+                    return promotedUser.data;
+                })
+                .then(null, function(err) {
+                    console.log(err.message)
+                });
+        },
+        delete:function(id){
+            return $http.delete(userApiPath + '/'+id)
+                .then(function(promotedUser) {
+                    return promotedUser.data;
+                })
+                .then(null, function(err) {
+                    console.log(err.message)
+                });
         }
+
     };
 });

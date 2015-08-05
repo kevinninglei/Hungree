@@ -1,5 +1,8 @@
 <div class="col-md-12">
-    <button class="btn btn-success btn-sm pull-right" ui-sref="account.newDish">Add Dish</button>
+    <div class="alert alert-info" ng-show={{!myDishes.length}}>
+        <h4 class="text-center"><i class="fa fa-warning"> </i> There seems to be nothing here. Start listing your yummy dishes today!    <button class="btn btn-success btn-sm pull-right" ui-sref="account.newDish">Add Dish</button> </h4>
+    <button ng-show="{{myDishes.length}}" class="btn btn-success btn-sm pull-right" ui-sref="account.newDish">Add Dish</button>
+    </div>
 </div>
 <br><br>
 <div class="col-md-12">
