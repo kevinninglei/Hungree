@@ -1,13 +1,13 @@
 <div ng-controller="HomeCtrl">
   <div style="width: 100%; position:absolute; top:60px; left:0px">
-    <carousel 
+    <carousel
       interval="myInterval" no-wrap="noWrapSlides">
-    <slide 
+    <slide
       ng-repeat="slide in slides" active="slide.active">
-      <div 
+      <div
         class="carousel-img"
         ng-style="{'background-image': 'url({{slide.image}})'}"></div>
- <!--    <img 
+ <!--    <img
       ng-src="{{slide.image}}" style="margin:auto; vertical-align:middle"> -->
     </slide>
     </carousel>
@@ -67,7 +67,7 @@
       </div>
     </div>
     <div class="centered">
-      <button ui-sref="listDishes" class="btn btn-default">Get Started</button>
+      <button ui-sref="signUp" class="btn btn-default">Get Started</button>
     </div>
   </div>
 </section>
