@@ -126,9 +126,12 @@ var users = [
         cart: carts[2]
     }),
         new User({
+            description: 'Take the blue pill!',
+            name: {first:'Morpheus',last:'InDaMatrix'},
             email: 'admin',
             password:'jkay',
-            isAdmin: true
+            isAdmin: true,
+            picture:'https://thegrownupya.files.wordpress.com/2012/05/morpheus.jpg'
         })
 ];
 

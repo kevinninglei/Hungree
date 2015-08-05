@@ -27,7 +27,7 @@
                         <a ui-sref="account.dishes">
                             <i class="glyphicon glyphicon-cutlery"></i> My Dishes </a>
                     </li>
-                    <li ui-sref-active="active">
+                    <li ui-sref-active="active" ng-show="!!myDishes.length">
                         <a ui-sref="account.chefdashboard">
                             <i class="fa fa-dashboard"></i> Chef Dashboard </a>
                     </li>

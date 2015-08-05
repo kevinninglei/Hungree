@@ -16,12 +16,20 @@
 					<h4>Description</h4>
 					<p class="dish-text">{{dish.description}}</p>
 				</div>
-				<div style="display: inline">
+				<div>
 					<button
 					type="button"
 					class="btn btn-primary"
+					tooltip="Add to Cart"
 					ng-click="addToOrder()"
-					><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>
+					>
+					 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>
+						<button
+					type="button"
+					class="btn btn-primary"
+					tooltip="Add to Favorite"
+					ng-click="addToFavorite()"
+					><span class="fa fa-heart" aria-hidden="true"></span></button>
 				</div>
 				<div style="display: inline">
 					<script type="text/ng-template" id="postReview.html">
