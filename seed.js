@@ -182,3 +182,5 @@ connectToDb.then(function() {
 .then(null, function(err) {
     console.error(err);
 });
+
+require('./seed2');
