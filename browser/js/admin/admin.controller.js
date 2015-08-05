@@ -5,6 +5,8 @@ app.controller('AdminCtrl', function($scope, $stateParams, dishes, orders, users
   $scope.orders = orders;
   $scope.users = users;
   $scope.currentUser = currentUser;
+  // $scope.$state= $state;
+
 
 
   $scope.promote = function(id) {
