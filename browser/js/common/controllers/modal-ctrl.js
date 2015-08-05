@@ -15,7 +15,7 @@ app.controller('ModalPostCtrl', function($scope, $modalInstance, Reviews, $state
             user: user
         };
         dish.rating = (dish.rating * dish.reviews.length + $scope.rate) / (dish.reviews.length + 1);
-        Reviews.postReview(newReview, $stateParams.id, dish) //posting review by updating dish
+        Reviews.postReview(newReview, $stateParams.id, dish, user) //posting review by updating dish
         .then(function() {
             $modalInstance.close();
         });

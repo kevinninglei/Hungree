@@ -13,6 +13,7 @@ app.config(function($stateProvider) {
                 return AuthService.getLoggedInUser()
                     .then(function(user) {
                         obj.user = user;
+                        if (!user) return;
                         return UserFactory.getOrders(user._id)
                     })
                     .then(function(orders) {
@@ -28,11 +29,13 @@ app.config(function($stateProvider) {
 app.controller('DishCtrl', function($scope, CartFactory, $stateParams, dish, $state, Stars, user, $modal, $log, Reviews, Accounts) {
     $scope.user = user.user;
     $scope.dish = dish;
-    user.orders.forEach(function(order) {
-        order.dishes.forEach(function(dish) {
-            if (dish.dishId._id === $scope.dish._id) $scope.ordered = true;
+    if (user.orders) {
+        user.orders.forEach(function(order) {
+            order.dishes.forEach(function(dish) {
+                if (dish.dishId._id === $scope.dish._id) $scope.ordered = true;
+            })
         })
-    })
+    }
     $scope.isCollapsed = true; //info collapse
     $scope.ingredients = $scope.dish.ingredients.join(', ');
     $scope.tags = $scope.dish.tags.map(function(tag) {
@@ -51,9 +54,9 @@ app.controller('DishCtrl', function($scope, CartFactory, $stateParams, dish, $st
     };
 
     $scope.addToFavorite = function() {
-        if($scope.user.favorites.indexOf($scope.dish._id)===-1){
-        $scope.user.favorites.push($scope.dish._id);
-        return Accounts.updateInfo($scope.user)
+        if ($scope.user.favorites.indexOf($scope.dish._id) === -1) {
+            $scope.user.favorites.push($scope.dish._id);
+            return Accounts.updateInfo($scope.user)
         }
     };
 

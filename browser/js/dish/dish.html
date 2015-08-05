@@ -23,38 +23,40 @@
 					tooltip="Add to Cart"
 					ng-click="addToOrder()"
 					>
-					 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>
-						<button
+					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>
+					<button
 					type="button"
 					class="btn btn-success"
 					tooltip="Add to Favorite"
+					ng-show="user"
 					ng-click="addToFavorite()"
 					><span class="fa fa-heart" aria-hidden="true"></span></button>
-				</div>
-				<div style="display: inline">
-					<script type="text/ng-template" id="postReview.html">
-					<div class="modal-header">
-						<h3 class="modal-title">Your Review</h3>
-					</div>
-					<div class="modal-body">
+				
+					<div style="display: inline">
+						<script type="text/ng-template" id="postReview.html">
+						<div class="modal-header">
+							<h3 class="modal-title">Your Review</h3>
+						</div>
+						<div class="modal-body">
 							<div>
-										<h4>Rating</h4>
-										<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-									</div>
-						<div class="form-group">
-								<h4>Review</h4>
-											<textarea ng-model="description" class="form-control" rows="6"></textarea>
-									</div>
+								<h4>Rating</h4>
+								<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+							</div>
+								<div class="form-group">
+									<h4>Review</h4>
+										<textarea ng-model="description" class="form-control" rows="6"></textarea>
+								</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" ng-click="postReview()">OK</button>
+							<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+						</div>
+						</script>
+						<button
+						class="btn btn-primary"
+						ng-show="ordered"
+						ng-click="open()"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></button>
 					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" ng-click="postReview()">OK</button>
-						<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-					</div>
-					</script>
-					<button
-					class="btn btn-primary"
-					ng-show="ordered"
-					ng-click="open()"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></button>
 				</div>
 			</div>
 			<div class="col-sm-4">
@@ -88,30 +90,30 @@
 					<div class="pull-right">
 						<script type="text/ng-template" id="editReview.html">
 						<div class="modal-header">
-							<h3 class="modal-title">Edit Review</h3>
+								<h3 class="modal-title">Edit Review</h3>
 						</div>
 						<div class="modal-body">
-								<div>
-											<h4>Rating</h4>
-											<rating ng-model="editRate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-										</div>
-							<div class="form-group">
-									<h4>Review</h4>
-												<textarea ng-model="editDescription" class="form-control" rows="6"></textarea>
-										</div>
+									<div>
+													<h4>Rating</h4>
+													<rating ng-model="editRate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+											</div>
+								<div class="form-group">
+											<h4>Review</h4>
+														<textarea ng-model="editDescription" class="form-control" rows="6"></textarea>
+											</div>
 						</div>
 						<div class="modal-footer">
-							<button class="btn btn-success" ng-click="editReview()">OK</button>
-							<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+								<button class="btn btn-success" ng-click="editReview()">OK</button>
+								<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 						</div>
 						</script>
 						<script type="text/ng-template" id="confirm.html">
 						<div class="modal-header">
-							<h3>Are you sure you want to delete?</h3>
+								<h3>Are you sure you want to delete?</h3>
 						</div>
 						<div class="modal-footer">
-							<button class="btn btn-success" ng-click="archive()">OK</button>
-							<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+								<button class="btn btn-success" ng-click="archive()">OK</button>
+								<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 						</div>
 						</script>
 						<button type="button"
